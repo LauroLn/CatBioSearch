@@ -1,21 +1,36 @@
-const express = require("express")
-const router = express.Router()
-const User = require('../models/Usuario')
+// routes/user.js
+const express = require("express");
+const router = express.Router();
+const initUserModel = require('../models/Usuario'); // Ajuste o caminho conforme necessário
 
-router.get("/", (req,res) =>{
-    res.send("Testando")
-} )
+let User;
 
-router.post('/add', (req,res) =>{
-    let{Nome,Email,Telefone, Password} = req.body
+const initializeModel = async () => {
+    User = await initUserModel();
+};
 
-    User.create({
-        Nome,Email,Telefone,Password
-    }).then(() => res.redirect('/'))
-    .catch(err =>{
-        console.log(`Ocorreu um erro ${err}`)
-    })
-})
+router.get("/", (req, res) => {
+    res.send("Testando");
+});
 
+router.post('/add', async (req, res) => {
+    let { Nome, Email, Telefone, Password } = req.body;
 
-module.exports = router
+    try {
+        await User.create({
+            Nome,
+            Email,
+            Telefone,
+            Password
+        });
+        res.redirect('/'); // Redireciona após a criação
+    } catch (err) {
+        console.error(`Ocorreu um erro: ${err}`); // Corrigido
+        res.status(500).send('Ocorreu um erro ao criar o usuário.'); // Responde com erro
+    }
+});
+
+// Chama a inicialização do modelo quando o roteador é carregado
+initializeModel();
+
+module.exports = router;
