@@ -1,23 +1,34 @@
-const Sequelize = require('sequelize');
-const db = require('../db/database');
+const { Sequelize } = require('sequelize');
+const startDb = require('../db/database'); // Importa a função que inicializa a conexão
 
-const User = db.define('User', {
-    Nome: {
-        type: Sequelize.STRING,
-        allowNull: false, // Torna o campo obrigatório (opcional)
-    },
-    Email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true, // Garante que o email seja único
-    },
-    Telefone: {
-        type: Sequelize.STRING, // Alterado para STRING
-    },
-    Password: {
-        type: Sequelize.STRING, // Corrigido de "Passwork" para "Password"
-        allowNull: false, // Torna o campo obrigatório (opcional)
-    }
-});
+let User; // Variável para armazenar o modelo User
 
-module.exports = User;
+const initUserModel = async () => {
+    const db = await startDb(); // Garante que a conexão foi estabelecida
+
+    // Define o modelo User somente após a inicialização do Sequelize
+    User = db.define('User', {
+        Nome: {
+            type: Sequelize.STRING,
+            allowNull: false, // Campo obrigatório
+        },
+        Email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true, // Email único
+        },
+        Telefone: {
+            type: Sequelize.STRING, // Definido como STRING
+        },
+        Password: {
+            type: Sequelize.STRING, // Corrige o nome do campo
+            allowNull: false, // Campo obrigatório
+        }
+    });
+
+    // Sincroniza o modelo com o banco de dados
+    await User.sync({ alter: true }); // Cria/atualiza a tabela
+    return User;
+};
+
+module.exports = initUserModel;
