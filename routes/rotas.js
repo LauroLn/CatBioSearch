@@ -9,21 +9,19 @@ const initializeModel = async () => {
     User = await initUserModel();
 };
 
-router.get("/", (req, res) => {
-    res.send("Testando");
-});
 
 router.post('/add', async (req, res) => {
-    let { Nome, Email, Telefone, Password } = req.body;
+    let { Nome, Email, Telefone, Password, Admin } = req.body;
 
     try {
         await User.create({
             Nome,
             Email,
             Telefone,
-            Password
+            Password,
+            Admin: Admin || false,
         });
-        res.redirect('/'); // Redireciona após a criação
+        res.send("Usuario cadastrado com sucesso"); // Redireciona após a criação
     } catch (err) {
         console.error(`Ocorreu um erro: ${err}`); // Corrigido
         res.status(500).send('Ocorreu um erro ao criar o usuário.'); // Responde com erro

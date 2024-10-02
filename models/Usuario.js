@@ -19,11 +19,17 @@ const initUserModel = async () => {
         },
         Telefone: {
             type: Sequelize.STRING, // Definido como STRING
+            allowNull: false, // Campo obrigatório
         },
         Password: {
             type: Sequelize.STRING, // Corrige o nome do campo
             allowNull: false, // Campo obrigatório
-        }
+        },
+        Admin: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: false, // O valor padrão é falso, ou seja, não admin
+          },
     });
 
     // Sincroniza o modelo com o banco de dados
