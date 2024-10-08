@@ -41,7 +41,13 @@ router.post('/login', async (req, res) => {
         }
 
         if (Password === usuario.Password) {
-            return res.status(200).json({ "Message": "Login bem sucedido" });
+
+           if(usuario.Admin == true){
+            return res.status(200).json({ "Message": "Admin logado com sucesso" });
+           }else{
+            return res.status(200).json({ "Message": "Usuario logado com sucesso" });
+           }
+
         } else {
             return res.status(400).json({ "Message": "Senha inválida" });
         }
