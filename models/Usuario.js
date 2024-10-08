@@ -33,7 +33,7 @@ const initUserModel = async () => {
     });
 
     // Sincroniza o modelo com o banco de dados
-    await User.sync({ alter: true }); // Cria/atualiza a tabela
+    await User.sync();
     return User;
 };
 
