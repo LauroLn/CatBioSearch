@@ -81,6 +81,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
+// Rota protegida para usuários normais
+router.get('/user-dashboard', isAuthenticated, (req, res) => {
+    // Esta rota só pode ser acessada se o usuário estiver logado
+    res.json({ message: `Bem-vindo ao painel de usuário, ${req.session.user.nome}!` });
+});
+
+// Rota protegida para administradores
+router.get('/admin-dashboard', isAuthenticated, isAdmin, (req, res) => {
+    // Esta rota só pode ser acessada se o usuário for admin
+    res.json({ message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}!` });
+});
+
+
 // Chama a inicialização do modelo quando o roteador é carregado
 initializeModel();
 
