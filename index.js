@@ -3,9 +3,23 @@ const path = require('path');
 const startDb = require('./db/database');  // Importa a função que inicializa a conexão
 const initUserModel = require('./models/Usuario');  // Importa a função que inicializa o modelo User
 const routes = require('./routes/rotas');  // Importa suas rotas
+const session = require('express-session');
 
 // Instanciando o express na constante app
 const app = express();
+
+
+
+
+app.use(session({
+    secret: '123123123123', // Use uma chave segura
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 3600000 // Sessão expira em 1 hora (milissegundos)
+    }
+}));
+
 
 // Middleware para interpretar JSON no corpo da requisição
 app.use(express.json());

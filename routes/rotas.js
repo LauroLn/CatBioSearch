@@ -1,4 +1,3 @@
-// routes/user.js
 const express = require("express");
 const router = express.Router();
 const initUserModel = require('../models/Usuario'); // Ajuste o caminho conforme necessário
@@ -10,8 +9,25 @@ const initializeModel = async () => {
     User = await initUserModel();
 };
 
+// Middleware para verificar se o usuário está autenticado
+const autenticacao = (req, res, next) => {
+    if (req.session.user) {
+        return next(); // Se o usuário está autenticado, continua
+    } else {
+        return res.status(401).json({ "message": "Você precisa estar logado." });
+    }
+};
 
+// Middleware para verificar se o usuário é admin
+const isAdmin = (req, res, next) => {
+    if (req.session.user && req.session.user.admin) {
+        return next(); // Se o usuário é admin, continua
+    } else {
+        return res.status(403).json({ "message": "Acesso negado. Apenas administradores podem acessar." });
+    }
+};
 
+// Rota de cadastro
 router.post('/cadastro', async (req, res) => {
     let { Nome, Email, Telefone, Password, Admin } = req.body;
 
@@ -23,31 +39,39 @@ router.post('/cadastro', async (req, res) => {
             Password,
             Admin: Admin || false,
         });
-        res.send("Usuario cadastrado com sucesso"); // Redireciona após a criação
+        res.send("Usuário cadastrado com sucesso");
     } catch (err) {
-        console.error(`Ocorreu um erro: ${err}`); // Corrigido
-        res.status(500).send('Ocorreu um erro ao criar o usuário.'); // Responde com erro
+        console.error(`Ocorreu um erro: ${err}`);
+        res.status(500).send('Ocorreu um erro ao criar o usuário.');
     }
 });
 
+// Rota de login
 router.post('/login', async (req, res) => {
     let { Email, Password } = req.body;
 
     try {
-        const usuario = await User.findOne({ where: { Email } }); 
+        const usuario = await User.findOne({ where: { Email } });
 
         if (!usuario) {
             return res.status(400).json({ "message": "Usuário não encontrado" });
         }
 
         if (Password === usuario.Password) {
+            // Criar a sessão do usuário
+            req.session.user = {
+                id: usuario.id,
+                nome: usuario.Nome,
+                email: usuario.Email,
+                admin: usuario.Admin
+            };
 
-           if(usuario.Admin == true){
-            return res.status(200).json({ "Message": "Admin logado com sucesso" });
-           }else{
-            return res.status(200).json({ "Message": "Usuario logado com sucesso" });
-           }
-
+            // Redireciona com base no nível de permissão
+            if (usuario.Admin) {
+                return res.status(200).json({ "Message": "Admin logado com sucesso", "Redirect": "/admin-dashboard" });
+            } else {
+                return res.status(200).json({ "Message": "Usuário logado com sucesso", "Redirect": "/user-dashboard" });
+            }
         } else {
             return res.status(400).json({ "Message": "Senha inválida" });
         }
