@@ -83,13 +83,13 @@ router.post('/login', async (req, res) => {
 
 
 // Rota protegida para usuários normais
-router.get('/user-dashboard', isAuthenticated, (req, res) => {
+router.get('/user-dashboard', autenticacao, (req, res) => {
     // Esta rota só pode ser acessada se o usuário estiver logado
     res.json({ message: `Bem-vindo ao painel de usuário, ${req.session.user.nome}!` });
 });
 
 // Rota protegida para administradores
-router.get('/admin-dashboard', isAuthenticated, isAdmin, (req, res) => {
+router.get('/admin-dashboard', autenticacao, isAdmin, (req, res) => {
     // Esta rota só pode ser acessada se o usuário for admin
     res.json({ message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}!` });
 });
