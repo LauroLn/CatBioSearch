@@ -1,0 +1,128 @@
+.loginarea {
+    margin: 0;
+    display: flex;
+}
+
+
+.areaLogin {
+    overflow: hidden;
+}
+
+.content .gato{
+    background-color: #FFC100;
+    width: 100vh;
+    height: auto;
+}
+
+.inputs{
+    margin-top: 10%;
+    align-items: center;
+    width: 50vh;
+    height: auto;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 5rem; 
+}
+
+.login-title {
+    font-weight: 200;
+    font-size: 20px;
+    text-align: center;
+}
+
+.input-wrapper {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 100px;
+}
+
+.input-wrapper input {
+    border: none;
+    outline: none;
+    padding: 5px 55px;
+    height: 40px;
+    background-color: #F2F2F2;
+    border-radius: 100px;
+}
+
+.input-wrapper img {
+    height: 24px;
+    width: 24px;
+    margin-left: 10px;
+    /* Espaço entre o texto e a imagem */
+}
+
+.password-wrapper{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 100px;
+}
+
+.password-wrapper img{
+    height: 24px;
+    width: 24px;
+    margin-left: 10px;
+}
+
+.password-wrapper input {
+    border: none;
+    outline: none;
+    padding: 5px 55px;
+    height: 40px;
+    background-color: #F2F2F2;
+    border-radius: 100px;
+}
+
+.button-signIn {
+    margin-top: 40px;
+}
+
+.button-signIn .button-style {
+    padding: 12px 60px;
+    background-color: #FFC100;
+    border: none;
+    border-radius: 20px;
+    color: #F2F2F2;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-signIn a:hover {
+    background-color: black;
+    color: #FFC100;
+}
+
+.content-cat{
+    width: auto;
+    height: auto;
+    background-color: #FFC100;
+    position: absolute;
+    overflow: hidden;
+ }
+
+.gato img{
+    margin-top: 22%;
+    width: 30rem;
+    border-radius: 20px;
+}
+
+.logo{
+    width: 200px;
+    
+}
+
+.login-title{
+    font-size: 20px;
+}
