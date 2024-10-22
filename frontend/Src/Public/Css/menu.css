@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center; /* Centralizar o conteúdo */
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px; /* Espaçamento das bordas da página */
+}
+
+.content {
+    max-width: 900px; /* Definir uma largura máxima */
+    width: 100%; /* O conteúdo se ajusta a tela */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.form-container {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end; /* Alinhar o botão com os campos */
+}
+
+.input-box {
+    flex: 1;
+}
+
+label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #f0ad4e;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 42px; /* Altura igual aos campos de input */
+    align-self: flex-end; /* Alinhar o botão ao final */
+}
+
+.table-container {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    width: 100%; /* Ajustar a tabela para a largura máxima */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.btn-actions {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
