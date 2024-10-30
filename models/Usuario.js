@@ -12,17 +12,17 @@ const initUserModel = async () => {
             type: Sequelize.STRING,
             allowNull: false, // Campo obrigatório
         },
-        Email: {
+        Usuario: {
             type: Sequelize.STRING,
-            allowNull: false,
-            unique: true, // Email único
+            allowNull: false,  // Campo obrigatório
+            unique: true, 
         },
-        Telefone: {
-            type: Sequelize.STRING, // Definido como STRING
+        Funcao: {
+            type: Sequelize.STRING, 
             allowNull: false, // Campo obrigatório
         },
         Password: {
-            type: Sequelize.STRING, // Corrige o nome do campo
+            type: Sequelize.STRING,
             allowNull: false, // Campo obrigatório
         },
         Admin: {
