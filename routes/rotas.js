@@ -27,31 +27,13 @@ const isAdmin = (req, res, next) => {
     }
 };
 
-// Rota de cadastro
-router.post('/cadastro', async (req, res) => {
-    let { Nome, Email, Telefone, Password, Admin } = req.body;
-
-    try {
-        await User.create({
-            Nome,
-            Email,
-            Telefone,
-            Password,
-            Admin: Admin || false,
-        });
-        res.send("Usuário cadastrado com sucesso");
-    } catch (err) {
-        console.error(`Ocorreu um erro: ${err}`);
-        res.status(500).send('Ocorreu um erro ao criar o usuário.');
-    }
-});
 
 // Rota de login
 router.post('/login', async (req, res) => {
-    let { Email, Password } = req.body;
+    let { Usuario, Password } = req.body;
 
     try {
-        const usuario = await User.findOne({ where: { Email } });
+        const usuario = await User.findOne({ where: { Usuario } });
 
         if (!usuario) {
             return res.status(400).json({ "message": "Usuário não encontrado" });
@@ -62,7 +44,6 @@ router.post('/login', async (req, res) => {
             req.session.user = {
                 id: usuario.id,
                 nome: usuario.Nome,
-                email: usuario.Email,
                 admin: usuario.Admin
             };
 
@@ -85,16 +66,37 @@ router.post('/login', async (req, res) => {
 // Rota protegida para usuários normais
 router.get('/user-dashboard', autenticacao, (req, res) => {
     // Esta rota só pode ser acessada se o usuário estiver logado
-    res.json({ message: `Bem-vindo ao painel de usuário, ${req.session.user.nome}!` });
+    res.json({ message: `Bem-vindo ao painel de usuário, ${req.session.user.nome}` });
 });
 
 // Rota protegida para administradores
-router.get('/admin-dashboard', autenticacao, isAdmin, (req, res) => {
-    // Esta rota só pode ser acessada se o usuário for admin
-    res.json({ message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}!` });
+router.post('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
+    const { Nome, Usuario, Funcao, Password } = req.body;
+
+    try {
+        // Cria um novo usuário
+        await User.create({
+            Nome,
+            Usuario,
+            Funcao,
+            Password,
+
+        });
+
+        // Obtém a lista de todos os usuários cadastrados
+        const usuarios = await User.findAll({
+            attributes: ['id', 'Nome', 'Usuario', 'Funcao'],
+        });
+
+        res.json({
+            message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}`,
+            usuarios: usuarios
+        });
+    } catch (err) {
+        console.error(`Ocorreu um erro: ${err}`);
+        res.status(500).send('Ocorreu um erro ao criar o usuário ou listar os usuários.');
+    }
 });
-
-
 // Chama a inicialização do modelo quando o roteador é carregado
 initializeModel();
 
