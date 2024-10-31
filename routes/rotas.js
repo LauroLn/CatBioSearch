@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const initUserModel = require('../models/Usuario'); // Ajuste o caminho conforme necessário
+const initRelatorioModel = require('..models/Relatorio')
 const { where } = require("sequelize");
 
 let User;
@@ -29,7 +30,7 @@ const isAdmin = (req, res, next) => {
 
 
 // Rota de login
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     let { Usuario, Password } = req.body;
 
     try {
@@ -99,5 +100,6 @@ router.post('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
 });
 // Chama a inicialização do modelo quando o roteador é carregado
 initializeModel();
+initRelatorioModel();
 
 module.exports = router;
