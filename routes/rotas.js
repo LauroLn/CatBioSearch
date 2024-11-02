@@ -179,6 +179,25 @@ router.delete('/admin-usuario/:id', autenticacao, isAdmin, async (req, res) => {
     }
 });
 
+// Rota para a outra "tela" de relatorio
+
+router.get('/user-dashboard/relatorio', async (req,res) => {
+        try {
+            const totalRelatorios = await Relatorio.count(); // Conta todos os registros na tabela 'Relatorio'
+            
+            res.json({
+                message: 'Total de relatórios',
+                total: totalRelatorios
+            });
+        } catch (err) {
+            console.error(`Ocorreu um erro ao contar os relatórios: ${err}`);
+            res.status(500).send('Erro ao contar relatórios');
+        }
+    });
+    
+
+
+
 // Chama a inicialização do modelo quando o roteador é carregado
 initializeModel();
 
