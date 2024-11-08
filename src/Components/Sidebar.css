@@ -1,0 +1,31 @@
+/* Estilo padrão para os links */
+.img img{
+    width: 200px;
+    height: auto;
+}
+
+.sidebar-link {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+  }
+  
+  /* Efeito de hover */
+  .sidebar-link:hover {
+    color: #FFC100;
+  }
+  
+  /* Estilo do link ativo */
+  .sidebar-link.active {
+    color: #292929;
+    padding: 5px 70px;
+    background-color: #FFC100;
+    font-weight: bold; /* opcional */
+  }
+  
+  .conteudo-principal{
+    background-color: #F2F2F2;
+    width: 100%;
+}

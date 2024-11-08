@@ -1,12 +1,14 @@
-import Login from './Components/login/login';
-import Acess from './Components/primeiroAcesso/acess'
+import React from 'react';
+import AppRoutes from './routes';
 import './App.css'
 
 function App() {
   return(
 
-    <Login/>
-    //<Acess/>
+    <div className="App">
+    <AppRoutes />
+  </div>
+
   );
 }
 

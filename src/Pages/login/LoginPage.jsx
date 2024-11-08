@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
-import logoimage from '../assets/logo.svg';
+import logoimage from '../../Components/assets/logo.svg';
 import '../login/login.css';
-import user from '../assets/mdi_user.svg'
-import olho from '../assets/mdi_eye.svg'
-import olhofechado from '../assets/mdi_eye-off.svg'
-import gato from '../assets/pexels-wojciech-kumpicki-1084687-2071882-removebg-preview 1.svg'
+import user from '../../Components/assets/mdi_eye-off.svg';
+import olho from '../../Components/assets/mdi_eye.svg';
+import olhofechado from '../../Components/assets/mdi_user.svg'
+import gato from '../../Components/assets/pexels-wojciech-kumpicki-1084687-2071882-removebg-preview 1.svg'
 
 let logo = logoimage;
 let userimg = user;
