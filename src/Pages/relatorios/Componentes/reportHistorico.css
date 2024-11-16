@@ -1,0 +1,105 @@
+/* Estilo do container principal */
+.report-history {
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-left: 240px; /* Ajusta conforme a largura do sidebar */
+    box-sizing: border-box;
+    min-height: 100vh;
+  }
+  
+  /* Cabeçalho */
+  .history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .history-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* Lista de relatórios */
+  .report-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .report-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adiciona espaço entre o conteúdo principal e a data */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Círculo de preenchimento */
+  .report-circle {
+    width: 50px;
+    height: 50px;
+    border: 5px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+  }
+  
+  .report-fill {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  /* Detalhes do relatório */
+  .report-details {
+    flex: 1;
+  }
+  
+  .report-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .report-probability {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin-top: 10px;
+  }
+  
+  /* Estilo para a data */
+  .report-date {
+    font-size: 14px;
+    color: #777;
+    text-align: right;
+  }
+  
