@@ -1,26 +1,46 @@
-import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';  // Ajuste os imports
-import Passo1 from './Steps/Passo1';
-import Passo2 from './Steps/Passo2';
-import Passo3 from './Steps/Passo3';
-import StepNavigation from './Component/StepNavigation'; // Certifique-se que o caminho está correto
+
+import React from "react";
+import "./cadastro.css";
+import { FaFilter } from "react-icons/fa";
 import Sidebar from '../../Components/Sidebar';
 
-function CadastroPage() {
-  const navigate = useNavigate();  // Correção para useNavigate em vez de useHistory
-  
+const CatsPage = () => {
   return (
-    <div className="cadastro-page">
-        <Sidebar />
-      <h2>Cadastro de Usuário</h2>
-      <Routes>
-        <Route path="/cadastro/passo1" element={<Passo1 />} />
-        <Route path="/cadastro/passo2" element={<Passo2 />} />
-        <Route path="/cadastro/passo3" element={<Passo3 />} />
-      </Routes>
-      <StepNavigation navigate={navigate} /> {/* Passando o navigate para o StepNavigation */}
+    <div className="cats-page">
+      {/* Cabeçalho */}
+      <Sidebar />
+      <header className="cats-header">
+        <h1 className="cats-title">Gatos cadastrados</h1>
+        <div className="cats-actions">
+          <button className="filter-button">
+            <FaFilter style={{ marginRight: '10px' }} /> Filtro
+          </button>
+          <button className="add-button">+ Adicionar</button>
+        </div>
+      </header>
+
+      {/* Tabela */}
+      <table className="cats-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Raça</th>
+            <th>Proprietário</th>
+            <th>Data última análise</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td colSpan="5" className="empty-row">
+              Nenhum dado disponível.
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
-export default CadastroPage;
+export default CatsPage;

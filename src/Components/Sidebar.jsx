@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-content">
-        <div className="img" style={{ marginBottom: '20px' }}>
+        <div className="img" style={{ marginBottom: '0' }}>
           <img src={logoimage} alt="Logo" style={{ width: '100%' }} />
         </div>
 
@@ -23,6 +23,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/cadastro" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
           <FaUser style={{ marginRight: '10px' }} /> Cadastros
+        </NavLink>
+        <NavLink to="/acesso" className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}>
+          <FaLock style={{ marginRight: '10px' }} /> Acesso
         </NavLink>
       </div>
     </div>

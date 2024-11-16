@@ -1,0 +1,74 @@
+/* Estilos principais */
+.cats-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-left: 240px; /* Ajusta a largura do sidebar (troque 240px pelo valor exato da largura do sidebar) */
+    min-height: 100vh; /* Garante que o conteúdo ocupe toda a altura da tela */
+    box-sizing: border-box; /* Inclui padding/margin no cálculo total do tamanho */
+  }
+  
+  /* Cabeçalho */
+  .cats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .cats-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .cats-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Botões */
+  .filter-button,
+  .add-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .filter-button {
+    background-color: #f1f1f1;
+    color: #6F6F6F;
+  }
+  
+  .add-button {
+    background-color: #ffc107;
+    color: #292929;
+  }
+  
+  /* Tabela */
+  .cats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+  
+  .cats-table th,
+  .cats-table td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  .cats-table th {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .cats-table .empty-row {
+    text-align: center;
+    color: #999;
+  }
+  
