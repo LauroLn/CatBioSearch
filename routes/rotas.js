@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const initUserModel = require('../models/Usuario');
 const initRelatorioModel = require('../models/Relatorio');
+const initVetModel = require("../models/Veterinario")
 const { where } = require("sequelize");
 const userService = require('../db/assets/manipulação-db'); // Substitua
 
