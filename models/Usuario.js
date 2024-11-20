@@ -12,17 +12,25 @@ const initUserModel = async () => {
             type: Sequelize.STRING,
             allowNull: false, // Campo obrigatório
         },
-        Usuario: {
+        Login: {
             type: Sequelize.STRING,
             allowNull: false,  // Campo obrigatório
             unique: true, 
         },
-        Funcao: {
+        Password: {
+            type: Sequelize.STRING,
+            allowNull: false, // Campo obrigatório
+        },
+        CPF: {
             type: Sequelize.STRING, 
             allowNull: false, // Campo obrigatório
         },
-        Password: {
-            type: Sequelize.STRING,
+        Nascimento: {
+            type: Sequelize.DATE, 
+            allowNull: false, // Campo obrigatório
+        },
+        CRBM: {
+            type: Sequelize.STRING, 
             allowNull: false, // Campo obrigatório
         },
         Admin: {
