@@ -8,7 +8,7 @@ const initRelatorioModel = async () =>{
     const db = await startDb()
 
     Relatorio = db.define('Relatorios',{
-        Nome_gato:{
+        Nome:{
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -17,6 +17,26 @@ const initRelatorioModel = async () =>{
             allowNull: false
         },
         Cliente:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Sexo:{
+            type: Sequelize.String,
+            allowNull: false
+        },
+        Idade:{
+            type: Sequelize.NUMBER,
+            allowNull: false
+        },
+        Pelagem:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Material:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Metodo:{
             type: Sequelize.STRING,
             allowNull: false
         }
