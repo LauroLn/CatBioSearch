@@ -7,19 +7,29 @@ const initVetModel = async () => {
     const db = await startDb(); // Garante que a conexão foi estabelecida
 
     // Define o modelo User somente após a inicialização do Sequelize
-    User = db.define('User', {
+    Vet = db.define('Veterinario', {
         Nome: {
             type: Sequelize.STRING,
             allowNull: false // Campo obrigatório
         },
         Telefone: {
-            type: Sequelize.NUMBER,
+            type: Sequelize.STRING,
             allowNull: false,  // Campo obrigatório
             unique: true
         },
         Email: {
             type: Sequelize.STRING,
             allowNull: false, // Campo obrigatório
+            unique: true
+        },
+        Endereco: {
+            type: Sequelize.STRING,
+            allowNull: false, // Campo obrigatório
+            unique: true
+        },
+        Observacoes: {
+            type: Sequelize.STRING,
+            allowNull: true, 
             unique: true
         }
     });

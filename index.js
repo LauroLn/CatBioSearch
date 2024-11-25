@@ -2,9 +2,12 @@ const express = require('express');
 const path = require('path');
 const startDb = require('./db/database');  // Importa a função que inicializa a conexão
 const initUserModel = require('./models/Usuario');  // Importa a função que inicializa o modelo User
-const routes = require('./routes/rotas');  // Importa suas rotas
+//const routes = require('./routes/rotas');  // Importa suas rotas
 const session = require('express-session');
-
+const menuRoutes = require("./routes/menu-routes");
+const userRoutes = require("./routes/user-routes");
+const vetRoutes = require('./routes/vet-routes')
+const relatorioRoutes = require("./routes/relatorio-routes");
 // Instanciando o express na constante app
 const app = express();
 
@@ -25,8 +28,10 @@ app.use(session({
 app.use(express.json());
 
 // Middleware para as rotas
-app.use('/', routes);
-
+app.use('/', menuRoutes);
+app.use('/users', userRoutes);
+app.use('/relatorios', relatorioRoutes);
+app.use('/vet', vetRoutes)
 // Pasta estática
 app.use(express.static(path.join(__dirname, 'public')));
 

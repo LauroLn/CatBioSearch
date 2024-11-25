@@ -1,6 +1,6 @@
 const { Sequelize }= require('sequelize')
 const startDb = require('../db/database')
-const initUserModel = require('./Usuario')
+
 
 let Relatorio
 
@@ -20,12 +20,8 @@ const initRelatorioModel = async () =>{
             type: Sequelize.STRING,
             allowNull: false
         },
-        Sexo:{
-            type: Sequelize.String,
-            allowNull: false
-        },
         Idade:{
-            type: Sequelize.NUMBER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         Pelagem:{

@@ -6,7 +6,7 @@ let User; // Variável para armazenar o modelo User
 const initUserModel = async () => {
     const db = await startDb(); // Garante que a conexão foi estabelecida
 
-    // Define o modelo User somente após a inicialização do Sequelize
+    // Define o modelo User
     User = db.define('User', {
         Nome: {
             type: Sequelize.STRING,
@@ -14,7 +14,7 @@ const initUserModel = async () => {
         },
         Login: {
             type: Sequelize.STRING,
-            allowNull: false,  // Campo obrigatório
+            allowNull: false, // Campo obrigatório
             unique: true, 
         },
         Password: {
@@ -26,7 +26,7 @@ const initUserModel = async () => {
             allowNull: false, // Campo obrigatório
         },
         Nascimento: {
-            type: Sequelize.DATE, 
+            type: Sequelize.STRING, 
             allowNull: false, // Campo obrigatório
         },
         CRBM: {
@@ -37,7 +37,17 @@ const initUserModel = async () => {
             type: Sequelize.BOOLEAN,
             allowNull: false,
             defaultValue: false, // O valor padrão é falso, ou seja, não admin
-          },
+        },
+        Ativo: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: true, // O valor padrão é true, ou seja, ativo
+        },
+        Funcao: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            defaultValue: "Biomédico", // Define o valor padrão como "Biomédico"
+        },
     });
 
     // Sincroniza o modelo com o banco de dados

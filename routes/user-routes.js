@@ -2,34 +2,28 @@ const express = require("express");
 const router = express.Router();
 const initUserModel = require('../models/Usuario');
 const initRelatorioModel = require('../models/Relatorio');
-const initVetModel = require("../models/Veterinario")
-const { where } = require("sequelize");
-const userService = require('../db/assets/manipulação-db'); // Substitua
-
 
 let User;
 let Relatorio;
 
-const initializeModel = async () => {
+const initializeModels = async () => {
     User = await initUserModel();
     Relatorio = await initRelatorioModel();
 };
 
-// Middleware para verificar se o usuário está autenticado
 const autenticacao = (req, res, next) => {
     if (req.session.user) {
         return next();
     } else {
-        return res.status(401).json({ "message": "Você precisa estar logado." });
+        return res.status(401).json({ message: "Você precisa estar logado." });
     }
 };
 
-// Middleware para verificar se o usuário é admin
 const isAdmin = (req, res, next) => {
     if (req.session.user && req.session.user.admin) {
         return next();
     } else {
-        return res.status(403).json({ "message": "Acesso negado. Apenas administradores podem acessar." });
+        return res.status(403).json({ message: "Acesso negado. Apenas administradores podem acessar." });
     }
 };
 
@@ -74,7 +68,7 @@ router.get('/user-dashboard', autenticacao, (req, res) => {
 router.get('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
     try {
         const usuarios = await User.findAll({
-            attributes: ['id', 'Nome', 'Usuario', 'Funcao'],
+            attributes: ['id', 'Nome', 'Login', 'Ativo', 'Nascimento'],
         });
 
         res.json({
@@ -127,62 +121,77 @@ router.get('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
     }
 });
 
-// Rota para listar relatórios
-router.get("/menu", autenticacao, async (req, res) => {
+// Rota para buscar usuário por ID
+router.get('/admin-usuario/:id', autenticacao, isAdmin, async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const relatorios = await Relatorio.findAll({
-            attributes: ['id', 'Nome', 'Sexo', 'Cliente', 'Idade', 'Pelagem', 'Material', 'Metodo'], // Atualizado
+        const usuario = await User.findByPk(id, {
+            attributes: ['id', 'Nome', 'Login', 'CPF', 'Nascimento', 'CRBM', 'Admin', 'Ativo']
         });
-        res.json({
-            message: 'Dentro da rota /menu',
-            relatorios: relatorios,
-        });
+
+        if (!usuario) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+
+        res.json(usuario);
     } catch (err) {
-        console.error(`Ocorreu um erro ao listar os relatórios: ${err}`);
-        res.status(500).send('Erro ao listar relatórios');
+        console.error(`Erro ao buscar usuário: ${err}`);
+        res.status(500).send('Ocorreu um erro ao buscar o usuário.');
     }
 });
 
-// Rota para criar novo relatório
-router.post('/novo-relatorio', autenticacao, async (req, res) => {
-    const { Nome, Sexo, Cliente, Idade, Pelagem, Material, Metodo } = req.body;
+// Rota para atualizar informações de um usuário
+router.put('/admin-usuario/:id', autenticacao, isAdmin, async (req, res) => {
+    const { id } = req.params;
+    const { Nome, Login, Password, CPF, Nascimento, CRBM, Admin, Ativo } = req.body;
 
     try {
-        await Relatorio.create({
+        const usuario = await User.findByPk(id);
+
+        if (!usuario) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+
+        await usuario.update({
             Nome,
-            Sexo,
-            Cliente,
-            Idade,
-            Pelagem,
-            Material,
-            Metodo,
+            Login,
+            Password,
+            CPF,
+            Nascimento,
+            CRBM,
+            Admin,
+            Ativo
         });
-        res.json({ message: 'Relatório criado com sucesso' });
+
+        res.json({ message: "Usuário atualizado com sucesso.", usuario });
     } catch (err) {
-        console.error(`Ocorreu um erro: ${err}`);
-        res.status(500).send('Ocorreu um erro ao criar o relatório.');
+        console.error(`Erro ao atualizar usuário: ${err}`);
+        res.status(500).send('Ocorreu um erro ao atualizar o usuário.');
     }
 });
 
-// Rota para a outra "tela" de relatório
-router.get('/user-dashboard/relatorio', async (req, res) => {
+// Rota para excluir um usuário
+router.delete('/admin-usuario/:id', autenticacao, isAdmin, async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const totalRelatorios = await Relatorio.count(); // Conta todos os registros na tabela 'Relatorio'
-        res.json({
-            message: 'Total de relatórios',
-            total: totalRelatorios,
-        });
+        const usuario = await User.findByPk(id);
+
+        if (!usuario) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+
+        await usuario.destroy();
+
+        res.json({ message: "Usuário excluído com sucesso." });
     } catch (err) {
-        console.error(`Ocorreu um erro ao contar os relatórios: ${err}`);
-        res.status(500).send('Erro ao contar relatórios');
+        console.error(`Erro ao excluir usuário: ${err}`);
+        res.status(500).send('Ocorreu um erro ao excluir o usuário.');
     }
 });
 
-    
-
-
-
-// Chama a inicialização do modelo quando o roteador é carregado
-initializeModel();
+// Inicializa os modelos ao carregar o roteador
+initializeModels();
 
 module.exports = router;
