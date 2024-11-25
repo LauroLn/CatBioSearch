@@ -1,9 +1,12 @@
-from Bio.Blast import NCBIWWW, NCBIXML
-import requests
+from Bio.Blast.Applications import NcbiblastnCommandline
+from Bio.Blast import NCBIXML
 from io import StringIO
-import time
+import os
 
 def buscar_gene_pkd1(conteudo):
+    """
+    Procura pelo gene PKD1 em um arquivo FASTA.
+    """
     cabecalho = ''
     sequencias = []
     gene_encontrado = False
@@ -27,89 +30,47 @@ def buscar_gene_pkd1(conteudo):
     else:
         return {"error": "Gene PKD1 não encontrado no arquivo"}
 
-def realizar_blast(sequencia):
+def realizar_blast(sequencia, db_path="C:/BLAST/NCBI/blast-2.16.0+/bin/pkd1_db", mutacoes_doenca=None):
     try:
-        blast_url = "https://blast.ncbi.nlm.nih.gov/Blast.cgi"
-        
-        params = {
-            "CMD": "Put",
-            "PROGRAM": "blastn",
-            "DATABASE": "nt",
-            "QUERY": sequencia,
-            "FORMAT_TYPE": "XML",
-            "EXPECT": 0.001,
-            "HITLIST_SIZE": 5
-        }
+        query_file = "temp_query.fasta"
+        result_file = "blast_result.xml"
 
-        for attempt in range(3):
-            print(f"Tentativa {attempt + 1}: Enviando sequência para BLAST")
-            response = requests.post(blast_url, data=params, timeout=300)
-            
-            if response.status_code != 200:
-                print(f"Erro HTTP: {response.status_code}")
-                continue
+        with open(query_file, "w") as f:
+            f.write(">Consulta\n")
+            f.write(sequencia)
 
-            rid = None
-            for line in response.text.splitlines():
-                if line.startswith("RID"):
-                    rid = line.split("=")[-1].strip()
-                    break
-            
-            if rid:
-                print(f"RID obtido com sucesso: {rid}")
-                break
+        blastn_cline = NcbiblastnCommandline(
+            cmd="blastn",
+            query=query_file,
+            db=db_path,
+            evalue=0.001,
+            outfmt=5,
+            out=result_file
+        )
+        stdout, stderr = blastn_cline()
+
+        with open(result_file) as result_handle:
+            blast_record = NCBIXML.read(result_handle)
+            if blast_record.alignments:
+                best_hit = blast_record.alignments[0]
+                return {
+                    "title": best_hit.title,
+                    "length": best_hit.length,
+                    "score": best_hit.hsps[0].score,
+                    "e_value": best_hit.hsps[0].expect,
+                    "identity": best_hit.hsps[0].identities,
+                    "alignment_length": best_hit.hsps[0].align_length,
+                    "query_start": best_hit.hsps[0].query_start,
+                    "subject_start": best_hit.hsps[0].sbjct_start
+                }
             else:
-                print("Falha ao obter RID. Tentando novamente...")
-
-            time.sleep(5)
-        else:
-            return {"error": "Falha ao obter RID após várias tentativas"}
-
-        params_check = {
-            "CMD": "Get",
-            "FORMAT_OBJECT": "SearchInfo",
-            "RID": rid
-        }
-
-        for _ in range(30):
-            result = requests.get(blast_url, params=params_check)
-            result.raise_for_status()
-
-            if "Status=READY" in result.text:
-                print("Resultados prontos para serem obtidos")
-                break
-            elif "Status=FAILED" in result.text:
-                return {"error": "Falha no processamento do BLAST."}
-            
-            print("Aguardando resultado...")
-            time.sleep(10)
-
-        params_result = {
-            "CMD": "Get",
-            "RID": rid,
-            "FORMAT_TYPE": "XML"
-        }
-        blast_result = requests.get(blast_url, params=params_result, timeout=300)
-        blast_result.raise_for_status()
-
-        blast_record = NCBIXML.read(StringIO(blast_result.text))
-        if blast_record.alignments:
-            best_hit = blast_record.alignments[0]
-            return {
-                "title": best_hit.title,
-                "length": best_hit.length,
-                "score": best_hit.hsps[0].score,
-                "e_value": best_hit.hsps[0].expect,
-                "identity": best_hit.hsps[0].identities,
-                "alignment_length": best_hit.hsps[0].align_length,
-                "query_start": best_hit.hsps[0].query_start,
-                "subject_start": best_hit.hsps[0].sbjct_start,
-                "query_seq": best_hit.hsps[0].query,
-                "subject_seq": best_hit.hsps[0].sbjct
-            }
-        else:
-            return {"error": "Nenhum alinhamento encontrado para a sequência fornecida"}
-    except requests.Timeout:
-        return {"error": "Timeout atingido ao tentar acessar o serviço BLAST NCBI"}
+                return {"error": "Nenhum alinhamento encontrado para a sequência fornecida"}
     except Exception as e:
-        return {"error": f"Falha no BLAST: {str(e)}"}
+        return {"error": f"Erro no BLAST local: {str(e)}"}
+    finally:
+        if os.path.exists(query_file):
+            os.remove(query_file)
+        if os.path.exists(result_file):
+            os.remove(result_file)
+
+
