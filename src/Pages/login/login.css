@@ -1,0 +1,135 @@
+.loginarea {
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.areaLogin {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+.login-title {
+    font-weight: 200;
+    font-size: 20px;
+    text-align: center;
+}
+
+.input-wrapper {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding-right: 10px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 100px;
+}
+
+.input-wrapper input {
+    border: none;
+    outline: none;
+    padding: 5px 20px;
+    flex: 1;
+    height: 40px;
+    background-color: #F2F2F2;
+    border-radius: 100px;
+}
+
+.input-wrapper img {
+    height: 24px;
+    width: 24px;
+    margin-left: 10px;
+}
+
+.password-wrapper {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding-right: 10px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 100px;
+}
+
+.password-wrapper img {
+    height: 24px;
+    width: 24px;
+    margin-left: 10px;
+}
+
+.password-wrapper input {
+    border: none;
+    outline: none;
+    padding: 5px 20px;
+    flex: 1;
+    height: 40px;
+    background-color: #F2F2F2;
+    border-radius: 100px;
+}
+
+.button-signIn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-signIn .button-style {
+    padding: 12px 60px;
+    background-color: #FFC100;
+    border: none;
+    border-radius: 20px;
+    color: #F2F2F2;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-signIn .button-style:hover {
+    transition: 0.5s;
+    background-color: black;
+    color: #FFC100;
+}
+
+.gato {
+    background-color: #FFC100;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gato img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.logo {
+    width: 200px;
+}
+
+.login-title {
+    font-size: 20px;
+}

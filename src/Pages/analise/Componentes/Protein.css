@@ -1,0 +1,33 @@
+/* Container principal */
+.proteins-container {
+    font-family: "Arial", sans-serif;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Título */
+  .proteins-container h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  /* Lista */
+  .proteins-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .proteins-list li {
+    font-size: 14px;
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  

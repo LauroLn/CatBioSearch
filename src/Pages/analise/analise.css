@@ -1,0 +1,118 @@
+/* Estilo principal */
+.analysis-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-left: 240px; /* Sidebar */
+    box-sizing: border-box;
+  }
+  
+  /* Resumo */
+  .analysis-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .summary-item {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .summary-item h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .risk-indicator {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .summary-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Needleman Wunsch */
+  .needleman-section {
+    
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .sequence-row span {
+    display: inline-block;
+    padding: 8px;
+    margin: 2px;
+    border-radius: 4px;
+  }
+  
+  .match {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .mismatch {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+  
+  .gap {
+    background-color: #f1c40f;
+    color: #fff;
+  }
+  
+  /* RNA e proteínas */
+  .analysis-data {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .transcription-section,
+  .protein-section {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .protein-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .protein-section li {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Dispersão */
+  .scatter-plot {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scatter-placeholder {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    color: #999;
+  }
+  

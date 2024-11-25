@@ -1,0 +1,52 @@
+/* Sidebar.css */
+
+/* Estilo padrão para os links */
+
+.sidebar-link {
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito de hover */
+.sidebar-link:hover {
+  color: #FFC100;
+}
+
+/* Estilo do link ativo */
+.sidebar-link.active {
+  color: #292929;
+  padding: 5px 70px;
+  background-color: #FFC100;
+  font-weight: bold; /* opcional */
+}
+
+/* Garantir que o sidebar ocupe toda a altura da tela */
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #292929;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 10px;
+  text-align: center;
+  position: fixed; /* Para garantir que o sidebar fique fixo na lateral */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Fica acima do conteúdo */
+}
+
+/* Ajuste o conteúdo dentro do sidebar para ocupar a altura total */
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.conteudo-principal {
+  background-color: #F2F2F2;
+  width: 100%;
+}
