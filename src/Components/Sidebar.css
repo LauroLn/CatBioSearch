@@ -1,18 +1,18 @@
 /* Sidebar principal */
 .sidebar {
   position: fixed;
-  width: 10vh; /* Inicialmente estreita */
+  width: 80px; /* Inicialmente estreita */
   height: 100vh;
   background-color: #292929; /* Fundo escuro */
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Espaça os itens superior/inferior */
-  padding: 10px 0;
   top: 0;
   left: 0; /* Alinhada à esquerda */
   transition: width 0.5s ease-in-out; /* Transição suave ao expandir */
   overflow: hidden; /* Esconde o conteúdo excedente */
+
 }
 
 .sidebar:hover {
@@ -21,7 +21,7 @@
 
 /* Links da sidebar */
 .sidebar-link {
-  color: white;
+  color: #6F6F6F;
   text-decoration: none;
   border-radius: 5px;
   display: flex;
@@ -42,6 +42,7 @@
   color: #292929; /* Texto escuro */
   background-color: #FFC100; /* Fundo amarelo destacado */
   font-weight: bold;
+  width: 100%;
 }
 
 /* Ícones da sidebar */
@@ -69,14 +70,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Alinha à esquerda quando expandir */
-  padding-left: 20px;
-  margin-top: 200px; /* Adiciona margem no topo, entre o logo e os ícones */
+/* Adiciona margem no topo, entre o logo e os ícones */
 }
 
 /* Seção inferior */
 .sidebar-footer {
   margin-top: auto;
-  padding-bottom: 20px;
 }
 
 .sidebar .img {

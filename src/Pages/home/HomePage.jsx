@@ -1,81 +1,61 @@
 import React from 'react';
-import Sidebar from '../../Components/Sidebar';
-import './../home/home.css'
-import Card from './components/carroussel';
-import CreateButton from './components/btn-acessar';
-import { Line, Pie } from 'react-chartjs-2'; 
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import Sidebar from "../../Components/Sidebar";
+import './home.css';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
-
-function HomePage() {
-
-  const data1 = {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'], 
-    datasets: [
-      {
-        label: 'Casos Diagnosticados',
-        data: [30, 50, 70, 40, 90],
-        fill: false,
-        borderColor: 'rgba(75, 192, 192, 1)', 
-        tension: 0.1,
-      },
-    ],
-  };
-
-  const data2 = {
-    labels: ['Positivos', 'Negativos', 'Em Análise'],  
-    datasets: [
-      {
-        label: 'Casos Positivos',
-        data: [55, 25, 20], 
-        backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(255, 159, 64, 0.6)'], 
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255, 159, 64, 1)'],  
-      },
-    ],
-  };
-
+function Dashboard() {
   return (
-    <div className="home-page">
-      <Sidebar />
-      <div className="content">
+    <div className="dashboard">
+      {/* Sidebar */}
+      <Sidebar/>
+
+      {/* Main Content */}
+      <main className="content">
+        {/* Header Section */}
         <div className="header">
-          <div className="btn">
-            <CreateButton />
-          </div>
-          <h2>Últimos relatórios</h2>
-          <div className="card-sequence">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-        </div>
+          <div className="header-card">
+            <h2>Novidades do Software!</h2>
+            <p>Fique por dentro das inovações da biomedicina.</p>
 
-        <div className="charts-container">
-          <div className="grafic-diagnoses">
-            <div className="chart-1">
-              <h3>Casos diagnosticados</h3>
-             
-              <Line data={data1} />
+            <a href="#">Ver mais</a>
+          </div>
+          <div className="header-metrics">
+            <div className="metric-card">
+              <h3>+15%</h3>
+              <p>Crescimento</p>
             </div>
-          </div>
-
-          <div className="grafic-positive">
-            <div className="chart-2">
-              <h3>Casos Positivos</h3>
-              
-              <Pie data={data2} />
+            <div className="metric-card">
+              <h3>198</h3>
+              <p>Relatórios Gerados</p>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* Actions */}
+        <div className="actions">
+          <button className="action-btn">+ Iniciar Análise</button>
+          <button className="action-btn">Histórico de Análises</button>
+          <button className="action-btn">Cadastrar Cliente</button>
+        </div>
+
+        {/* Charts and Analysis */}
+        <div className="charts">
+          <div className="chart">
+            <h3>Relatórios gerados por mês</h3>
+            <img src="https://via.placeholder.com/400x200" alt="Gráfico" />
+          </div>
+          <div className="recent-analyses">
+            <h3>Últimas Análises</h3>
+            <ul>
+              <li>#23 - Análise Max - VetMais</li>
+              <li>#41 - Análise Bella - PetStars</li>
+              <li>#54 - Análise Luna - Scooby Pet</li>
+              <li>#76 - Análise Rex - Clínica AmoPet</li>
+            </ul>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
 
-export default HomePage;
+export default Dashboard;

@@ -31,14 +31,16 @@ const Sidebar = () => {
           <FaCog className="sidebar-icon" />
           <span className="sidebar-text">Acesso</span>
         </NavLink>
-      </div>
 
-      <div className="sidebar-footer">
+        <div className="sidebar-footer">
         <NavLink to="/logout" className="sidebar-link">
           <FaSignOutAlt className="sidebar-icon" />
           <span className="sidebar-text">Sair</span>
         </NavLink>
       </div>
+      </div>
+
+     
     </div>
   );
 };
