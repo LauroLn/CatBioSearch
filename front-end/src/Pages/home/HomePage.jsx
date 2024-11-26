@@ -18,6 +18,10 @@ function Dashboard() {
             <p>Fique por dentro das inovações da biomedicina.</p>
 
             <a href="#">Ver mais</a>
+
+            <div className="figure">
+              
+            </div>
             </div>
             
           </div>

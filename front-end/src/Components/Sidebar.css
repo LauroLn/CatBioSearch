@@ -73,7 +73,7 @@
 
 /* Seção inferior */
 .sidebar-footer {
-  margin-top: auto;
+  margin-top: 150px;
 }
 
 .sidebar .img {
@@ -82,4 +82,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px; /* Ajuste o espaço abaixo da logo se necessário */
+}
+
+.sidebar:hover .img img {
+  content: url('./assets/logo_com_hover.svg');
 }
