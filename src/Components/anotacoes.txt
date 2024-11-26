@@ -1,0 +1,48 @@
+<div className="sidebar-content">
+        <div className="img">
+          <img src={logoimage} alt="Logo" />
+        </div>
+
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? 'sidebar-link active' : 'sidebar-link')}
+        >
+          <FaHome className="icon" />
+          <span className="sidebar-text">Início</span>
+        </NavLink>
+
+        <NavLink
+          to="/analise"
+          className={({ isActive }) => (isActive ? 'sidebar-link active' : 'sidebar-link')}
+        >
+          <FaChartBar className="icon" />
+          <span className="sidebar-text">Análise</span>
+        </NavLink>
+
+        <NavLink
+          to="/relatorio"
+          className={({ isActive }) => (isActive ? 'sidebar-link active' : 'sidebar-link')}
+        >
+          <FaFileAlt className="icon" />
+          <span className="sidebar-text">Relatório</span>
+        </NavLink>
+
+        <NavLink
+          to="/cadastro"
+          className={({ isActive }) => (isActive ? 'sidebar-link active' : 'sidebar-link')}
+        >
+          <FaUser className="icon" />
+          <span className="sidebar-text">Cadastro</span>
+        </NavLink>
+
+        <NavLink
+          to="/acesso"
+          className={({ isActive }) => (isActive ? 'sidebar-link active' : 'sidebar-link')}
+        >
+          <FaLock className="icon" />
+          <span className="sidebar-text">Acesso</span>
+        </NavLink>
+      </div>
+
+
+      "/acesso"
