@@ -3,7 +3,7 @@ import HomePage from './Pages/home/HomePage';
 import Login from './Pages/login/LoginPage';
 import RelatorioPage from './Pages/relatorios/relatorios';
 import AnalisePage from './Pages/analise/analise';
-import CadastroPage from './Pages/cadastro/cadastro';
+import CatsPage from './Pages/cadastro/cadastro';
 import AcessoPage from './Pages/acesso/acesso';
 
 
@@ -16,7 +16,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/analise" element={<AnalisePage />} />
       <Route path="/relatorio" element={<RelatorioPage />} />
-      <Route path="/cadastro/*" element={<CadastroPage />} />   
+      <Route path="/cadastro" element={<CatsPage />} />   
       <Route path="/acesso" element={<AcessoPage />} /> {/* Added AcessoPage route */}
     </Routes>
   </Router>
