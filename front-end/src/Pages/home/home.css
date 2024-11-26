@@ -1,60 +1,116 @@
-.home-page {
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .dashboard {
     display: flex;
-    background-color: #F2F2F2;
-    height: 100vh; /* Ocupa a altura total da tela */
-    overflow: hidden; /* Evita que o conteúdo "escorra" para fora da tela */
-}
-
-.content {
-    flex: 1; /* Faz o conteúdo ocupar o espaço restante */
-    margin-left: 200px; /* Compensa a largura da sidebar fixa */
+  }
+  
+  .sidebar {
+    width: 50px;
+    background-color: #333;
+    height: 100vh;
+    padding: 10px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-item {
+    text-decoration: none;
+    color: #ccc;
+    padding: 10px 0;
+    transition: color 0.3s;
+  }
+  
+  .menu-item:hover {
+    color: #fff;
+  }
+  
+  .content {
+    flex: 1;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-}
-
-.header {
-    display: flex;
-    flex-direction: column;
-    width: 100%; /* Garante que o conteúdo da header ocupe a largura total do content */
-}
-
-.card-sequence {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 10px;
-    padding-bottom: 10px;
-}
-
-.charts-container {
+  }
+  
+  .header {
     display: flex;
     gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.grafic-diagnoses{
-    background-color: #fff;
-    padding: 10px 200px;
+  }
+  
+  .header-card {
+    flex: 1;
+    background: #222;
+    color: #fff;
+    padding: 20px;
     border-radius: 8px;
-}
-
-.grafic-positive{
-    background-color: #fff;
-    padding: 10px;
+  }
+  
+  .header-metrics {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .metric-card {
+    background: #111;
+    color: #fff;
+    padding: 20px;
     border-radius: 8px;
-}
-
-.chart-1 {
-    padding: 50px;
-    width: 40rem;
-    height: auto; /* Ajuste a altura do gráfico conforme necessário */
-}
-
-.chart-2{
-    padding: 50px;
-    width: 20rem;
-}
+    text-align: center;
+  }
+  
+  .actions {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #fbc02d;
+    color: #333;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+  
+  .action-btn:hover {
+    background: #f9a825;
+  }
+  
+  .charts {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .chart, .recent-analyses {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart img {
+    width: 100%;
+  }
+  
+  .recent-analyses ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recent-analyses li {
+    margin: 10px 0;
+  }

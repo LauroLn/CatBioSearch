@@ -1,52 +1,92 @@
-/* Sidebar.css */
-
-/* Estilo padrão para os links */
-
-.sidebar-link {
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: color 0.3s ease;
-}
-
-/* Efeito de hover */
-.sidebar-link:hover {
-  color: #FFC100;
-}
-
-/* Estilo do link ativo */
-.sidebar-link.active {
-  color: #292929;
-  padding: 5px 70px;
-  background-color: #FFC100;
-  font-weight: bold; /* opcional */
-}
-
-/* Garantir que o sidebar ocupe toda a altura da tela */
+/* Sidebar principal */
 .sidebar {
-  width: 200px;
+  position: fixed;
+  width: 80px; /* Inicialmente estreita */
   height: 100vh;
-  background-color: #292929;
+  background-color: #292929; /* Fundo escuro */
   color: white;
   display: flex;
   flex-direction: column;
-  padding: 2px 10px;
-  text-align: center;
-  position: fixed; /* Para garantir que o sidebar fique fixo na lateral */
+  justify-content: space-between; /* Espaça os itens superior/inferior */
   top: 0;
-  left: 0;
-  z-index: 1000; /* Fica acima do conteúdo */
+  left: 0; /* Alinhada à esquerda */
+  transition: width 0.5s ease-in-out; /* Transição suave ao expandir */
+  overflow: hidden; /* Esconde o conteúdo excedente */
+
 }
 
-/* Ajuste o conteúdo dentro do sidebar para ocupar a altura total */
+.sidebar:hover {
+  width: 250px; /* Largura da sidebar ao passar o mouse */
+}
+
+/* Links da sidebar */
+.sidebar-link {
+  color: #6F6F6F;
+  text-decoration: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: center; /* Centraliza o ícone inicialmente */
+  transition: color 0.3s ease, background-color 1s ease; /* Efeitos suaves */
+  margin: 10px 0; /* Espaçamento entre os links */
+}
+
+.sidebar-link:hover {
+  color: #FFC100; /* Destaque do texto/ícone no hover */
+  background-color: #333; /* Fundo mais claro ao passar o mouse */
+}
+
+/* Link ativo */
+.sidebar-link.active {
+  color: #292929; /* Texto escuro */
+  background-color: #FFC100; /* Fundo amarelo destacado */
+  font-weight: bold;
+  width: 100%;
+}
+
+/* Ícones da sidebar */
+.sidebar-icon {
+  font-size: 1.5rem; /* Tamanho do ícone */
+  margin-right: 10px; /* Espaço entre ícone e texto */
+}
+
+/* Oculta o texto inicialmente */
+.sidebar-text {
+  display: none;
+  opacity: 0;
+  transition: opacity 2.0s ease, margin-left 0.5s ease;
+}
+
+/* Quando a sidebar expandir, exibe o texto */
+.sidebar:hover .sidebar-text {
+  display: inline-block;
+  opacity: 1;
+  margin-left: 10px; /* Espaçamento para o texto */
+}
+
+/* Conteúdo da sidebar (estrutura geral) */
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
+  align-items: flex-start; /* Alinha à esquerda quando expandir */
+/* Adiciona margem no topo, entre o logo e os ícones */
 }
 
-.conteudo-principal {
-  background-color: #F2F2F2;
-  width: 100%;
+/* Seção inferior */
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.sidebar .img {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Ajuste o espaço abaixo da logo se necessário */
+}
+
+/* Modifica a imagem da logo quando a sidebar está em hover */
+.sidebar:hover .img img {
+  content: url('./assets/logo_com_hover.svg'); /* Nova logo */
 }
