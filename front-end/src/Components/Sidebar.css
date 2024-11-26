@@ -12,7 +12,6 @@
   left: 0; /* Alinhada à esquerda */
   transition: width 0.5s ease-in-out; /* Transição suave ao expandir */
   overflow: hidden; /* Esconde o conteúdo excedente */
-
 }
 
 .sidebar:hover {
@@ -33,8 +32,8 @@
 }
 
 .sidebar-link:hover {
-  color: #FFC100; /* Destaque do texto/ícone no hover */
-  background-color: #333; /* Fundo mais claro ao passar o mouse */
+  color: #FFC100;
+  background-color: #333;
 }
 
 /* Link ativo */
@@ -70,7 +69,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Alinha à esquerda quando expandir */
-/* Adiciona margem no topo, entre o logo e os ícones */
 }
 
 /* Seção inferior */
@@ -84,9 +82,4 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px; /* Ajuste o espaço abaixo da logo se necessário */
-}
-
-/* Modifica a imagem da logo quando a sidebar está em hover */
-.sidebar:hover .img img {
-  content: url('./assets/logo_com_hover.svg'); /* Nova logo */
 }

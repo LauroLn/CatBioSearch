@@ -46,9 +46,9 @@ router.post('/', async (req, res) => {
             };
 
             if (usuario.Admin) {
-                return res.status(200).json({ "Message": "Admin logado com sucesso", "Redirect": "/admin-dashboard" });
+                return res.status(200).json({ "Message": "Admin logado com sucesso", "Redirect": "/acesso" });
             } else {
-                return res.status(200).json({ "Message": "Usuário logado com sucesso", "Redirect": "/user-dashboard" });
+                return res.status(200).json({ "Message": "Usuário logado com sucesso", "Redirect": "/acesso" });
             }
         } else {
             return res.status(400).json({ "Message": "Senha inválida" });
@@ -73,11 +73,11 @@ router.get('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
 
         res.json({
             message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}`,
-            usuarios: usuarios
+            usuarios: usuarios,
         });
     } catch (err) {
-        console.error(`Ocorreu um erro ao listar os usuarios: ${err}`);
-        res.status(500).send('Erro ao listar usuários');
+        console.error(`Erro ao listar os usuarios: ${err}`);
+        res.status(500).json({ message: 'Erro ao listar usuários' });
     }
 });
 
