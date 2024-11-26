@@ -1,13 +1,34 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./acesso.css";
 import Sidebar from '../../Components/Sidebar';
 import { FaFilter } from "react-icons/fa";
+import axios from "../../api";
 
 const AcessoPage = () => {
+    const [usuarios, setUsuarios] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            try {
+                const response = await axios.get("/users/admin-dashboard");
+                setUsuarios(response.data.usuarios);
+                setLoading(false);
+            } catch (err) {
+                setError("Erro ao carregar dados.");
+                setLoading(false);
+            }
+        };
+
+        fetchUsuarios();
+    }, []);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>{error}</p>;
+
     return (
         <div className="cats-page">
-            {/* Cabeçalho */}
             <Sidebar />
             <header className="user-header">
                 <h1 className="user-title">Usuários</h1>
@@ -22,22 +43,30 @@ const AcessoPage = () => {
                 </div>
             </header>
 
-            {/* Tabela */}
             <table className="user-table">
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Função</th>
                         <th>Usuário</th>
+                        <th>Ativo</th>
+                        <th>Nascimento</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td colSpan="5" className="empty-row">
-                            Nenhum dado disponível.
-                        </td>
-                    </tr>
+                    {usuarios.length > 0 ? (
+                        usuarios.map((usuario) => (
+                            <tr key={usuario.id}>
+                                <td>{usuario.Nome}</td>
+                                <td>{usuario.Login}</td>
+                                <td>{usuario.Ativo ? "Sim" : "Não"}</td>
+                                <td>{usuario.Nascimento}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4" className="empty-row">Nenhum dado disponível.</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>

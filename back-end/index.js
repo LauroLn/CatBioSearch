@@ -12,14 +12,21 @@ const relatorioRoutes = require("./routes/relatorio-routes");
 const app = express();
 
 
+const cors = require("cors");
+app.use(cors({
+    origin: "http://localhost:5173", // Porta do front-end
+    credentials: true,
+}));
 
 
 app.use(session({
-    secret: '123123123123', // Use uma chave segura
+    secret: '123123123123', 
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 3600000 // Sessão expira em 1 hora (milissegundos)
+        httpOnly: true,
+        secure: false, 
+        maxAge: 3600000, // 1 hora
     }
 }));
 
