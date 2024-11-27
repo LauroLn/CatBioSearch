@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';  // Adicionando axios
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';  // Adicionando axios
 import Sidebar from "../../Components/Sidebar";
 import './home.css';
 import figure from '../../Components/assets/figure-home.svg'
@@ -120,4 +122,5 @@ function HomePage() {
   );
 }
 
+export default HomePage;
 export default HomePage;
