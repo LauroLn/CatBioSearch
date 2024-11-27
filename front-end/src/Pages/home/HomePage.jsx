@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';  // Adicionando axios
 import Sidebar from "../../Components/Sidebar";
 import './home.css';
 
-function Dashboard() {
+function HomePage() {
+  // Estado para armazenar os dados
+  const [ultimosRelatorios, setUltimosRelatorios] = useState([]);
+  const [totalRelatorios, setTotalRelatorios] = useState(0);
+  const [loading, setLoading] = useState(true); 
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/menu'); 
+      setUltimosRelatorios(response.data.relatorios); // Últimos 4 relatórios
+      setTotalRelatorios(response.data.totalRelatorios); // Total de relatórios
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log(`Total de relatórios: ${totalRelatorios}`);
+
   return (
     <div className="dashboard">
       {/* Sidebar */}
@@ -14,16 +39,13 @@ function Dashboard() {
         <div className="header">
           <div className="header-card">
             <div className="content-text">
-            <h2>Novidades do Software!</h2>
-            <p>Fique por dentro das inovações da biomedicina.</p>
+              <h2>Novidades do Software!</h2>
+              <p>Fique por dentro das inovações da biomedicina.</p>
 
-            <a href="#">Ver mais</a>
+              <a href="#">Ver mais</a>
 
-            <div className="figure">
-              
+              <div className="figure"></div>
             </div>
-            </div>
-            
           </div>
           <div className="header-metrics">
             <div className="metric-card">
@@ -31,7 +53,7 @@ function Dashboard() {
               <p>Crescimento</p>
             </div>
             <div className="metric-card">
-              <h3>198</h3>
+              <h3>{totalRelatorios}</h3> {/* Exibe o total de relatórios gerados */}
               <p>Relatórios Gerados</p>
             </div>
           </div>
@@ -52,12 +74,19 @@ function Dashboard() {
           </div>
           <div className="recent-analyses">
             <h3>Últimas Análises</h3>
-            <ul>
-              <li>#23 - Análise Max - VetMais</li>
-              <li>#41 - Análise Bella - PetStars</li>
-              <li>#54 - Análise Luna - Scooby Pet</li>
-              <li>#76 - Análise Rex - Clínica AmoPet</li>
-            </ul>
+            {loading ? (
+              <p>Carregando...</p> // Exibe uma mensagem enquanto os dados estão carregando
+            ) : (
+              <ul>
+                {ultimosRelatorios && ultimosRelatorios.length > 0 ? (
+                  ultimosRelatorios.map((relatorio) => (
+                    <li key={relatorio.id}>#{relatorio.id} - {relatorio.Cliente}</li>
+                  ))
+                ) : (
+                  <li>Sem relatórios disponíveis</li> // Caso não haja relatórios
+                )}
+              </ul>
+            )}
           </div>
         </div>
       </main>
@@ -65,4 +94,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default HomePage;
