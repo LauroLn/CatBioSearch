@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';  // Adicionando axios
 import Sidebar from "../../Components/Sidebar";
 import './home.css';
 import figure from '../../Components/assets/figure-home.svg'
@@ -6,7 +7,31 @@ import { RiPencilLine } from "react-icons/ri";
 import { LuHistory } from "react-icons/lu";
 
 
-function Dashboard() {
+function HomePage() {
+  // Estado para armazenar os dados
+  const [ultimosRelatorios, setUltimosRelatorios] = useState([]);
+  const [totalRelatorios, setTotalRelatorios] = useState(0);
+  const [loading, setLoading] = useState(true); 
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/menu'); 
+      setUltimosRelatorios(response.data.relatorios); // Últimos 4 relatórios
+      setTotalRelatorios(response.data.totalRelatorios); // Total de relatórios
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log(`Total de relatórios: ${totalRelatorios}`);
+
   return (
     <div className="dashboard">
       {/* Sidebar */}
@@ -95,4 +120,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default HomePage;
