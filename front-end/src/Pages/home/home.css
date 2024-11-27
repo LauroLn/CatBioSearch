@@ -4,12 +4,13 @@ body {
     background-color: #f9f9f9;
   }
   
-  .dashboard {
-    display: flex;
+  .dashboard{
+    padding: 5rem 10rem;
   }
   
   .sidebar {
-    width: 50px;
+    position:fixed;
+    width: 80px;
     background-color: #333;
     height: 100vh;
     padding: 10px;
@@ -49,19 +50,30 @@ body {
   
   .header-card {
     flex: 1;
-    background: #222;
+    background: #292929;
     color: #fff;
-    padding: 20px;
+    padding: 80px;
+    width: 200px;
     border-radius: 8px;
-  }
+    height: 300px;
+    align-items:center;
+    display: flex;
+    justify-content: space-around;
+}
   
+
+.img-card img{
+    width: 500px;
+    align-items: center;
+}
+
   .header-metrics {
     display: flex;
     gap: 10px;
   }
   
   .metric-card {
-    background: #111;
+    background: #292929;
     color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -74,7 +86,7 @@ body {
     gap: 10px;
   }
   
-  .action-btn {
+  .iniciar-btn {
     padding: 10px 20px;
     border: none;
     background: #fbc02d;
@@ -85,16 +97,26 @@ body {
     transition: background 0.3s;
   }
   
-  .action-btn:hover {
+  .iniciar-btn:hover {
     background: #f9a825;
   }
   
+
+  .home-btn{
+    padding: 10px 20px;
+    border: none;
+    margin-left: 5px;
+    font-size: 1rem;
+    background-color: "#F2F2F2";
+
+  }
+
   .charts {
     display: flex;
     gap: 20px;
   }
   
-  .chart, .recent-analyses {
+  .chart {
     flex: 1;
     background: #fff;
     border-radius: 8px;
@@ -105,6 +127,7 @@ body {
   .chart img {
     width: 100%;
   }
+
   
   .recent-analyses ul {
     list-style: none;
