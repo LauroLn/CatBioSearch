@@ -5,7 +5,7 @@ import RelatorioPage from './Pages/relatorios/relatorios';
 import AnalisePage from './Pages/analise/analise';
 import CatsPage from './Pages/cadastro/cadastro';
 import AcessoPage from './Pages/acesso/acesso';
-
+import AnalysisPage from './Pages/analise-id/analise_id';
 
 
 const AppRoutes = () => (
@@ -18,6 +18,7 @@ const AppRoutes = () => (
       <Route path="/relatorio" element={<RelatorioPage />} />
       <Route path="/cadastro" element={<CatsPage />} />   
       <Route path="/acesso" element={<AcessoPage />} /> {/* Added AcessoPage route */}
+      <Route path="/analise/:id" element={<AnalysisPage />} />
     </Routes>
   </Router>
 );

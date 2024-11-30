@@ -53,7 +53,6 @@ body {
     background: #292929;
     color: #fff;
     padding: 80px;
-    width: 200px;
     border-radius: 8px;
     height: 300px;
     align-items:center;
@@ -72,13 +71,18 @@ body {
     gap: 10px;
   }
   
-  .metric-card {
+  .metric-card-growth, .metric-card-report{
     background: #292929;
     color: #fff;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+   justify-content: space-around;
   }
+  
+  
   
   .actions {
     margin: 20px 0;
@@ -107,7 +111,14 @@ body {
     border: none;
     margin-left: 5px;
     font-size: 1rem;
-    background-color: "#F2F2F2";
+    border-radius: 8px;
+    background-color: #F2F2F2;
+    cursor: pointer;
+    color: #6F6F6F;
+
+  }
+  .home-btn:hover{
+    background-color: #CACACA;
 
   }
 
@@ -117,18 +128,14 @@ body {
   }
   
   .chart {
-    flex: 1;
-    background: #fff;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
   }
   
   .chart img {
     width: 100%;
   }
 
-  
   .recent-analyses ul {
     list-style: none;
     padding: 0;
