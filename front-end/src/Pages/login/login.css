@@ -1,29 +1,26 @@
 .loginarea {
     margin: 0;
     display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-
-.areaLogin {
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
 }
 
+
 .content {
-    flex: 1;
+    padding: 2rem;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
 }
-
 
 .login-title {
     font-weight: 200;
@@ -38,8 +35,8 @@
     background-color: #F2F2F2;
     padding-right: 10px;
     width: 100%;
-    max-width: 300px;
-    border-radius: 100px;
+    max-width: 30rem;
+    border-radius: 10px;
 }
 
 .input-wrapper input {
@@ -49,7 +46,7 @@
     flex: 1;
     height: 40px;
     background-color: #F2F2F2;
-    border-radius: 100px;
+    border-radius: 10px;
 }
 
 .input-wrapper img {
@@ -65,8 +62,8 @@
     background-color: #F2F2F2;
     padding-right: 10px;
     width: 100%;
-    max-width: 300px;
-    border-radius: 100px;
+    max-width: 30rem;
+    border-radius: 10px;
 }
 
 .password-wrapper img {
@@ -82,7 +79,7 @@
     flex: 1;
     height: 40px;
     background-color: #F2F2F2;
-    border-radius: 100px;
+    border-radius: 10px;
 }
 
 .button-signIn {
@@ -92,11 +89,12 @@
 }
 
 .button-signIn .button-style {
-    padding: 12px 60px;
+    width: 30rem;
+    height: 3rem;
     background-color: #FFC100;
     border: none;
-    border-radius: 20px;
-    color: #F2F2F2;
+    border-radius: 10px;
+    color: #292929;
     cursor: pointer;
     text-decoration: none;
     position: relative;
@@ -106,30 +104,24 @@
 
 .button-signIn .button-style:hover {
     transition: 0.5s;
-    background-color: black;
+    background-color: #292929;
     color: #FFC100;
 }
 
 .gato {
-    background-color: #FFC100;
+    background-color: #292929;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
-.gato img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 20px;
-    object-fit: cover;
-}
 
 .logo {
     width: 200px;
 }
 
 .login-title {
-    font-size: 20px;
+    font-size: 40px;
 }

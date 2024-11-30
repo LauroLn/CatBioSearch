@@ -5,7 +5,7 @@ import "../login/login.css";
 import user from "../../Components/assets/mdi_user.svg";
 import olho from "../../Components/assets/mdi_eye.svg";
 import olhofechado from "../../Components/assets/mdi_eye-off.svg";
-import gato from "../../Components/assets/pexels-wojciech-kumpicki-1084687-2071882-removebg-preview 1.svg";
+import gato from "../../Components/assets/Medicine-bro 1.svg";
 
 function Login() {
   const [login, setLogin] = useState("");
@@ -47,7 +47,7 @@ function Login() {
       <div className="areaLogin">
         <div className="loginarea">
           <div className="content">
-            <img className="logo" src={logoimage} alt="Logo" />
+
             <form onSubmit={handleSubmit}>
               <div className="inputs">
                 <div className="login-title">

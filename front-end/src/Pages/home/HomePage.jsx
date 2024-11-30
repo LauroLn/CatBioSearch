@@ -63,13 +63,13 @@ function HomePage() {
 
         <div className="header-metrics">
           <div className="metric-card-growth">
-            <p>Crescimento</p>
+            <p>Uso do Software</p>
             <div className="img-crescimento">
               <img src={software} alt="" />
             </div>
           </div>
           <div className="metric-card-report">
-            <p>Relatórios Gerados</p>
+            <p>Total de Relatórios</p>
               <div className="img-report">
                 <img src={relatorios} alt="" /> 
               </div>

@@ -33,7 +33,7 @@ const Sidebar = () => {
         </NavLink>
 
         <div className="sidebar-footer">
-        <NavLink to="/logout" className="sidebar-link">
+        <NavLink to="/login" className="sidebar-link">
           <FaSignOutAlt className="sidebar-icon" />
           <span className="sidebar-text">Sair</span>
         </NavLink>
