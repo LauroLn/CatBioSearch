@@ -33,7 +33,7 @@ const CatsPage = () => {
       {/* Cabeçalho */}
       <Sidebar />
       <header className="cats-header">
-        <h1 className="cats-title">Gatos cadastrados</h1>
+        <h1 className="cats-title">Clientes cadastrados</h1>
         <div className="cats-actions">
           <button className="filter-button">
             <FaFilter style={{ marginRight: '10px' }} /> Filtro

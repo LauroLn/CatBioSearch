@@ -1,0 +1,34 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    margin: 1rem 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.inputs{
+    background-color:#F2F2F2;
+    width: 250px;
+    height: 10px;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+}

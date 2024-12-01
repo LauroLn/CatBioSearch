@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from 'axios'; // Adicionando axios
 import Sidebar from "../../Components/Sidebar";
 import './home.css';
@@ -7,10 +8,12 @@ import software from '../../Components/assets/software-uso.svg';
 import relatorios from '../../Components/assets/relatorios.svg';
 import { RiPencilLine } from "react-icons/ri";
 import { LuHistory } from "react-icons/lu";
-import ReportsChart from "./Componentes_Home/grafic.jsx"
+import ReportsChart from "./Componentes_Home/grafic.jsx";
 import LastAnalyses from './Componentes_Home/analyses.jsx';
 
 function HomePage() {
+  const navigate = useNavigate(); // Inicialize o navigate aqui
+
   // Estado para armazenar os dados
   const [ultimosRelatorios, setUltimosRelatorios] = useState([]);
   const [totalRelatorios, setTotalRelatorios] = useState(0);
@@ -32,22 +35,17 @@ function HomePage() {
     fetchData();
   }, []);
 
-  console.log(`Total de relatórios: ${totalRelatorios}`);
-
   return (
     <div className="dashboard">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-
-      {/* Header Section */}
       <div className="header">
         <div className="header-card">
           <div className="content-text">
             <h2 style={{ color: "#FFC100", fontWeight: "700", fontSize: 40 }}>Novidades do Software!</h2>
             <p style={{ color: "#FFFFFF", fontSize: 16 }}>Fique por dentro das inovações da biomedicina.</p>
-
             <a
               href="#"
               style={{ color: "#FFFFFF", fontWeight: 800, marginTop: "20px", display: "inline-block" }}
@@ -70,9 +68,9 @@ function HomePage() {
           </div>
           <div className="metric-card-report">
             <p>Total de Relatórios</p>
-              <div className="img-report">
-                <img src={relatorios} alt="" /> 
-              </div>
+            <div className="img-report">
+              <img src={relatorios} alt="" /> 
+            </div>
           </div>
         </div>
       </div>
@@ -81,7 +79,7 @@ function HomePage() {
       <div className="actions">
         <button
           className="iniciar-btn"
-          onClick={() => navigate("/analysis")}
+          onClick={() => navigate("/passosAnalise/step1")}
         >
           + Iniciar Análise
         </button>
@@ -108,11 +106,10 @@ function HomePage() {
         </div>
 
         <div className="recent-analyses">
-            <LastAnalyses/>
-          </div>
+          <LastAnalyses/>
         </div>
       </div>
-
+    </div>
   );
 }
 
