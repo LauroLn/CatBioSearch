@@ -17,24 +17,25 @@ const autenticacao = (req, res, next) => {
 };
 
 router.get("/menu", autenticacao, async (req, res) => {
+    console.log("Requisição recebida no endpoint /menu");
     try {
-        // Obter os últimos 4 relatórios
         const relatorios = await Relatorio.findAll({
-            attributes: ['id', 'Nome', 'Sexo', 'Cliente', 'Idade', 'Pelagem', 'Material', 'Metodo'], // Campos atualizados
-            order: [['id', 'DESC']], // Ordenando pela ID de forma decrescente para pegar os mais recentes
-            limit: 4, // Limita para os últimos 4
+            attributes: ['id', 'Cliente', 'Nome'],
+            order: [['id', 'DESC']],
+            limit: 4,
         });
-
-        // Contar o total de relatórios
         const totalRelatorios = await Relatorio.count();
 
+        console.log("Relatórios enviados:", relatorios);
+        console.log("Total de relatórios:", totalRelatorios);
+
         res.json({
-            message: 'Dentro da rota /menu',
-            relatorios: relatorios,
-            totalRelatorios: totalRelatorios, // Retorna o total de relatórios
+            message: 'Dados do menu carregados com sucesso',
+            relatorios,
+            totalRelatorios,
         });
     } catch (err) {
-        console.error(`Ocorreu um erro ao listar os relatórios: ${err}`);
+        console.error("Erro ao processar /menu:", err);
         res.status(500).send('Erro ao listar relatórios');
     }
 });

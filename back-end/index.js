@@ -35,7 +35,7 @@ app.use(session({
 app.use(express.json());
 
 // Middleware para as rotas
-app.use('/', menuRoutes);
+app.use('/home', menuRoutes);
 app.use('/users', userRoutes);
 app.use('/relatorios', relatorioRoutes);
 app.use('/vet', vetRoutes)
