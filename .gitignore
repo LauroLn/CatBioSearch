@@ -1,0 +1,79 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de dependências
+node_modules/
+bower_components/
+
+# Build do Node.js
+build/
+
+# Diretórios de pacotes
+.DS_Store
+
+# Arquivos relacionados ao Python
+*.py[cod]
+__pycache__/
+*.so
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Cache de pacotes do pip
+*.egg-info/
+.eggs/
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Arquivos de configuração do PyCharm/VSCode
+.idea/
+.vscode/
+
+# Arquivos gerados pelo Jupyter Notebook
+.ipynb_checkpoints/
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
+
+# Testes de cobertura
+htmlcov/
+.tox/
+.coverage
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# Build
+build/
+dist/
+site/
+*.egg
+
+# Configuração local de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos temporários
+*.swp
+*.swo
+*~
+*.tmp
+
+# Diretórios de logs
+logs/
+*.log
+
+# Docker
+*.pid
