@@ -24,7 +24,7 @@ function HomePage() {
       setUltimosRelatorios(response.data.relatorios || []);
       setTotalRelatorios(response.data.totalRelatorios ?? null); // Se não for fornecido, permanece null
       setLoading(false);
-      console.log(`aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ${totalRelatorios}`)
+      console.log(`${totalRelatorios}`)
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
       setLoading(false);
