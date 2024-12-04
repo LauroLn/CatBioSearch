@@ -1,105 +1,164 @@
-import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Sidebar from '../../Components/Sidebar';
-import { FaFilter } from "react-icons/fa";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../../Components/Sidebar";
 import axios from "../../api";
 
 const CriarUsuario = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const containerStyle = {
-        display: "flex",
-        flexDirection: "column", // Define a direção das caixas (coluna ou linha)
-        alignItems: "center", // Centraliza os itens horizontalmente
-        justifyContent: "center", // Centraliza os itens verticalmente
-        gap: "1rem", // Espaçamento entre os itens
-        height: "100vh", // Preenche a altura total da tela
-        padding: "1rem",
-      };
-    
-      const formStyle = {
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap", // Permite quebrar linha se necessário
-        gap: "1rem",
-        width: "100%",
-        maxWidth: "600px", // Limita a largura do formulário
-      };
-    
-      const buttonContainerStyle = {
-        display: "flex",
-        justifyContent: "space-between", // Espaço igual entre os botões
-        width: "100%",
-        maxWidth: "600px",
-      };
-    
-      const buttonStyle = {
-        padding: "0.75rem 1.5rem",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-      };
-    
-      const backButtonStyle = {
-        ...buttonStyle,
-        backgroundColor: "#ff7675", // Cor para o botão Voltar
-        color: "white",
-      };
-    
-      const nextButtonStyle = {
-        ...buttonStyle,
-        backgroundColor: "green", // Cor para o botão Próximo
-        color: "white",
-      };
-    
-      const labelStyle = {
-        fontWeight: "600", // Define o texto como "light"
-        fontSize: "14px",
-        color: "#333", // Cor opcional para melhor contraste
-      };
+  // Estado para armazenar os dados do formulário
+  const [formData, setFormData] = useState({
+    Nome: "",
+    Telefone: "",
+    Email: "",
+    Endereco: "",
+    Observacoes: "",
+  });
 
-      const inpu = {
-        height: "100px",
-      };
-      
-    
-      return (
-        <div style={containerStyle}>
-            <Sidebar />
-          <h2>Cadastar Cliente</h2>
-          <form style={formStyle}>
-            <div>
-              <label style={labelStyle}>Nome da Empresa</label>
-              <input className="inputs" type="text" placeholder="Digite o nome da Empresa" />
-    
-              <label style={labelStyle}>Telefone</label>
-              <input className="inputs" type="text" placeholder="Digite o telefone" />
-    
-              <label style={labelStyle}>E-mail</label>
-              <input className="inputs" type="number" placeholder="Digite o E-mail" />
-            </div>
-            <div>
-              <label style={labelStyle}>Endereço</label>
-              <input className="inputs" type="text" placeholder="Digite o Endereço" />
-    
-              <label style={labelStyle}>Observação</label>
-              <input style={inpu} className="inputs" type="textarea" placeholder="Digite uma Observação" />
-            </div>
-          </form>
-          <div style={buttonContainerStyle}>
-            <button style={backButtonStyle}
-            onClick={() => navigate("/")}>
-              Voltar
-            </button>
-            <button
-              style={nextButtonStyle}
-              onClick={() => navigate("/")}
-            >
-              Finalizar Cadastro →
-            </button>
-          </div>
+  // Função para lidar com mudanças no formulário
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Função para lidar com o envio do formulário
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("/vet/cadastro", formData);
+      alert(response.data.message); // Exibe mensagem de sucesso
+      navigate("/"); // Redireciona após o cadastro
+    } catch (err) {
+      console.error("Erro ao cadastrar veterinário:", err);
+      alert("Ocorreu um erro ao cadastrar o veterinário.");
+    }
+  };
+
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    height: "100vh",
+    padding: "1rem",
+  };
+
+  const formStyle = {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: "1rem",
+    width: "100%",
+    maxWidth: "600px",
+  };
+
+  const buttonContainerStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    maxWidth: "600px",
+  };
+
+  const buttonStyle = {
+    padding: "0.75rem 1.5rem",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  };
+
+  const backButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: "#ff7675",
+    color: "white",
+  };
+
+  const nextButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: "green",
+    color: "white",
+  };
+
+  const labelStyle = {
+    fontWeight: "600",
+    fontSize: "14px",
+    color: "#333",
+  };
+
+  const inputStyle = {
+    height: "100px",
+  };
+
+  return (
+    <div style={containerStyle}>
+      <Sidebar />
+      <h2>Cadastrar Veterinário</h2>
+      <form style={formStyle}>
+        <div>
+          <label style={labelStyle}>Nome</label>
+          <input
+            className="inputs"
+            type="text"
+            name="Nome"
+            placeholder="Digite o nome"
+            value={formData.Nome}
+            onChange={handleChange}
+          />
+
+          <label style={labelStyle}>Telefone</label>
+          <input
+            className="inputs"
+            type="text"
+            name="Telefone"
+            placeholder="Digite o telefone"
+            value={formData.Telefone}
+            onChange={handleChange}
+          />
+
+          <label style={labelStyle}>E-mail</label>
+          <input
+            className="inputs"
+            type="email"
+            name="Email"
+            placeholder="Digite o e-mail"
+            value={formData.Email}
+            onChange={handleChange}
+          />
         </div>
-    );
+        <div>
+          <label style={labelStyle}>Endereço</label>
+          <input
+            className="inputs"
+            type="text"
+            name="Endereco"
+            placeholder="Digite o endereço"
+            value={formData.Endereco}
+            onChange={handleChange}
+          />
+
+          <label style={labelStyle}>Observação</label>
+          <textarea
+            style={inputStyle}
+            className="inputs"
+            name="Observacoes"
+            placeholder="Digite uma observação"
+            value={formData.Observacoes}
+            onChange={handleChange}
+          />
+        </div>
+      </form>
+      <div style={buttonContainerStyle}>
+        <button style={backButtonStyle} onClick={() => navigate("/")}>
+          Voltar
+        </button>
+        <button style={nextButtonStyle} onClick={handleSubmit}>
+          Finalizar Cadastro →
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default CriarUsuario;
