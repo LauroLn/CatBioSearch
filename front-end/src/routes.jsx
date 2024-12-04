@@ -9,6 +9,8 @@ import AnalysisPage from './Pages/analise-id/analise_id';
 import Cadastro from './Pages/PassosAnalise/index';
 import CriarCliente from './Pages/criarCliente/index';
 import CriarUsuario from './Pages/criarUsuario/index';
+import AlterarCliente from './Pages/alterarCliente/index';
+import AlterarUsuario from './Pages/alterarUsuario/index';
 
 
 const AppRoutes = () => (
@@ -26,6 +28,8 @@ const AppRoutes = () => (
       <Route path="/passosAnalise/*" element={<Cadastro />} />
       <Route path="/criarcliente" element={<CriarCliente />} />
       <Route path="/criarusuario" element={<CriarUsuario />} />
+      <Route path="/alterarcliente" element={<AlterarCliente />} />
+      <Route path="/alterarusuario" element={<AlterarUsuario />} />
       </Routes>
   </Router>
 );

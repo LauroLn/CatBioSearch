@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
 import axios from "../../api";
 
-const CriarCliente = () => {
+const AlterarCliente = () => {
   const navigate = useNavigate();
 
   // Estado para armazenar os dados do formulário
@@ -94,7 +94,7 @@ const CriarCliente = () => {
   return (
     <div style={containerStyle}>
       <Sidebar />
-      <h2>Cadastrar Cliente</h2>
+      <h2>Alterar Cliente</h2>
       <form style={formStyle}>
         <div>
           <label style={labelStyle}>Nome da Empresa</label>
@@ -150,7 +150,7 @@ const CriarCliente = () => {
         </div>
       </form>
       <div style={buttonContainerStyle}>
-        <button style={backButtonStyle} onClick={() => navigate("/")}>
+        <button style={backButtonStyle} onClick={() => navigate("/cadastro")}>
           Voltar
         </button>
         <button style={nextButtonStyle} onClick={handleSubmit}>
@@ -161,4 +161,4 @@ const CriarCliente = () => {
   );
 };
 
-export default CriarCliente;
+export default AlterarCliente;

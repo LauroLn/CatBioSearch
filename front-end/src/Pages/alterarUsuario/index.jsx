@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from '../../Components/Sidebar';
 import axios from "../../api";
 
-const AlterarUsuario= () => {
+const CriarUsuario= () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -152,7 +152,7 @@ const AlterarUsuario= () => {
                 </div>
             </form>
             <div style={buttonContainerStyle}>
-                <button style={backButtonStyle} onClick={() => navigate("/")}>
+                <button style={backButtonStyle} onClick={() => navigate("/acesso")}>
                     Voltar
                 </button>
                 <button style={nextButtonStyle} onClick={handleSubmit}>
@@ -163,4 +163,4 @@ const AlterarUsuario= () => {
     );
 };
 
-export default AlterarUsuario;
+export default CriarUsuario;
