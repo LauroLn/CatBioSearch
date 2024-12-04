@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./cadastro.css";
 import { FaFilter } from "react-icons/fa";
 import Sidebar from '../../Components/Sidebar';
 import axios from "../../api";
 
 const CatsPage = () => {
-
+  const navigate = useNavigate();
   const [clinicas, setClinicas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -38,7 +39,9 @@ const CatsPage = () => {
           <button className="filter-button">
             <FaFilter style={{ marginRight: '10px' }} /> Filtro
           </button>
-          <button className="add-button">+ Adicionar</button>
+          <button className="add-button"
+          onClick={() => navigate("/criarcliente")}>
+            + Adicionar</button>
         </div>
       </header>
 

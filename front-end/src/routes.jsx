@@ -7,6 +7,8 @@ import CatsPage from './Pages/cadastro/cadastro';
 import AcessoPage from './Pages/acesso/acesso';
 import AnalysisPage from './Pages/analise-id/analise_id';
 import Cadastro from './Pages/PassosAnalise/index';
+import CriarCliente from './Pages/criarCliente/index';
+import CriarUsuario from './Pages/criarUsuario/index';
 
 
 const AppRoutes = () => (
@@ -22,6 +24,8 @@ const AppRoutes = () => (
       <Route path="/analise/:id" element={<AnalysisPage />} />
       <Route path="/clientes" element={<clientesCadastrados />} />
       <Route path="/passosAnalise/*" element={<Cadastro />} />
+      <Route path="/criarcliente" element={<CriarCliente />} />
+      <Route path="/criarusuario" element={<CriarUsuario />} />
       </Routes>
   </Router>
 );

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./acesso.css";
 import Sidebar from '../../Components/Sidebar';
 import { FaFilter } from "react-icons/fa";
 import axios from "../../api";
 
 const AcessoPage = () => {
+    const navigate = useNavigate();
     const [usuarios, setUsuarios] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -39,7 +41,8 @@ const AcessoPage = () => {
                     <button className="export-button">
                         Exportar
                     </button>
-                    <button className="add-button">+ Adicionar</button>
+                    <button className="add-button"
+                    onClick={() => navigate("/criarusuario")}>+ Adicionar</button>
                 </div>
             </header>
 

@@ -93,7 +93,7 @@ function HomePage() {
         </button>
         <button
           className="home-btn"
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/criarcliente")}
         >
           <RiPencilLine style={{ marginRight: 5 }} />
           Cadastrar Cliente
