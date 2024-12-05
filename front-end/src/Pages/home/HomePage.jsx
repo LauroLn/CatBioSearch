@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from "react-router-dom";
-import axios from 'axios'; // Adicionando axios
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import Sidebar from "../../Components/Sidebar";
 import './home.css';
 import figure from '../../Components/assets/figure-home.svg';
@@ -9,22 +9,22 @@ import relatorios from '../../Components/assets/relatorios.svg';
 import { RiPencilLine } from "react-icons/ri";
 import { LuHistory } from "react-icons/lu";
 import ReportsChart from "./Componentes_Home/grafic.jsx";
-import LastAnalyses from './Componentes_Home/analyses.jsx';
 
 function HomePage() {
-  const navigate = useNavigate(); // Inicialize o navigate aqui
+  const navigate = useNavigate();
 
-  // Estado para armazenar os dados
   const [ultimosRelatorios, setUltimosRelatorios] = useState([]);
-  const [totalRelatorios, setTotalRelatorios] = useState(0);
+  const [totalRelatorios, setTotalRelatorios] = useState(null); // Alterado para null
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('/menu');
-      setUltimosRelatorios(response.data.relatorios); // Últimos 4 relatórios
-      setTotalRelatorios(response.data.totalRelatorios); // Total de relatórios
+      const response = await axios.get('/home/menu');
+      console.log("Dados recebidos do backend:", response.data); // Inspecione os dados recebidos
+      setUltimosRelatorios(response.data.relatorios || []);
+      setTotalRelatorios(response.data.totalRelatorios ?? null); // Se não for fornecido, permanece null
       setLoading(false);
+      console.log(`${totalRelatorios}`)
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
       setLoading(false);
@@ -36,11 +36,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="dashboard">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="dashboard"> 
+      <Sidebar /> 
 
-      {/* Main Content */}
       <div className="header">
         <div className="header-card">
           <div className="content-text">
@@ -53,7 +51,6 @@ function HomePage() {
               Ver mais
             </a>
           </div>
-
           <div className="img-card">
             <img src={figure} alt="" />
           </div>
@@ -68,14 +65,18 @@ function HomePage() {
           </div>
           <div className="metric-card-report">
             <p>Total de Relatórios</p>
+            {totalRelatorios !== null ? ( // Exibir apenas após carregar
+              <h3>{totalRelatorios}</h3>
+            ) : (
+              <p>Carregando...</p>
+            )}
             <div className="img-report">
-              <img src={relatorios} alt="" /> 
+              <img src={relatorios} alt="" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Actions */}
       <div className="actions">
         <button
           className="iniciar-btn"
@@ -92,21 +93,37 @@ function HomePage() {
         </button>
         <button
           className="home-btn"
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/criarcliente")}
         >
           <RiPencilLine style={{ marginRight: 5 }} />
           Cadastrar Cliente
         </button>
       </div>
 
-      {/* Charts and Analysis */}
       <div className="charts">
         <div className="chart">
-          <ReportsChart/>
+          <ReportsChart />
         </div>
 
         <div className="recent-analyses">
-          <LastAnalyses/>
+          <h3>Últimos Relatórios</h3>
+          {loading ? (
+            <p>Carregando...</p>
+          ) : (
+            <ul>
+              {ultimosRelatorios.length > 0 ? (
+                ultimosRelatorios.map((relatorio) => (
+                  <li key={relatorio.id}>
+                    <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
+                    <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
+                    <p><strong>ID:</strong> {relatorio.id}</p>
+                  </li>
+                ))
+              ) : (
+                <p>Nenhum relatório encontrado.</p>
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </div>

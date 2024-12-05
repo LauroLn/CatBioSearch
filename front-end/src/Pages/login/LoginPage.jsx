@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../../api"; 
+import axios from "../../api";
 import logoimage from "../../Components/assets/logo.svg";
 import "../login/login.css";
 import user from "../../Components/assets/mdi_user.svg";
@@ -48,45 +48,53 @@ function Login() {
         <div className="loginarea">
           <div className="content">
 
-            <form onSubmit={handleSubmit}>
-              <div className="inputs">
-                <div className="login-title">
-                  <h2>Login</h2>
+
+            <div className="inputs">
+              <form onSubmit={handleSubmit}>
+
+                <div className="inputs-content">
+                  <div className="login-title">
+                    <h2>Login</h2>
+                  </div>
+
+                  <div className="input-wrapper">
+                    <input className="text-input"
+                      type="text"
+                      placeholder="Usuário"
+                      value={login}
+                      onChange={(e) => setLogin(e.target.value)}
+                      required
+
+                    />
+                    
+                    <img src={user} alt="Ícone de usuário" />
+                  </div>
+                  <div className="password-wrapper">
+                    <input
+                      type={passwordVisible ? "text" : "password"}
+                      placeholder="Digite sua senha"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <img
+                      src={passwordVisible ? olho : olhofechado}
+                      alt="Toggle password visibility"
+                      onClick={togglePasswordVisibility}
+                      className="toggle-password"
+                    />
+                  </div>
+                  <div className="button-signIn">
+                    <button type="submit" className="button-style">
+                      Entrar
+                    </button>
+                  </div>
                 </div>
 
-                <div className="input-wrapper">
-                  <input
-                    type="text"
-                    placeholder="Usuário"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value)}
-                    required
-                  />
-                  <img src={user} alt="Ícone de usuário" />
-                </div>
-                <div className="password-wrapper">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <img
-                    src={passwordVisible ? olho : olhofechado}
-                    alt="Toggle password visibility"
-                    onClick={togglePasswordVisibility}
-                    className="toggle-password"
-                  />
-                </div>
-                <div className="button-signIn">
-                  <button type="submit" className="button-style">
-                    Entrar
-                  </button>
-                </div>
-              </div>
-              {errorMessage && <p className="error-message">{errorMessage}</p>}
-            </form>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+              </form>
+            </div>
+
           </div>
 
           <div className="gato">

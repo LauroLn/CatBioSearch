@@ -7,13 +7,17 @@ import CatsPage from './Pages/cadastro/cadastro';
 import AcessoPage from './Pages/acesso/acesso';
 import AnalysisPage from './Pages/analise-id/analise_id';
 import Cadastro from './Pages/PassosAnalise/index';
+import CriarCliente from './Pages/criarCliente/index';
+import CriarUsuario from './Pages/criarUsuario/index';
+import AlterarCliente from './Pages/alterarCliente/index';
+import AlterarUsuario from './Pages/alterarUsuario/index';
 
 
 const AppRoutes = () => (
   <Router>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/home" element={<HomePage />} /> {/* Added "/home" route */}
+  {/* <Route path="/home" element={<HomePage />} */} {/* Added "/home" route */}
       <Route path="/login" element={<Login />} />
       <Route path="/analise" element={<AnalisePage />} />
       <Route path="/relatorio" element={<RelatorioPage />} />
@@ -22,6 +26,10 @@ const AppRoutes = () => (
       <Route path="/analise/:id" element={<AnalysisPage />} />
       <Route path="/clientes" element={<clientesCadastrados />} />
       <Route path="/passosAnalise/*" element={<Cadastro />} />
+      <Route path="/criarcliente" element={<CriarCliente />} />
+      <Route path="/criarusuario" element={<CriarUsuario />} />
+      <Route path="/alterarcliente/:id" element={<AlterarCliente />} />
+      <Route path="/alterarusuario/:id" element={<AlterarUsuario />} />
       </Routes>
   </Router>
 );
