@@ -1,0 +1,130 @@
+/* Container Geral */
+
+/* Container Geral */
+.content-relatorio {
+  width: 100%;
+  height: 100vh;  /* Usando 100% da altura da janela para centralizar verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Centraliza verticalmente */
+  align-items: center;      /* Centraliza horizontalmente */
+  padding: 20px;            /* Adicionando um pouco de padding */
+  box-sizing: border-box;   /* Garante que o padding não afete as dimensões do container */
+}
+
+.historico-container {
+  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  width: 100%;                /* Garante que o container ocupe toda a largura */
+  max-width: 900px;           /* Limita a largura máxima */
+  color: #333;
+  text-align: center;         /* Centraliza o texto dentro do container */
+} 
+  /* Barra de Pesquisa */
+  .search-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    width: 20rem;
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  
+  /* Header e Filtros */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+  }
+  
+  .filter-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    margin-left: 10px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .filter-buttons button.active {
+    background-color: #ffc107;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Tabela */
+  .relatorio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .relatorio-table th,
+  .relatorio-table td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .relatorio-table th {
+    color: #666;
+    font-weight: 400;
+  }
+  
+  .relatorio-table tbody tr.even {
+    background-color: #f9f9f9;
+  }
+  
+  /* Status */
+  .status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .status.concluído {
+    background-color: #28a745;
+  }
+  
+  .status.pendente {
+    background-color: #ffc107;
+  }
+  
+  /* Paginação */
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .pagination div {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .pagination span {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .pagination span.active {
+    background-color: #ffc107;
+    color: #fff;
+    border-radius: 5px;
+  }
+  

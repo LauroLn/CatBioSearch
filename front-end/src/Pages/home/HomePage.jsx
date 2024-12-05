@@ -85,7 +85,7 @@ function HomePage() {
         </button>
         <button
           className="home-btn"
-          onClick={() => navigate("/history")}
+          onClick={() => navigate("/relatorio")}
         >
           <LuHistory style={{ marginRight: 5 }} />
           Histórico de Análises

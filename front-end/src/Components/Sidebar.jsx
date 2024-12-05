@@ -19,7 +19,7 @@ const Sidebar = () => {
           <FaHome className="sidebar-icon" />
           <span className="sidebar-text">Início</span>
         </NavLink>
-        <NavLink to="/analise" className="sidebar-link">
+        <NavLink to="/relatorio" className="sidebar-link">
           <FaChartBar className="sidebar-icon" />
           <span className="sidebar-text">Relatórios</span>
         </NavLink>

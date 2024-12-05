@@ -82,7 +82,9 @@ const Step1 = () => {
         </div>
       </form>
       <div style={buttonContainerStyle}>
-        <button style={backButtonStyle} disabled>
+        <button style={backButtonStyle}
+                onClick={()=> navigate("/")}
+        >
           Voltar
         </button>
         <button
