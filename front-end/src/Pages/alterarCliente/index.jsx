@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
 import axios from "../../api";
 
 const AlterarCliente = () => {
   const navigate = useNavigate();
+  const { id } = useParams(); // Pega o ID do veterinário da URL
 
   // Estado para armazenar os dados do formulário
   const [formData, setFormData] = useState({
@@ -14,6 +15,26 @@ const AlterarCliente = () => {
     Endereco: "",
     Observacoes: "",
   });
+
+  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [error, setError] = useState(null); // Estado de erro
+
+  // Busca os dados do veterinário ao carregar a página
+  useEffect(() => {
+    const fetchVeterinario = async () => {
+      try {
+        const response = await axios.get(`/vet/${id}`); // Faz o GET pelo ID
+        setFormData(response.data); // Preenche os campos do formulário com os dados recebidos
+        setLoading(false);
+      } catch (err) {
+        console.error("Erro ao buscar dados do veterinário:", err);
+        setError("Erro ao carregar os dados do veterinário.");
+        setLoading(false);
+      }
+    };
+
+    fetchVeterinario();
+  }, [id]);
 
   // Função para lidar com mudanças no formulário
   const handleChange = (e) => {
@@ -27,15 +48,16 @@ const AlterarCliente = () => {
   // Função para lidar com o envio do formulário
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("/vet/cadastro", formData);
-      alert(response.data.message); // Exibe mensagem de sucesso
-      navigate("/"); // Redireciona após o cadastro
+      await axios.put(`/vet/${id}`, formData); // Atualiza os dados do veterinário
+      alert("Dados alterados com sucesso!");
+      navigate("/cadastro"); // Redireciona após o sucesso
     } catch (err) {
-      console.error("Erro ao cadastrar veterinário:", err);
-      alert("Ocorreu um erro ao cadastrar o veterinário.");
+      console.error("Erro ao alterar os dados:", err);
+      alert("Ocorreu um erro ao alterar os dados.");
     }
   };
 
+  // Estilização (mantida do código original)
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -91,18 +113,22 @@ const AlterarCliente = () => {
     height: "100px",
   };
 
+  // Caso esteja carregando ou tenha ocorrido um erro
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div style={containerStyle}>
       <Sidebar />
       <h2>Alterar Cliente</h2>
       <form style={formStyle}>
         <div>
-          <label style={labelStyle}>Nome da Empresa</label>
+          <label style={labelStyle}>Nome da empresa</label>
           <input
             className="inputs"
             type="text"
             name="Nome"
-            placeholder="Digite o nome da Empresa"
+            placeholder="Digite o nome"
             value={formData.Nome}
             onChange={handleChange}
           />
@@ -154,7 +180,7 @@ const AlterarCliente = () => {
           Voltar
         </button>
         <button style={nextButtonStyle} onClick={handleSubmit}>
-          Finalizar Cadastro →
+          Salvar Alterações →
         </button>
       </div>
     </div>

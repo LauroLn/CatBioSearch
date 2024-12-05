@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from '../../Components/Sidebar';
 import axios from "../../api";
 
-const CriarUsuario= () => {
+const CriarUsuario = () => {
+    const { id } = useParams(); // Obtém o ID da URL
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -17,6 +18,26 @@ const CriarUsuario= () => {
         Ativo: true,
     });
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Função para buscar as informações do usuário
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (id) {
+                try {
+                    const response = await axios.get(`/users/admin-usuario/${id}`);
+                    setFormData(response.data);
+                    setIsLoading(false);
+                } catch (error) {
+                    console.error("Erro ao carregar usuário:", error);
+                    alert("Erro ao carregar usuário.");
+                }
+            }
+        };
+
+        fetchUser();
+    }, [id]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -24,12 +45,12 @@ const CriarUsuario= () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('/users/admin-cadastro', formData);
+            const response = await axios.put(`/users/admin-usuario/${id}`, formData);
             alert(response.data.message); // Exibe a mensagem de sucesso
-            navigate("/"); // Redireciona para a página inicial
+            navigate("/acesso"); // Redireciona para a página inicial após salvar
         } catch (error) {
-            console.error("Erro ao cadastrar usuário:", error);
-            alert("Ocorreu um erro ao cadastrar o usuário.");
+            console.error("Erro ao salvar usuário:", error);
+            alert("Ocorreu um erro ao salvar o usuário.");
         }
     };
 
@@ -84,10 +105,15 @@ const CriarUsuario= () => {
         color: "#333",
     };
 
+    // Se ainda estiver carregando, exibe uma mensagem de carregamento
+    if (isLoading) {
+        return <p>Carregando...</p>;
+    }
+
     return (
         <div style={containerStyle}>
             <Sidebar />
-            <h2>Alterar Usuário</h2>
+            <h2>{id ? "Alterar Usuário" : "Cadastrar Novo Usuário"}</h2>
             <form style={formStyle}>
                 <div>
                     <label style={labelStyle}>Nome Completo</label>
@@ -156,7 +182,7 @@ const CriarUsuario= () => {
                     Voltar
                 </button>
                 <button style={nextButtonStyle} onClick={handleSubmit}>
-                    Finalizar Cadastro →
+                    {id ? "Salvar Alterações" : "Finalizar Cadastro →"}
                 </button>
             </div>
         </div>

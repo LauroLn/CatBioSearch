@@ -42,10 +42,17 @@ const AcessoPage = () => {
     setMenuOpen(null); // Fecha o menu após a ação
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
-      alert(`Excluir usuário com ID: ${id}`);
-      // Aqui você pode implementar a lógica de exclusão com a API
+      try {
+        const response = await axios.delete(`/users/admin-usuario/${id}`);
+        alert(response.data.message); // Exibe a mensagem de sucesso
+
+        // Atualiza a lista de usuários após a exclusão
+        setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+      } catch (error) {
+        alert("Erro ao excluir usuário.");
+      }
     }
     setMenuOpen(null); // Fecha o menu após a ação
   };
@@ -107,7 +114,7 @@ const AcessoPage = () => {
                         <div className="actions-menu">
                           <button
                             className="edit"
-                            onClick={() => navigate("/alterarusuario")}
+                            onClick={() => navigate(`/alterarusuario/${usuario.id}`)}
                           >
                             Alterar
                           </button>

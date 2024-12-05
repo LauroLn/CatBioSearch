@@ -28,8 +28,8 @@ const AppRoutes = () => (
       <Route path="/passosAnalise/*" element={<Cadastro />} />
       <Route path="/criarcliente" element={<CriarCliente />} />
       <Route path="/criarusuario" element={<CriarUsuario />} />
-      <Route path="/alterarcliente" element={<AlterarCliente />} />
-      <Route path="/alterarusuario" element={<AlterarUsuario />} />
+      <Route path="/alterarcliente/:id" element={<AlterarCliente />} />
+      <Route path="/alterarusuario/:id" element={<AlterarUsuario />} />
       </Routes>
   </Router>
 );

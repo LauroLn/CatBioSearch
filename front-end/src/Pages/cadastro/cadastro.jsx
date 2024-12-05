@@ -14,6 +14,7 @@ const CatsPage = () => {
   const itemsPerPage = 5; // Quantidade de itens por página
   const [menuOpen, setMenuOpen] = useState(null); // Controla qual menu está aberto
 
+  // Função para buscar os dados da API
   useEffect(() => {
     const fetchVet = async () => {
       try {
@@ -28,25 +29,33 @@ const CatsPage = () => {
     fetchVet();
   }, []);
 
+  // Função para deletar um cliente
+  const handleDelete = async (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este cliente?")) {
+      try {
+        await axios.delete(`/vet/${id}`); // Chama a rota DELETE da API
+        alert("Cliente excluído com sucesso.");
+
+        // Atualiza a lista de clientes após a exclusão
+        setClinicas((prevClinicas) =>
+          prevClinicas.filter((clinica) => clinica.id !== id)
+        );
+      } catch (err) {
+        console.error("Erro ao excluir cliente:", err);
+        alert("Erro ao excluir o cliente. Tente novamente.");
+      }
+    }
+    setMenuOpen(null); // Fecha o menu após a ação
+  };
+
+  // Função para alterar a página
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // Alterna o menu para abrir/fechar
   const handleMenuToggle = (id) => {
-    setMenuOpen(menuOpen === id ? null : id); // Alterna o menu para abrir/fechar
-  };
-
-  const handleEdit = (id) => {
-    alert(`Editar cliente com ID: ${id}`);
-    setMenuOpen(null); // Fecha o menu após a ação
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm("Tem certeza que deseja excluir este cliente?")) {
-      alert(`Excluir cliente com ID: ${id}`);
-      // Aqui você pode implementar a lógica de exclusão com a API
-    }
-    setMenuOpen(null); // Fecha o menu após a ação
+    setMenuOpen(menuOpen === id ? null : id);
   };
 
   const currentItems = clinicas.slice(
@@ -64,7 +73,10 @@ const CatsPage = () => {
         <h1 className="cats-title">Clientes Cadastrados</h1>
         <div className="cats-actions">
           <button className="export-button">Exportar</button>
-          <button className="add-button" onClick={() => navigate("/criarcliente")}>
+          <button
+            className="add-button"
+            onClick={() => navigate("/criarcliente")}
+          >
             + Adicionar
           </button>
         </div>
@@ -75,7 +87,7 @@ const CatsPage = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nome da Emrpesa</th>
+              <th>Nome da Empresa</th>
               <th>Endereço</th>
               <th>E-mail</th>
               <th>Telefone</th>
@@ -101,8 +113,20 @@ const CatsPage = () => {
                       </button>
                       {menuOpen === clinica.id && (
                         <div className="actions-menu">
-                          <button className="edit" onClick={() => navigate("/alterarcliente")}>Alterar</button>
-                          <button className="delete" onClick={() => handleDelete(clinica.id)}>Excluir</button>
+                          <button
+                            className="edit"
+                            onClick={() =>
+                              navigate(`/alterarcliente/${clinica.id}`)
+                            }
+                          >
+                            Alterar
+                          </button>
+                          <button
+                            className="delete"
+                            onClick={() => handleDelete(clinica.id)}
+                          >
+                            Excluir
+                          </button>
                         </div>
                       )}
                     </div>
@@ -111,7 +135,9 @@ const CatsPage = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="empty-row">Nenhum dado disponível.</td>
+                <td colSpan="6" className="empty-row">
+                  Nenhum dado disponível.
+                </td>
               </tr>
             )}
           </tbody>
@@ -125,7 +151,9 @@ const CatsPage = () => {
           (_, index) => (
             <button
               key={index}
-              className={`pagination-button ${currentPage === index + 1 ? "active" : ""}`}
+              className={`pagination-button ${
+                currentPage === index + 1 ? "active" : ""
+              }`}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
