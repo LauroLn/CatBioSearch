@@ -254,7 +254,9 @@ const Cadastro = () => {
                                 type="file"
                                 onChange={handleFileChange}
                             />
-                            <span>Escolha um arquivo</span>
+                            <span>
+                                {formData.arquivo ? formData.arquivo.name : "Escolha um arquivo"}
+                            </span>
                         </label>
                     </div>
                 )}
