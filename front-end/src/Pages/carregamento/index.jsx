@@ -44,7 +44,7 @@ const LoadingPage = () => {
     // Redireciona para outra página quando o progresso atinge 100%
     if (progress === 100) {
       setTimeout(() => {
-        navigate('/'); // 
+        navigate('/relatorios'); // 
       }, 500); // Pequeno delay para o usuário perceber o 100%
     }
   }, [progress, navigate]);

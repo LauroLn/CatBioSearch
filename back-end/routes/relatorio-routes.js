@@ -141,6 +141,25 @@ router.delete('/relatorio/:id', autenticacao, async (req, res) => {
     }
 });
 
+router.get('/ultimo', autenticacao, async (req, res) => {
+    try {
+        const relatorio = await Relatorio.findOne({
+            order: [['id', 'DESC']], // Ordena pelo ID em ordem decrescente
+            attributes: ['id', 'Nome', 'Sexo', 'Cliente', 'Idade', 'Raca', 'Material', 'Metodo']
+        });
+
+        if (!relatorio) {
+            return res.status(404).json({ message: "Nenhum relatório encontrado." });
+        }
+
+        res.json(relatorio);
+    } catch (err) {
+        console.error(`Erro ao buscar o último relatório: ${err}`);
+        res.status(500).send('Ocorreu um erro ao buscar o último relatório.');
+    }
+});
+
+
 
 // Inicializa os modelos ao carregar o roteador
 initializeRelatorioModel();
