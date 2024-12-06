@@ -64,12 +64,7 @@ function HomePage() {
             </div>
           </div>
           <div className="metric-card-report">
-            <p>Total de Relatórios</p>
-            {totalRelatorios !== null ? ( // Exibir apenas após carregar
-              <h3>{totalRelatorios}</h3>
-            ) : (
-              <p>Carregando...</p>
-            )}
+  
             <div className="img-report">
               <img src={relatorios} alt="" />
             </div>
