@@ -144,3 +144,22 @@ body {
   .recent-analyses li {
     margin: 10px 0;
   }
+  .recent-analyses ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recent-analyses li {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ccc; /* Borda ao redor de cada relatório */
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Fundo claro para o relatório */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .recent-analyses li p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  

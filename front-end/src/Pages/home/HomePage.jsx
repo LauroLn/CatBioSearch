@@ -106,25 +106,26 @@ function HomePage() {
         </div>
 
         <div className="recent-analyses">
-          <h3>Últimos Relatórios</h3>
-          {loading ? (
-            <p>Carregando...</p>
-          ) : (
-            <ul>
-              {ultimosRelatorios.length > 0 ? (
-                ultimosRelatorios.map((relatorio) => (
-                  <li key={relatorio.id}>
-                    <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
-                    <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
-                    <p><strong>ID:</strong> {relatorio.id}</p>
-                  </li>
-                ))
-              ) : (
-                <p>Nenhum relatório encontrado.</p>
-              )}
-            </ul>
-          )}
-        </div>
+  <h3>Últimos Relatórios</h3>
+  {loading ? (
+    <p>Carregando...</p>
+  ) : (
+    <ul>
+      {ultimosRelatorios.length > 0 ? (
+        ultimosRelatorios.map((relatorio) => (
+          <li key={relatorio.id}>
+            <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
+            <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
+            <p><strong>ID:</strong> {relatorio.id}</p>
+          </li>
+        ))
+      ) : (
+        <p>Nenhum relatório encontrado.</p>
+      )}
+    </ul>
+  )}
+</div>
+
       </div>
     </div>
   );
