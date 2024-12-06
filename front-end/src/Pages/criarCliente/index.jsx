@@ -36,23 +36,31 @@ const CriarCliente = () => {
     }
   };
 
+  // Estilos
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     gap: "1rem",
-    height: "100vh",
+    minHeight: "100vh",
     padding: "1rem",
   };
 
   const formStyle = {
     display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: "1rem",
+    flexDirection: "row", // Coloca as colunas lado a lado
+    justifyContent: "space-between", // Adiciona espaço entre as colunas
+    gap: "2rem", // Define o espaçamento entre as colunas
     width: "100%",
-    maxWidth: "600px",
+    maxWidth: "800px",
+  };
+
+  const columnStyle = {
+    display: "flex",
+    flexDirection: "column", // Organiza os itens da coluna verticalmente
+    gap: "1rem", // Espaço entre os itens dentro da coluna
+    flex: "1", // Faz com que ambas as colunas ocupem tamanhos iguais
   };
 
   const buttonContainerStyle = {
@@ -85,9 +93,21 @@ const CriarCliente = () => {
     fontWeight: "600",
     fontSize: "14px",
     color: "#333",
+    width: "100%",
+    maxWidth: "500px",
+    textAlign: "left",
   };
 
   const inputStyle = {
+    width: "100%",
+    maxWidth: "500px",
+    padding: "0.5rem",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  };
+
+  const textAreaStyle = {
+    ...inputStyle,
     height: "100px",
   };
 
@@ -96,7 +116,7 @@ const CriarCliente = () => {
       <Sidebar />
       <h2>Cadastrar Cliente</h2>
       <form style={formStyle}>
-        <div>
+        <div style={columnStyle}>
           <label style={labelStyle}>Nome da Empresa</label>
           <input
             className="inputs"
@@ -105,6 +125,7 @@ const CriarCliente = () => {
             placeholder="Digite o nome da Empresa"
             value={formData.Nome}
             onChange={handleChange}
+            style={inputStyle}
           />
 
           <label style={labelStyle}>Telefone</label>
@@ -115,6 +136,7 @@ const CriarCliente = () => {
             placeholder="Digite o telefone"
             value={formData.Telefone}
             onChange={handleChange}
+            style={inputStyle}
           />
 
           <label style={labelStyle}>E-mail</label>
@@ -125,9 +147,10 @@ const CriarCliente = () => {
             placeholder="Digite o e-mail"
             value={formData.Email}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
-        <div>
+        <div style={columnStyle}>
           <label style={labelStyle}>Endereço</label>
           <input
             className="inputs"
@@ -136,11 +159,12 @@ const CriarCliente = () => {
             placeholder="Digite o endereço"
             value={formData.Endereco}
             onChange={handleChange}
+            style={inputStyle}
           />
 
           <label style={labelStyle}>Observação</label>
           <textarea
-            style={inputStyle}
+            style={textAreaStyle}
             className="inputs"
             name="Observacoes"
             placeholder="Digite uma observação"

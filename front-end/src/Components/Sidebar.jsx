@@ -25,7 +25,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/cadastro" className="sidebar-link">
           <FaUser className="sidebar-icon" />
-          <span className="sidebar-text">Cadastro</span>
+          <span className="sidebar-text">Clientes</span>
         </NavLink>
         <NavLink to="/acesso" className="sidebar-link">
           <FaCog className="sidebar-icon" />

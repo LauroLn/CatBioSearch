@@ -106,25 +106,34 @@ function HomePage() {
         </div>
 
         <div className="recent-analyses">
-  <h3>Últimos Relatórios</h3>
+  <h3 className="recent-analyses-title">Últimos Relatórios</h3>
   {loading ? (
-    <p>Carregando...</p>
+    <p className="recent-analyses-loading">Carregando...</p>
   ) : (
-    <ul>
+    <ul className="recent-analyses-list">
       {ultimosRelatorios.length > 0 ? (
         ultimosRelatorios.map((relatorio) => (
-          <li key={relatorio.id}>
-            <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
-            <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
-            <p><strong>ID:</strong> {relatorio.id}</p>
+          <li key={relatorio.id} className="recent-analyses-item">
+            <div className="recent-analyses-icon">
+              📄 {/* Você pode substituir por um ícone real, ex.: via biblioteca Font Awesome */}
+            </div>
+            <a className='aa' href='/'>
+              <div className="recent-analyses-content">
+              <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
+              <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
+              <p><strong>ID:</strong> {relatorio.id}</p>
+            </div>
+            </a>
           </li>
         ))
       ) : (
-        <p>Nenhum relatório encontrado.</p>
+        <p className="recent-analyses-empty">Nenhum relatório encontrado.</p>
       )}
     </ul>
   )}
 </div>
+
+
 
       </div>
     </div>
