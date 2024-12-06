@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api"; // Certifique-se de que o caminho está correto
 import "./style.css";
 
 const Cadastro = () => {
@@ -13,13 +14,28 @@ const Cadastro = () => {
         telefoneClinica: "",
         emailClinica: "",
         enderecoClinica: "",
-        clienteCadastrado: false,
+        clienteCadastrado: "Não", // Valor padrão para "Não"
         materialGenetico: "",
         sequenciamento: "",
         arquivo: null,
     });
 
+    const [veterinarios, setVeterinarios] = useState([]); // Estado para armazenar os veterinários
     const navigate = useNavigate();
+
+    // Busca os veterinários do backend ao carregar o componente
+    useEffect(() => {
+        const fetchVeterinarios = async () => {
+            try {
+                const response = await api.get("/vet/veterinarios"); // Faz a requisição para a rota que retorna os veterinários
+                setVeterinarios(response.data.veterinarios || []);
+            } catch (err) {
+                console.error("Erro ao buscar veterinários:", err);
+            }
+        };
+
+        fetchVeterinarios();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -44,9 +60,27 @@ const Cadastro = () => {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Dados enviados:", formData);
+
+        const relatorioData = {
+            Nome: formData.nomeGato,
+            Sexo: formData.sexoGato,
+            Cliente: formData.clienteCadastrado, // Aqui usamos o valor selecionado na dropdown
+            Idade: formData.idadeGato,
+            Raca: formData.racaGato,
+            Material: formData.materialGenetico,
+            Metodo: formData.sequenciamento,
+        };
+
+        try {
+            const response = await api.post("/relatorios/novo-relatorio", relatorioData);
+            alert(response.data.message); // Exibe uma mensagem de sucesso
+            navigate("/"); // Redireciona após o cadastro
+        } catch (err) {
+            console.error("Erro ao cadastrar o relatório:", err);
+            alert("Ocorreu um erro ao cadastrar o relatório.");
+        }
     };
 
     return (
@@ -69,7 +103,7 @@ const Cadastro = () => {
                 ))}
             </div>
 
-            <form className="form-container" onSubmit={handleSubmit}>
+            <form className="form-container" onSubmit={(e) => e.preventDefault()}>
                 {/* Passo 1: Informações básicas do gato */}
                 {currentStep === 1 && (
                     <div className="form-step">
@@ -117,7 +151,6 @@ const Cadastro = () => {
                                 </select>
                             </label>
                         </div>
-                        {/* Botão "Voltar" aparece apenas no primeiro passo */}
                         <button
                             type="button"
                             className="nav-button back-home"
@@ -140,6 +173,7 @@ const Cadastro = () => {
                                     name="nomeClinica"
                                     value={formData.nomeClinica}
                                     onChange={handleChange}
+                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
                                 />
                             </label>
                             <label>
@@ -149,6 +183,7 @@ const Cadastro = () => {
                                     name="telefoneClinica"
                                     value={formData.telefoneClinica}
                                     onChange={handleChange}
+                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
                                 />
                             </label>
                         </div>
@@ -160,6 +195,7 @@ const Cadastro = () => {
                                     name="emailClinica"
                                     value={formData.emailClinica}
                                     onChange={handleChange}
+                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
                                 />
                             </label>
                             <label>
@@ -169,6 +205,7 @@ const Cadastro = () => {
                                     name="enderecoClinica"
                                     value={formData.enderecoClinica}
                                     onChange={handleChange}
+                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
                                 />
                             </label>
                         </div>
@@ -179,8 +216,12 @@ const Cadastro = () => {
                                 value={formData.clienteCadastrado}
                                 onChange={handleChange}
                             >
-                                <option value={false}>Não</option>
-                                <option value={true}>Sim</option>
+                                <option value="Não">Não</option>
+                                {veterinarios.map((vet) => (
+                                    <option key={vet.id} value={vet.Nome}>
+                                        {vet.Nome}
+                                    </option>
+                                ))}
                             </select>
                         </label>
                     </div>
@@ -230,7 +271,7 @@ const Cadastro = () => {
                             Próximo
                         </button>
                     ) : (
-                        <button type="submit" className="nav-button finalizar">
+                        <button type="submit" onClick={handleSubmit} className="nav-button finalizar">
                             Finalizar
                         </button>
                     )}
