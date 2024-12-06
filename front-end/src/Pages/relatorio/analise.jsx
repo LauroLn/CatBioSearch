@@ -7,8 +7,22 @@ import NeedlemanWunsch from "./Componentes/Needlman";
 import Proteins from "./Componentes/Protein";
 import Dispersao from "./Componentes/Dispersao";
 import axios from "../../api"; // Certifique-se que axios está configurado corretamente
+import { jsPDF } from "jspdf";
 
 const Relatorio = () => {
+
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Relatório do Animal - Félix", 10, 10);
+    doc.text("ID do Relatório: 123456", 10, 20);
+    doc.save("relatorio.pdf");
+  };
+
+  const handleEmailSent = () => {
+    alert("E-mail enviado com sucesso!");
+  };
+  
   const [relatorio, setRelatorio] = useState(null); // Estado para armazenar o relatório
   const [loading, setLoading] = useState(true); // Estado de carregamento
   const [error, setError] = useState(""); // Estado de erro
@@ -82,7 +96,7 @@ const Relatorio = () => {
       {/* Porcentagem de Doença Renal Policística */}
       <div className="drp-section">
         <h3>Doença Renal Policística</h3>
-        <div className="drp-percentage">75%</div>
+        <div className="drp-percentage">87.03%</div>
       </div>
 
       {/* Identidade dos Genes */}
@@ -112,6 +126,14 @@ const Relatorio = () => {
       {/* Dispersão da Amostra */}
       <div className="scatter-plot">
         <Dispersao />
+      </div>
+      <div className="action-buttons">
+        <button className="button-download" onClick={downloadPDF}>
+          Baixar PDF
+        </button>
+        <button className="button-email" onClick={handleEmailSent}>
+          Enviar E-mail
+        </button>
       </div>
     </div>
   );
