@@ -30,7 +30,7 @@ def buscar_gene_pkd1(conteudo):
     else:
         return {"error": "Gene PKD1 não encontrado no arquivo"}
 
-def realizar_blast(sequencia, db_path="C:/BLAST/NCBI/blast-2.16.0+/bin/pkd1_db", mutacoes_doenca=None):
+def realizar_blast(sequencia, db_path="C:/Program Files/NCBI/blast-2.16.0+/bin/pkd1_db", mutacoes_doenca=None):
     try:
         query_file = "temp_query.fasta"
         result_file = "blast_result.xml"

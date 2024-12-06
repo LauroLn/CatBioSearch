@@ -76,7 +76,7 @@ const Cadastro = () => {
         try {
             const response = await api.post("/relatorios/novo-relatorio", relatorioData);
             alert(response.data.message); // Exibe uma mensagem de sucesso
-            navigate("/"); // Redireciona após o cadastro
+            navigate("/loading"); // Redireciona após o cadastro
         } catch (err) {
             console.error("Erro ao cadastrar o relatório:", err);
             alert("Ocorreu um erro ao cadastrar o relatório.");

@@ -11,6 +11,7 @@ import CriarCliente from './Pages/criarCliente/index';
 import CriarUsuario from './Pages/criarUsuario/index';
 import AlterarCliente from './Pages/alterarCliente/index';
 import AlterarUsuario from './Pages/alterarUsuario/index';
+import LoadingPage from './Pages/carregamento/index';
 
 
 const AppRoutes = () => (
@@ -30,6 +31,7 @@ const AppRoutes = () => (
       <Route path="/criarusuario" element={<CriarUsuario />} />
       <Route path="/alterarcliente/:id" element={<AlterarCliente />} />
       <Route path="/alterarusuario/:id" element={<AlterarUsuario />} />
+      <Route path="/loading" element={<LoadingPage />} />
       </Routes>
   </Router>
 );
