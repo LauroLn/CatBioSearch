@@ -74,7 +74,7 @@ const HistoricoRelatorios = () => {
         <h1 className="cats-title">Histórico de Relatórios</h1>
         <div className="cats-actions">
           <button className="export-button">Exportar</button>
-          <button className="add-button" onClick={() => navigate("/adicionar")}>
+          <button className="add-button" onClick={() => navigate("/passosAnalise/step1")}>
             + Adicionar
           </button>
         </div>
