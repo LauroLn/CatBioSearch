@@ -24,7 +24,7 @@ const initRelatorioModel = async () =>{
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        Pelagem:{
+        Raca:{
             type: Sequelize.STRING,
             allowNull: false
         },

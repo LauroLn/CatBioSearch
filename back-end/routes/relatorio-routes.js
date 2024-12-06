@@ -18,7 +18,7 @@ const autenticacao = (req, res, next) => {
 
 // Rota para criar novo relatório
 router.post('/novo-relatorio', autenticacao, async (req, res) => {
-    const { Nome, Sexo, Cliente, Idade, Pelagem, Material, Metodo } = req.body;
+    const { Nome, Sexo, Cliente, Idade, Raca, Material, Metodo } = req.body;
 
     try {
         await Relatorio.create({
@@ -26,7 +26,7 @@ router.post('/novo-relatorio', autenticacao, async (req, res) => {
             Sexo,
             Cliente,
             Idade,
-            Pelagem,
+            Raca,
             Material,
             Metodo,
         });
