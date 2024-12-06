@@ -1,83 +1,160 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./relatorios.css";
+import { FaEllipsisV } from "react-icons/fa";
 import Sidebar from "../../Components/Sidebar";
+import axios from "../../api";
 
 const HistoricoRelatorios = () => {
-  const registros = [
-    { id: "#236", nome: "Clinica VetMais", raca: "Persa", status: "Concluído", data: "20/04/2024" },
-    { id: "#237", nome: "Clinica VetMais", raca: "Persa", status: "Concluído", data: "25/04/2024" },
-    { id: "#238", nome: "Clinica VetMais", raca: "Persa", status: "Pendente", data: "01/05/2024" },
-    { id: "#239", nome: "Clinica VetMais", raca: "Persa", status: "Concluído", data: "10/05/2024" },
-    { id: "#240", nome: "Clinica VetMais", raca: "Persa", status: "Concluído", data: "11/05/2024" },
-  ];
+  const navigate = useNavigate();
+  const [gatos, setGatos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Quantidade de itens por página
+  const [menuOpen, setMenuOpen] = useState(null); // Controla qual menu está aberto
+
+  // Função para buscar os dados da API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/gatos/dados");
+        setGatos(response.data.gatos);
+        setLoading(false);
+      } catch (err) {
+        setError("Erro ao carregar dados.");
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Função para deletar um item
+  const handleDelete = async (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este registro?")) {
+      try {
+        await axios.delete(`/gatos/${id}`);
+        alert("Registro excluído com sucesso.");
+        setGatos((prevGatos) => prevGatos.filter((gato) => gato.id !== id));
+      } catch (err) {
+        console.error("Erro ao excluir registro:", err);
+        alert("Erro ao excluir o registro. Tente novamente.");
+      }
+    }
+    setMenuOpen(null); // Fecha o menu após a ação
+  };
+
+  // Função para alterar a página
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Alterna o menu para abrir/fechar
+  const handleMenuToggle = (id) => {
+    setMenuOpen(menuOpen === id ? null : id);
+  };
+
+  const currentItems = gatos.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-
-    <>
-        <div className="content-relatorio">
-        <Sidebar />
-        <div className="historico-container">
-        {/* Barra de Pesquisa */}
-        <div className="search-bar">
-          <input type="text" placeholder="Pesquisar Relatório" />
+    <div className="cats-page">
+      <Sidebar />
+      <header className="cats-header">
+        <h1 className="cats-title">Histórico de Relatórios</h1>
+        <div className="cats-actions">
+          <button className="export-button">Exportar</button>
+          <button className="add-button" onClick={() => navigate("/adicionar")}>
+            + Adicionar
+          </button>
         </div>
+      </header>
 
-        {/* Título e Filtros */}
-        <div className="header">
-          <h2>Histórico de Relatórios</h2>
-          <div className="filter-buttons">
-            <button>Hoje</button>
-            <button className="active">Semana</button>
-            <button>Mês</button>
-          </div>
-        </div>
-
-        {/* Tabela */}
-        <table className="relatorio-table">
+      <div className="table-container">
+        <table className="cats-table">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Nome</th>
+              <th>ID</th>
+              <th>Nome do Gato</th>
               <th>Raça</th>
-              <th>Status</th>
+              <th>Nome da Empresa</th>
+              <th>Usuário</th>
               <th>Data</th>
-              <th></th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {registros.map((registro, index) => (
-              <tr key={index} className={index % 2 === 0 ? "even" : ""}>
-                <td>{registro.id}</td>
-                <td>{registro.nome}</td>
-                <td>{registro.raca}</td>
-                <td>
-                  <span className={`status ${registro.status.toLowerCase()}`}>
-                    {registro.status}
-                  </span>
+            {currentItems.length > 0 ? (
+              currentItems.map((gato) => (
+                <tr key={gato.id}>
+                  <td className="inicio">#{gato.id}</td>
+                  <td className="meio">{gato.nome}</td>
+                  <td className="meio">{gato.raca}</td>
+                  <td className="meio">{gato.empresa}</td>
+                  <td className="meio">{gato.usuario}</td>
+                  <td className="meio">{gato.data}</td>
+                  <td className="fim">
+                    <div className="actions-menu-container">
+                      <button
+                        className="actions-button"
+                        onClick={() => handleMenuToggle(gato.id)}
+                      >
+                        <FaEllipsisV />
+                      </button>
+                      {menuOpen === gato.id && (
+                        <div className="actions-menu">
+                          <button
+                            className="edit"
+                            onClick={() => navigate(`/editar/${gato.id}`)}
+                          >
+                            Alterar
+                          </button>
+                          <button
+                            className="delete"
+                            onClick={() => handleDelete(gato.id)}
+                          >
+                            Excluir
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="empty-row">
+                  Nenhum dado disponível.
                 </td>
-                <td>{registro.data}</td>
-                <td>...</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-
-        {/* Paginação */}
-        <div className="pagination">
-          <span>20 Registros</span>
-          <div>
-            <span>&lt;</span>
-            <span className="active">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&gt;</span>
-          </div>
-        </div>
       </div>
-        </div>
-       
-    </>
+
+      {/* Paginação */}
+      <div className="pagination">
+        {Array.from(
+          { length: Math.ceil(gatos.length / itemsPerPage) },
+          (_, index) => (
+            <button
+              key={index}
+              className={`pagination-button ${
+                currentPage === index + 1 ? "active" : ""
+              }`}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
+    </div>
   );
 };
 
