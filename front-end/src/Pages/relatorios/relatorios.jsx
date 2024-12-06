@@ -3,29 +3,32 @@ import { useNavigate } from "react-router-dom";
 import "./relatorios.css";
 import { FaEllipsisV } from "react-icons/fa";
 import Sidebar from "../../Components/Sidebar";
-import axios from "../../api";
+import axios from "../../api"; // Certifique-se que axios está configurado corretamente
 
 const HistoricoRelatorios = () => {
   const navigate = useNavigate();
-  const [gatos, setGatos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Quantidade de itens por página
-  const [menuOpen, setMenuOpen] = useState(null); // Controla qual menu está aberto
+  const [gatos, setGatos] = useState([]); // Estado para os dados
+  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [error, setError] = useState(""); // Estado de erro
+  const [currentPage, setCurrentPage] = useState(1); // Página atual
+  const itemsPerPage = 5; // Itens por página
+  const [menuOpen, setMenuOpen] = useState(null); // Estado do menu
 
-  // Função para buscar os dados da API
+  // Função para buscar dados da API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/gatos/dados");
-        setGatos(response.data.gatos);
-        setLoading(false);
+        const response = await axios.get("/relatorios/relatorios");
+        console.log("Dados recebidos do backend:", response.data);
+        setGatos(response.data.relatorios || []); // Atualiza o estado com os dados da API
       } catch (err) {
+        console.error("Erro ao carregar dados:", err);
         setError("Erro ao carregar dados.");
-        setLoading(false);
+      } finally {
+        setLoading(false); // Sempre desativa o carregamento
       }
     };
+
     fetchData();
   }, []);
 
@@ -33,15 +36,16 @@ const HistoricoRelatorios = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este registro?")) {
       try {
-        await axios.delete(`/gatos/${id}`);
+        await axios.delete(`/relatorios/${id}`);
         alert("Registro excluído com sucesso.");
         setGatos((prevGatos) => prevGatos.filter((gato) => gato.id !== id));
       } catch (err) {
         console.error("Erro ao excluir registro:", err);
         alert("Erro ao excluir o registro. Tente novamente.");
+      } finally {
+        setMenuOpen(null); // Fecha o menu após a ação
       }
     }
-    setMenuOpen(null); // Fecha o menu após a ação
   };
 
   // Função para alterar a página
@@ -49,11 +53,12 @@ const HistoricoRelatorios = () => {
     setCurrentPage(pageNumber);
   };
 
-  // Alterna o menu para abrir/fechar
+  // Alterna o menu de ações
   const handleMenuToggle = (id) => {
     setMenuOpen(menuOpen === id ? null : id);
   };
 
+  // Define os itens da página atual
   const currentItems = gatos.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -80,11 +85,10 @@ const HistoricoRelatorios = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nome do Gato</th>
+              <th>Nome</th>
               <th>Raça</th>
-              <th>Nome da Empresa</th>
-              <th>Usuário</th>
-              <th>Data</th>
+              <th>Cliente</th>
+              <th>Idade</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -92,13 +96,12 @@ const HistoricoRelatorios = () => {
             {currentItems.length > 0 ? (
               currentItems.map((gato) => (
                 <tr key={gato.id}>
-                  <td className="inicio">#{gato.id}</td>
-                  <td className="meio">{gato.nome}</td>
-                  <td className="meio">{gato.raca}</td>
-                  <td className="meio">{gato.empresa}</td>
-                  <td className="meio">{gato.usuario}</td>
-                  <td className="meio">{gato.data}</td>
-                  <td className="fim">
+                  <td>#{gato.id}</td>
+                  <td>{gato.Nome}</td>
+                  <td>{gato.Raca}</td>
+                  <td>{gato.Cliente}</td>
+                  <td>{gato.Idade}</td>
+                  <td>
                     <div className="actions-menu-container">
                       <button
                         className="actions-button"
@@ -128,7 +131,7 @@ const HistoricoRelatorios = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="empty-row">
+                <td colSpan="6" className="empty-row">
                   Nenhum dado disponível.
                 </td>
               </tr>

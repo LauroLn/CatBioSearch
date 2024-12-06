@@ -51,6 +51,27 @@ router.get('/user-dashboard/relatorio', async (req, res) => {
     }
 });
 
+router.get('/relatorios', async (req, res) => {
+    try {
+        // Buscar todos os relatórios na tabela 'Relatorio'
+        const relatorios = await Relatorio.findAll();
+
+        // Verificar se há relatórios
+        if (relatorios.length === 0) {
+            return res.status(404).json({ message: 'Nenhum relatório encontrado' });
+        }
+
+        // Retornar os relatórios como JSON
+        res.json({
+            message: 'Relatórios encontrados',
+            relatorios: relatorios,
+        });
+    } catch (err) {
+        console.error(`Ocorreu um erro ao buscar os relatórios: ${err}`);
+        res.status(500).send('Erro ao buscar relatórios');
+    }
+});
+
 // Rota para buscar relatório por ID
 router.get('/relatorio/:id', autenticacao, async (req, res) => {
     const { id } = req.params;
