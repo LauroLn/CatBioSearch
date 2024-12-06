@@ -12,6 +12,7 @@ import CriarUsuario from './Pages/criarUsuario/index';
 import AlterarCliente from './Pages/alterarCliente/index';
 import AlterarUsuario from './Pages/alterarUsuario/index';
 import LoadingPage from './Pages/carregamento/index';
+import Relatorio from './Pages/relatorio/analise';
 
 
 const AppRoutes = () => (
@@ -32,6 +33,7 @@ const AppRoutes = () => (
       <Route path="/alterarcliente/:id" element={<AlterarCliente />} />
       <Route path="/alterarusuario/:id" element={<AlterarUsuario />} />
       <Route path="/loading" element={<LoadingPage />} />
+      <Route path="/relatorios" element={<Relatorio />} />
       </Routes>
   </Router>
 );
