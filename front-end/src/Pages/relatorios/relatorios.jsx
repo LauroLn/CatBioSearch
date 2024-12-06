@@ -18,12 +18,13 @@ const HistoricoRelatorios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true); // Ativa o carregamento antes de buscar os dados
         const response = await axios.get("/relatorios/relatorios");
         console.log("Dados recebidos do backend:", response.data);
         setGatos(response.data.relatorios || []); // Atualiza o estado com os dados da API
       } catch (err) {
         console.error("Erro ao carregar dados:", err);
-        setError("Erro ao carregar dados.");
+        setError("Nenhum dado cadastrado.");
       } finally {
         setLoading(false); // Sempre desativa o carregamento
       }
@@ -64,9 +65,7 @@ const HistoricoRelatorios = () => {
     currentPage * itemsPerPage
   );
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>{error}</p>;
-
+  // Renderização da página
   return (
     <div className="cats-page">
       <Sidebar />
@@ -81,80 +80,81 @@ const HistoricoRelatorios = () => {
       </header>
 
       <div className="table-container">
-        <table className="cats-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Raça</th>
-              <th>Cliente</th>
-              <th>Idade</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length > 0 ? (
-              currentItems.map((gato) => (
-                <tr key={gato.id}>
-                  <td>#{gato.id}</td>
-                  <td>{gato.Nome}</td>
-                  <td>{gato.Raca}</td>
-                  <td>{gato.Cliente}</td>
-                  <td>{gato.Idade}</td>
-                  <td>
-                    <div className="actions-menu-container">
-                      <button
-                        className="actions-button"
-                        onClick={() => handleMenuToggle(gato.id)}
-                      >
-                        <FaEllipsisV />
-                      </button>
-                      {menuOpen === gato.id && (
-                        <div className="actions-menu">
-                          <button
-                            className="edit"
-                            onClick={() => navigate(`/editar/${gato.id}`)}
-                          >
-                            Alterar
-                          </button>
-                          <button
-                            className="delete"
-                            onClick={() => handleDelete(gato.id)}
-                          >
-                            Excluir
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
+        {loading ? (
+          <p>Carregando...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : gatos.length === 0 ? (
+          <p className="empty-message">Nenhum relatório disponível no momento.</p>
+        ) : (
+          <>
+            <table className="cats-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Raça</th>
+                  <th>Cliente</th>
+                  <th>Idade</th>
+                  <th>Ações</th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="empty-row">
-                  Nenhum dado disponível.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Paginação */}
-      <div className="pagination">
-        {Array.from(
-          { length: Math.ceil(gatos.length / itemsPerPage) },
-          (_, index) => (
-            <button
-              key={index}
-              className={`pagination-button ${
-                currentPage === index + 1 ? "active" : ""
-              }`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          )
+              </thead>
+              <tbody>
+                {currentItems.map((gato) => (
+                  <tr key={gato.id}>
+                    <td>#{gato.id}</td>
+                    <td>{gato.Nome}</td>
+                    <td>{gato.Raca}</td>
+                    <td>{gato.Cliente}</td>
+                    <td>{gato.Idade}</td>
+                    <td>
+                      <div className="actions-menu-container">
+                        <button
+                          className="actions-button"
+                          onClick={() => handleMenuToggle(gato.id)}
+                        >
+                          <FaEllipsisV />
+                        </button>
+                        {menuOpen === gato.id && (
+                          <div className="actions-menu">
+                            <button
+                              className="edit"
+                              onClick={() => navigate(`/editar/${gato.id}`)}
+                            >
+                              Alterar
+                            </button>
+                            <button
+                              className="delete"
+                              onClick={() => handleDelete(gato.id)}
+                            >
+                              Excluir
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {/* Paginação */}
+            <div className="pagination">
+              {Array.from(
+                { length: Math.ceil(gatos.length / itemsPerPage) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    className={`pagination-button ${
+                      currentPage === index + 1 ? "active" : ""
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                )
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>
