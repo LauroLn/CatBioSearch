@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../Components/Sidebar/Sidebar";
-import axios from "../../api";
+import Sidebar from "../Templates/Sidebar/Sidebar";
+import axios from "../api";
 
 const CriarCliente = () => {
   const navigate = useNavigate();

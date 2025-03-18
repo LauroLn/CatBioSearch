@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Sidebar from '../../Components/Sidebar/Sidebar';
-import axios from "../../api";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from '../Templates/Sidebar/Sidebar';
+import axios from "../api";
 
-const AlterarUsuario = () => {
+const CriarUsuario = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,6 +18,28 @@ const AlterarUsuario = () => {
     Ativo: true,
   });
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (id) {
+        try {
+          const response = await axios.get(`/users/admin-usuario/${id}`);
+          setFormData(response.data);
+        } catch (error) {
+          console.error("Erro ao carregar usuário:", error);
+          alert("Erro ao carregar usuário.");
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [id]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,16 +47,18 @@ const AlterarUsuario = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/users/admin-cadastro', formData);
-      alert(response.data.message); // Exibe a mensagem de sucesso
-      navigate("/"); // Redireciona para a página inicial
+      const response = id
+        ? await axios.put(`/users/admin-usuario/${id}`, formData)
+        : await axios.post("/users/admin-cadastro", formData);
+      alert(response.data.message);
+      navigate("/acesso");
     } catch (error) {
-      console.error("Erro ao cadastrar usuário:", error);
-      alert("Ocorreu um erro ao cadastrar o usuário.");
+      console.error("Erro ao salvar usuário:", error);
+      alert("Ocorreu um erro ao salvar o usuário.");
     }
   };
 
-  // Estilos
+  // Mesmo estilo do AlterarUsuario
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -101,10 +126,14 @@ const AlterarUsuario = () => {
     border: "1px solid #ccc",
   };
 
+  if (isLoading) {
+    return <p style={{ textAlign: "center" }}>Carregando...</p>;
+  }
+
   return (
     <div style={containerStyle}>
       <Sidebar />
-      <h2>Alterar Usuário</h2>
+      <h2>{id ? "Alterar Usuário" : "Cadastrar Novo Usuário"}</h2>
       <form style={formStyle}>
         <div style={columnStyle}>
           <label style={labelStyle}>Nome Completo</label>
@@ -169,15 +198,15 @@ const AlterarUsuario = () => {
         </div>
       </form>
       <div style={buttonContainerStyle}>
-        <button style={backButtonStyle} onClick={() => navigate("/")}>
+        <button style={backButtonStyle} onClick={() => navigate("/acesso")}>
           Voltar
         </button>
         <button style={nextButtonStyle} onClick={handleSubmit}>
-          Finalizar Cadastro →
+          {id ? "Salvar Alterações" : "Finalizar Cadastro →"}
         </button>
       </div>
     </div>
   );
 };
 
-export default AlterarUsuario;
+export default CriarUsuario;

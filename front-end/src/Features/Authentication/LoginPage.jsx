@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "../../api";
 import logoimage from "../../Components/assets/logo.svg";
-import "../login/login.css";
+import "./login.css";
 import user from "../../Components/assets/mdi_user.svg";
 import olho from "../../Components/assets/mdi_eye.svg";
 import olhofechado from "../../Components/assets/mdi_eye-off.svg";
