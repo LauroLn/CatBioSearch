@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/home/HomePage';
-import Login from './Pages/login/LoginPage';
-import RelatorioPage from './Pages/relatorios/relatorios';
-import AnalisePage from './Pages/analise/analise';
-import CatsPage from './Pages/cadastro/cadastro';
-import AcessoPage from './Pages/acesso/acesso';
-import AnalysisPage from './Pages/analise-id/analise_id';
-import Cadastro from './Pages/PassosAnalise/index';
-import CriarCliente from './Pages/criarCliente/index';
-import CriarUsuario from './Pages/criarUsuario/index';
-import AlterarCliente from './Pages/alterarCliente/index';
-import AlterarUsuario from './Pages/alterarUsuario/index';
-import LoadingPage from './Pages/carregamento/index';
-import Relatorio from './Pages/relatorio/analise';
+import {
+  HomePage,
+  Login,
+  RelatorioPage,
+  AnalisePage,
+  CatsPage,
+  AcessoPage,
+  AnalysisPage,
+  Cadastro,
+  CriarCliente,
+  CriarUsuario,
+  AlterarCliente,
+  AlterarUsuario,
+  LoadingPage,
+  Relatorio,
+} from "../Pages";
 
 
 const AppRoutes = () => (

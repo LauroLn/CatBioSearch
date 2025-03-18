@@ -1,0 +1,14 @@
+export { default as HomePage } from './home/HomePage';
+export { default as Login } from './login/LoginPage';
+export { default as RelatorioPage } from './relatorios/relatorios';
+export { default as AnalisePage } from './analise/analise';
+export { default as CatsPage } from './cadastro/cadastro';
+export { default as AcessoPage } from './acesso/acesso';
+export { default as AnalysisPage } from './analise-id/analise_id';
+export { default as Cadastro } from './PassosAnalise';
+export { default as CriarCliente } from './criarCliente';
+export { default as CriarUsuario } from './criarUsuario';
+export { default as AlterarCliente } from './alterarCliente';
+export { default as AlterarUsuario } from './alterarUsuario';
+export { default as LoadingPage } from './carregamento';
+export { default as Relatorio } from './relatorio/analise';

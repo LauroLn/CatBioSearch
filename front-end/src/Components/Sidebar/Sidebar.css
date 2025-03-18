@@ -84,5 +84,20 @@
 }
 
 .sidebar:hover .img img {
-  content: url('./assets/logo_com_hover.svg');
+  content: url('../assets/logo_com_hover.svg');
+
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+  
+  .sidebar:hover {
+    width: 180px;
+  }
+
+  .sidebar-text {
+    font-size: 12px;
+  }
 }

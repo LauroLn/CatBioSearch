@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./relatorios.css";
 import { FaEllipsisV } from "react-icons/fa";
-import Sidebar from "../../Components/Sidebar";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 import axios from "../../api"; // Certifique-se que axios está configurado corretamente
 
 const HistoricoRelatorios = () => {

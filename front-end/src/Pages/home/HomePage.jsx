@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import Sidebar from "../../Components/Sidebar";
+import Sidebar from "../../Components/Sidebar/Sidebar.jsx";
 import './home.css';
 import figure from '../../Components/assets/figure-home.svg';
 import software from '../../Components/assets/software-uso.svg';
