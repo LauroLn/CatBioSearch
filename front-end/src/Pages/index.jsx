@@ -7,7 +7,7 @@ export { default as AcessoPage } from '../Features/acesso/acesso';
 export { default as AnalysisPage } from '../Features/CatAnalyses/analise_id';
 export { default as Cadastro } from '../Features/CatAnalyses/Steps';
 export { default as CriarCliente } from './criarCliente';
-export { default as CriarUsuario } from '../Features/Authentication/criarUsuario';
+export { default as CriarUsuario } from '../Features/UserManagment/criarUsuario';
 export { default as AlterarCliente } from './alterarCliente';
 export { default as AlterarUsuario } from './alterarUsuario';
 export { default as LoadingPage } from '../Features/CatAnalyses/Carregamento';
