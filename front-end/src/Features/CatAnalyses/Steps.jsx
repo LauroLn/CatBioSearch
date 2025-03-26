@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api"; // Certifique-se de que o caminho está correto
-import "./style.css";
+import "../CatAnalyses/PassosAnalise/style.css";
 
 const Cadastro = () => {
     const [currentStep, setCurrentStep] = useState(1);

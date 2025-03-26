@@ -1,12 +1,12 @@
 // src/pages/AnalysisPage.js
 import React, { useEffect, useState } from "react";
 import "./analise.css"; // Importa o CSS para estilização
-import Sidebar from "../../Templates/Sidebar/Sidebar";
 import RNASequence from "./Componentes/RNASequence";
 import NeedlemanWunsch from "./Componentes/Needlman";
 import Proteins from "./Componentes/Protein";
 import Dispersao from "./Componentes/Dispersao";
-import axios from "../../api"; // Certifique-se que axios está configurado corretamente
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
+import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api"; // Certifique-se que axios está configurado corretamente
 import { jsPDF } from "jspdf";
 
 const Relatorio = () => {

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./acesso.css";
 import { FaEllipsisV } from "react-icons/fa";
-import Sidebar from "../../Components/Sidebar/Sidebar";
-import axios from "../../api";
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
+import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";
 
 const AcessoPage = () => {
   const navigate = useNavigate();

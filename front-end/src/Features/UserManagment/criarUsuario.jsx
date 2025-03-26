@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from '../../Templates/Sidebar/Sidebar';
-import axios from "../../api";
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
+import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";
 
 const AlterarUsuario = () => {
   const navigate = useNavigate();

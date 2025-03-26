@@ -1,7 +1,7 @@
 // src/pages/AnalysisPage.js
 import React from "react";
 import "./analise.css"; // Importa o CSS para estilização
-import Sidebar from '../../Components/Sidebar/Sidebar';
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
 import RNASequence from './Componentes/RNASequence';
 import NeedlemanWunsch from './Componentes/Needlman';
 import Proteins from "./Componentes/Protein";

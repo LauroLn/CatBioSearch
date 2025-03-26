@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./cadastro.css";
+import "../Authentication/cadastro.css";
 import { FaEllipsisV } from "react-icons/fa";
-import Sidebar from "../../Components/Sidebar/Sidebar";
-import axios from "../../api";
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
+import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";
 
 const CatsPage = () => {
   const navigate = useNavigate();

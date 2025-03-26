@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "../Templates/Sidebar/Sidebar";
-import axios from "../api";
+import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
+import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";
 
 const AlterarCliente = () => {
   const navigate = useNavigate();
