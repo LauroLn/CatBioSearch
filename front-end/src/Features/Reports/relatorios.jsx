@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./relatorios.css";
 import { FaEllipsisV } from "react-icons/fa";
-import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
-import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";// Certifique-se que axios está configurado corretamente
+import Sidebar from '../../Templates/Sidebar/Sidebar';
+import axios from "../../api";// Certifique-se que axios está configurado corretamente
 
 const HistoricoRelatorios = () => {
   const navigate = useNavigate();

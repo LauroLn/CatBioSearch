@@ -84,7 +84,7 @@
 }
 
 .sidebar:hover .img img {
-  content: url('../assets/logo_com_hover.svg');
+  content: url('/front-end/src/Components/assets/logo_com_hover.svg');
 
 }
 

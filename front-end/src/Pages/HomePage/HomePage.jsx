@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Sidebar from '/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/Templates/Sidebar/Sidebar';
-import axios from "/Users/fatec-dsm5/Desktop/projeto/CatBioSearch/front-end/src/api";
+import Sidebar from '../../Templates/Sidebar/Sidebar';
+import axios from "../../api";
 import './home.css';
 import figure from '../../Components/assets/figure-home.svg';
 import software from '../../Components/assets/software-uso.svg';
