@@ -36,102 +36,115 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="dashboard"> 
-      <Sidebar /> 
+    <div className="homePage">
 
-      <div className="header">
-        <div className="header-card">
-          <div className="content-text">
-            <h2 style={{ color: "#FFC100", fontWeight: "700", fontSize: 40 }}>Novidades do Software!</h2>
-            <p style={{ color: "#FFFFFF", fontSize: 16 }}>Fique por dentro das inovações da biomedicina.</p>
-            <a
-              href="#"
-              style={{ color: "#FFFFFF", fontWeight: 800, marginTop: "20px", display: "inline-block" }}
-            >
-              Ver mais
-            </a>
-          </div>
-          <div className="img-card">
-            <img src={figure} alt="" />
+      <Sidebar />
+
+      <div className="dashboard">
+
+
+        <div className="grid-container">
+          <div className="header">
+            <div className="header-card">
+              <div className="content-text">
+                <h2 style={{ color: "#FFC100", fontWeight: "700", fontSize: 40 }}>Novidades do Software!</h2>
+                <p style={{ color: "#FFFFFF", fontSize: 16 }}>Fique por dentro das inovações da biomedicina.</p>
+                <a
+                  href="#"
+                  style={{ color: "#FFFFFF", fontWeight: 800, marginTop: "20px", display: "inline-block" }}
+                >
+                  Ver mais
+                </a>
+              </div>
+              <div className="img-card">
+                <img src={figure} alt="" />
+              </div>
+            </div>
+
+            <div className="header-metrics">
+              <div className="metric-card-growth">
+                <p>Uso do Software</p>
+                <div className="img-crescimento">
+                  <img src={software} alt="" />
+                </div>
+              </div>
+              <div className="metric-card-report">
+
+                <div className="img-report">
+                  <img src={relatorios} alt="" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="header-metrics">
-          <div className="metric-card-growth">
-            <p>Uso do Software</p>
-            <div className="img-crescimento">
-              <img src={software} alt="" />
-            </div>
-          </div>
-          <div className="metric-card-report">
-  
-            <div className="img-report">
-              <img src={relatorios} alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="actions">
-        <button
-          className="iniciar-btn"
-          onClick={() => navigate("/passosAnalise/step1")}
-        >
-          + Iniciar Análise
-        </button>
-        <button
-          className="home-btn"
-          onClick={() => navigate("/relatorio")}
-        >
-          <LuHistory style={{ marginRight: 5 }} />
-          Histórico de Análises
-        </button>
-        <button
-          className="home-btn"
-          onClick={() => navigate("/criarcliente")}
-        >
-          <RiPencilLine style={{ marginRight: 5 }} />
-          Cadastrar Cliente
-        </button>
-      </div>
-
-      <div className="charts">
-        <div className="chart">
-          <ReportsChart />
+        <div className="actions">
+          <button
+            className="iniciar-btn"
+            onClick={() => navigate("/passosAnalise/step1")}
+          >
+            + Iniciar Análise
+          </button>
+          <button
+            className="home-btn"
+            onClick={() => navigate("/relatorio")}
+          >
+            <LuHistory style={{ marginRight: 5 }} />
+            Histórico de Análises
+          </button>
+          <button
+            className="home-btn"
+            onClick={() => navigate("/criarcliente")}
+          >
+            <RiPencilLine style={{ marginRight: 5 }} />
+            Cadastrar Cliente
+          </button>
         </div>
 
-        <div className="recent-analyses">
-  <h3 className="recent-analyses-title">Últimos Relatórios</h3>
-  {loading ? (
-    <p className="recent-analyses-loading">Carregando...</p>
-  ) : (
-    <ul className="recent-analyses-list">
-      {ultimosRelatorios.length > 0 ? (
-        ultimosRelatorios.map((relatorio) => (
-          <li key={relatorio.id} className="recent-analyses-item">
-            <div className="recent-analyses-icon">
-              📄 {/* Você pode substituir por um ícone real, ex.: via biblioteca Font Awesome */}
-            </div>
-            <a className='aa' href='/'>
-              <div className="recent-analyses-content">
-              <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
-              <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
-              <p><strong>ID:</strong> {relatorio.id}</p>
-            </div>
-            </a>
-          </li>
-        ))
-      ) : (
-        <p className="recent-analyses-empty">Nenhum relatório encontrado.</p>
-      )}
-    </ul>
-  )}
-</div>
+        <div className="charts">
+          <div className="chart">
+            <ReportsChart />
+          </div>
+
+            <div className="recent-analyses-section">
+            
+            <h3 className="recent-analyses-title">Últimos Relatórios</h3>
+            <div className="recent-analyses">
+            {loading ? (
+              <p className="recent-analyses-loading">Carregando...</p>
+            ) : (
+              <ul className="recent-analyses-list">
+                {ultimosRelatorios.length > 0 ? (
+                  ultimosRelatorios.map((relatorio) => (
+                    <li key={relatorio.id} className="recent-analyses-item">
+                      <div className="recent-analyses-icon">
+                        📄 {/* Você pode substituir por um ícone real, ex.: via biblioteca Font Awesome */}
+                      </div>
+                      <a className='aa' href='/'>
+                        <div className="recent-analyses-content">
+                          <p><strong>Clínica:</strong> {relatorio.Cliente}</p>
+                          <p><strong>Nome do Gato:</strong> {relatorio.Nome}</p>
+                          <p><strong>ID:</strong> {relatorio.id}</p>
+                        </div>
+                      </a>
+                    </li>
+                  ))
+                ) : (
+                  <p className="recent-analyses-empty">Nenhum relatório encontrado.</p>
+                )}
+              </ul>
+            )}
+          </div>
+          </div>
 
 
 
+        </div>
       </div>
     </div>
+
+
   );
 }
 

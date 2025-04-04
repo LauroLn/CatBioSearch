@@ -1,150 +1,124 @@
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-  }
-  
-  .dashboard{
-    padding: 5rem 10rem;
-  }
-  
-  .sidebar {
-    position:fixed;
-    width: 80px;
-    background-color: #333;
-    height: 100vh;
-    padding: 10px;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .menu {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .menu-item {
-    text-decoration: none;
-    color: #ccc;
-    padding: 10px 0;
-    transition: color 0.3s;
-  }
-  
-  .menu-item:hover {
-    color: #fff;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .header {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .header-card {
-    flex: 1;
-    background: #292929;
-    color: #fff;
-    padding: 80px;
-    border-radius: 8px;
-    height: 300px;
-    align-items:center;
-    display: flex;
-    justify-content: space-around;
-}
-  
-
-.img-card img{
-    width: 500px;
-    align-items: center;
+.homePage {
+  width: 100vw;
+  height: auto;
+  justify-content: center;
+  padding-top: 20px;
 }
 
-  .header-metrics {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .metric-card-growth, .metric-card-report{
-    background: #292929;
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-   justify-content: space-around;
-  }
-  
-  
-  
-  .actions {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .iniciar-btn {
-    padding: 10px 20px;
-    border: none;
-    background: #fbc02d;
-    color: #333;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: background 0.3s;
-  }
-  
-  .iniciar-btn:hover {
-    background: #f9a825;
-  }
-  
+.dashboard {
+  transform: translateX(10%);
+}
 
-  .home-btn{
-    padding: 10px 20px;
-    border: none;
-    margin-left: 5px;
-    font-size: 1rem;
-    border-radius: 8px;
-    background-color: #F2F2F2;
-    cursor: pointer;
-    color: #6F6F6F;
 
-  }
-  .home-btn:hover{
-    background-color: #CACACA;
+.header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
 
-  }
+.header-card {
+  flex: 1;
+  background: #292929;
+  color: #fff;
+  height: 300px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 50px;
+  overflow: hidden;
 
-  .charts {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .chart {
-    border-radius: 8px;
-    margin-top: 1rem;
-  }
-  
-  .chart img {
-    width: 100%;
-  }
+}
 
-  /* Container geral */
+
+.img-card img {
+  width: 350px;
+  align-items: center;
+}
+
+.header-metrics {
+  display: flex;
+  gap: 10px;
+}
+
+.metric-card-growth,
+.metric-card-report {
+  background: #292929;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+
+.actions {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.iniciar-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #fbc02d;
+  color: #333;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.iniciar-btn:hover {
+  background: #f9a825;
+}
+
+
+.home-btn {
+  padding: 10px 20px;
+  border: none;
+  margin-left: 5px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #F2F2F2;
+  cursor: pointer;
+  color: #6F6F6F;
+
+}
+
+.home-btn:hover {
+  background-color: #CACACA;
+
+}
+
+.charts {
+  display: flex;
+}
+
+.chart {
+  border-radius: 8px;
+  margin-top: 1rem;
+
+}
+
+.recent-analyses-section{
+  margin-left: 30px;
+}
+
 .recent-analyses {
-  padding: 1rem;
-  max-width: 600px;
+  padding: 1rem 5rem;
   margin: 0 auto;
-  background: #f9f9f9;
+  background: #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-decoration: none;
+  cursor: pointer;
+}
+
+.recent-analyses:hover{
+  background-color: #ECE9E9;
 }
 
 /* Título */
@@ -153,7 +127,7 @@ body {
   font-weight: bold;
   margin-bottom: 1rem;
   text-align: center;
-  color: #333;
+  color: #6F6F6F;
   text-decoration: none;
 }
 
@@ -228,3 +202,14 @@ body {
 .aa {
   text-decoration: none;
 }
+
+/* Media Breakpoints*/
+
+@media (max-width: 1050px){
+  .header{
+    display: flex;
+    flex-wrap: wrap;
+    transform: translateX(10%);
+  }
+}
+

@@ -12,6 +12,7 @@
   left: 0; /* Alinhada à esquerda */
   transition: width 0.5s ease-in-out; /* Transição suave ao expandir */
   overflow: hidden; /* Esconde o conteúdo excedente */
+  z-index: 1;
 }
 
 .sidebar:hover {
@@ -86,6 +87,12 @@
 .sidebar:hover .img img {
   content: url('/front-end/src/Components/assets/logo_com_hover.svg');
 
+}
+
+@media (max-width: 1050px){
+  .sidebar{
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
