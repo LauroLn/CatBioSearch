@@ -1,7 +1,7 @@
-body {
+* {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    box-sizing: border-box;
 }
 
 .cadastro-container {
@@ -25,11 +25,21 @@ body {
     color: #333;
     font-weight: bold;
 }
-
-.progress-step.active {
-    background-color: #ffc107;
-    color: #000;
+.progress-bar.step-1 .progress-step:nth-child(1),
+.progress-bar.step-2 .progress-step:nth-child(2),
+.progress-bar.step-3 .progress-step:nth-child(3) {
+  background-color: #FFBF1B;
+  color: white;
+  border-radius: 0px 20px 20px 0px;
 }
+
+/* Passos completados */
+.progress-bar.step-2 .progress-step:nth-child(-n+1),
+.progress-bar.step-3 .progress-step:nth-child(-n+2) {
+  background-color: #28a745;
+  color: white;
+}
+
 
 .progress-step.completed {
     background-color: #6c757d;
@@ -121,15 +131,45 @@ textarea {
 .nav-button {
     padding: 10px 20px; /* Ajuste proporcional para altura */
     font-size: 16px;
-    font-weight: bold;
+     border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;   
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 10px;
+    margin-right: auto; 
+    padding: 10px 50px     
+}
+
+.nav-button-next{
+    padding: 10px 20px; /* Ajuste proporcional para altura */
+    font-size: 16px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s;   
+    background-color: #FFC100   ;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 50px   
+
 }
 
+.nav-button-finalizar{
+    padding: 10px 20px; /* Ajuste proporcional para altura */
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;   
+    background-color: #FFC100   ;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 50px  
+}
 .nav-button:hover {
-    background-color: #d39e00;
+    background-color: #D83737;
 }
 
 .finalizar {
@@ -145,8 +185,9 @@ textarea {
 .back-home {
     background-color: #dc3545;
     color: #fff;
-    border-radius: 20px;
-    margin-right: auto; /* Garante que o botão Voltar fique à esquerda */
+    border-radius: 10px;
+    margin-right: auto; 
+    padding: 10px 50px       ;
 }
 
 .back-home:hover {

@@ -15,8 +15,9 @@
   z-index: 1;
 }
 
-.sidebar:hover {
-  width: 250px; /* Largura da sidebar ao passar o mouse */
+
+.sidebar.expanded {
+  width: 250px;
 }
 
 /* Links da sidebar */
@@ -30,11 +31,6 @@
   justify-content: center; /* Centraliza o ícone inicialmente */
   transition: color 0.3s ease, background-color 1s ease; /* Efeitos suaves */
   margin: 10px 0; /* Espaçamento entre os links */
-}
-
-.sidebar-link:hover {
-  color: #FFC100;
-  background-color: #333;
 }
 
 /* Link ativo */
@@ -59,10 +55,9 @@
 }
 
 /* Quando a sidebar expandir, exibe o texto */
-.sidebar:hover .sidebar-text {
-  display: inline-block;
+.sidebar.expanded .sidebar-text {
   opacity: 1;
-  margin-left: 10px; /* Espaçamento para o texto */
+
 }
 
 /* Conteúdo da sidebar (estrutura geral) */
@@ -84,27 +79,20 @@
   margin-bottom: 20px; /* Ajuste o espaço abaixo da logo se necessário */
 }
 
-.sidebar:hover .img img {
-  content: url('/front-end/src/Components/assets/logo_com_hover.svg');
-
-}
-
-@media (max-width: 1050px){
-  .sidebar{
-    display: none;
-  }
-}
 
 @media (max-width: 768px) {
   .sidebar {
     width: 60px;
+    position: absolute; /* Evita empurrar o conteúdo */
+    z-index: 10; /* Fica acima do conteúdo */
   }
-  
+
   .sidebar:hover {
     width: 180px;
   }
 
-  .sidebar-text {
-    font-size: 12px;
+  .dashboard {
+    margin-left: 60px; /* Fixo no menor tamanho */
   }
 }
+

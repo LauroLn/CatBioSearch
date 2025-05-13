@@ -12,6 +12,7 @@ import ReportsChart from "./Componentes_Home/grafic.jsx";
 
 function HomePage() {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
 
   const [ultimosRelatorios, setUltimosRelatorios] = useState([]);
   const [totalRelatorios, setTotalRelatorios] = useState(null); // Alterado para null
@@ -38,7 +39,7 @@ function HomePage() {
   return (
     <div className="homePage">
 
-      <Sidebar />
+      <Sidebar expanded={expanded} onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)} />
 
       <div className="dashboard">
 

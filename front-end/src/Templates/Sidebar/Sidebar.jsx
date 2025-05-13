@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaHome, FaChartBar, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import './Sidebar.css';
@@ -12,11 +12,23 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <div className="sidebar">
+    <div
+      className={`sidebar ${isExpanded ? 'expanded' : ''}`}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
+    >
       <div className="img">
-        <img src={logoimage} alt="Logo" />
+        <img
+          src={isExpanded
+            ? import('../../Components/assets/logo_com_hover.svg')
+            : logoimage}
+          alt="Logo"
+        />
       </div>
+
 
       <div className="sidebar-content">
         {menuItems.map((item, index) => (
@@ -38,4 +50,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-  

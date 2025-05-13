@@ -86,10 +86,10 @@ const Cadastro = () => {
     return (
         <div className="cadastro-container">
             {/* Barra de progresso */}
-            <div className="progress-bar">
+            <div className={`progress-bar step-${currentStep}`}>    
                 {["Passo 1", "Passo 2", "Passo 3"].map((step, index) => (
                     <div
-                        key={index}
+                        key={index} 
                         className={`progress-step ${
                             currentStep === index + 1
                                 ? "active"
@@ -151,13 +151,7 @@ const Cadastro = () => {
                                 </select>
                             </label>
                         </div>
-                        <button
-                            type="button"
-                            className="nav-button back-home"
-                            onClick={() => navigate("/")}
-                        >
-                            Voltar
-                        </button>
+                      
                     </div>
                 )}
 
@@ -263,17 +257,17 @@ const Cadastro = () => {
 
                 {/* Botões de navegação */}
                 <div className="nav-buttons">
-                    {currentStep > 1 && (
+                    {currentStep > 0 && (
                         <button type="button" onClick={prevStep} className="nav-button">
                             Anterior
                         </button>
                     )}
                     {currentStep < 3 ? (
-                        <button type="button" onClick={nextStep} className="nav-button next">
+                        <button type="button" onClick={nextStep} className="nav-button-next">
                             Próximo
                         </button>
                     ) : (
-                        <button type="submit" onClick={handleSubmit} className="nav-button finalizar">
+                        <button type="submit" onClick={handleSubmit} className="nav-button-finalizar">
                             Finalizar
                         </button>
                     )}
