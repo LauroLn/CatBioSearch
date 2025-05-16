@@ -10,6 +10,7 @@ const AcessoPage = () => {
   const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Quantidade de itens por página
@@ -67,94 +68,101 @@ const AcessoPage = () => {
 
   return (
     <div className="cats-page">
-      <Sidebar />
-      <header className="cats-header">
-        <h1 className="cats-title">Usuários</h1>
-        <div className="cats-actions">
-          <button className="export-button">Exportar</button>
-          <button
-            className="add-button"
-            onClick={() => navigate("/criarusuario")}
-          >
-            + Adicionar
-          </button>
-        </div>
-      </header>
+      <Sidebar
+        expanded={expanded}
+        onMouseEnter={() => setExpanded(true)}
+        onMouseLeave={() => setExpanded(false)}
+      />
 
-      <div className="table-container">
-        <table className="cats-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Usuário</th>
-              <th>Ativo</th>
-              <th>Nascimento</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length > 0 ? (
-              currentItems.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td className="inicio">#{usuario.id}</td>
-                  <td className="meio">{usuario.Nome}</td>
-                  <td className="meio">{usuario.Login}</td>
-                  <td className="meio">{usuario.Ativo ? "Sim" : "Não"}</td>
-                  <td className="meio">{usuario.Nascimento}</td>
-                  <td className="fim">
-                    <div className="actions-menu-container">
-                      <button
-                        className="actions-button"
-                        onClick={() => handleMenuToggle(usuario.id)}
-                      >
-                        <FaEllipsisV />
-                      </button>
-                      {menuOpen === usuario.id && (
-                        <div className="actions-menu">
-                          <button
-                            className="edit"
-                            onClick={() => navigate(`/alterarusuario/${usuario.id}`)}
-                          >
-                            Alterar
-                          </button>
-                          <button
-                            className="delete"
-                            onClick={() => handleDelete(usuario.id)}
-                          >
-                            Excluir
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="empty-row">Nenhum dado disponível.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <div className={`main-content ${expanded ? 'sidebar-expanded' : ''}`}>
 
-      {/* Paginação */}
-      <div className="pagination">
-        {Array.from(
-          { length: Math.ceil(usuarios.length / itemsPerPage) },
-          (_, index) => (
+        <header className="cats-header">
+          <h1 className="cats-title">Usuários</h1>
+          <div className="cats-actions">
+            <button className="export-button">Exportar</button>
             <button
-              key={index}
-              className={`pagination-button ${
-                currentPage === index + 1 ? "active" : ""
-              }`}
-              onClick={() => handlePageChange(index + 1)}
+              className="add-button"
+              onClick={() => navigate("/criarusuario")}
             >
-              {index + 1}
+              + Adicionar
             </button>
-          )
-        )}
+          </div>
+        </header>
+
+        <div className="table-container">
+          <table className="cats-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Usuário</th>
+                <th>Ativo</th>
+                <th>Nascimento</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.length > 0 ? (
+                currentItems.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td className="inicio">#{usuario.id}</td>
+                    <td className="meio">{usuario.Nome}</td>
+                    <td className="meio">{usuario.Login}</td>
+                    <td className="meio">{usuario.Ativo ? "Sim" : "Não"}</td>
+                    <td className="meio">{usuario.Nascimento}</td>
+                    <td className="fim">
+                      <div className="actions-menu-container">
+                        <button
+                          className="actions-button"
+                          onClick={() => handleMenuToggle(usuario.id)}
+                        >
+                          <FaEllipsisV />
+                        </button>
+                        {menuOpen === usuario.id && (
+                          <div className="actions-menu">
+                            <button
+                              className="edit"
+                              onClick={() => navigate(`/alterarusuario/${usuario.id}`)}
+                            >
+                              Alterar
+                            </button>
+                            <button
+                              className="delete"
+                              onClick={() => handleDelete(usuario.id)}
+                            >
+                              Excluir
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="empty-row">Nenhum dado disponível.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Paginação */}
+        <div className="pagination">
+          {Array.from(
+            { length: Math.ceil(usuarios.length / itemsPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                className={`pagination-button ${currentPage === index + 1 ? "active" : ""
+                  }`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+        </div>
       </div>
     </div>
   );

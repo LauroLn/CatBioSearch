@@ -1,8 +1,6 @@
 /* Página principal */
 .cats-page {
-  padding: 20px;
-  background-color: #f9f9f9;
-  margin-left: 240px;
+  background-color: white;
   min-height: 100vh;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
@@ -32,12 +30,12 @@
   padding: 10px 20px;
   font-size: 14px;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .export-button {
-  background-color: #e0e0e0;
+  background-color: #e0e0e0;  
   color: #292929;
   transition: background-color 0.2s ease;
 }

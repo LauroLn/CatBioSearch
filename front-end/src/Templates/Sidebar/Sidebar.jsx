@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaHome, FaChartBar, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import './Sidebar.css';
 import logoimage from '../../Components/assets/sem_hover.svg';
+import logoHover from '../../Components/assets/logo_com_hover.svg';
 
 const menuItems = [
   { to: '/', icon: <FaHome />, text: 'Início' },
@@ -11,30 +12,25 @@ const menuItems = [
   { to: '/acesso', icon: <FaCog />, text: 'Acesso' },
 ];
 
-const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+const Sidebar = ({ expanded, onMouseEnter, onMouseLeave }) => {
   return (
     <div
-      className={`sidebar ${isExpanded ? 'expanded' : ''}`}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      className={`sidebar ${expanded ? 'expanded' : ''}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="img">
         <img
-          src={isExpanded
-            ? import('../../Components/assets/logo_com_hover.svg')
-            : logoimage}
+          src={expanded ? logoHover : logoimage}
           alt="Logo"
         />
       </div>
-
 
       <div className="sidebar-content">
         {menuItems.map((item, index) => (
           <NavLink key={index} to={item.to} className="sidebar-link">
             <div className="sidebar-icon">{item.icon}</div>
-            <span className="sidebar-text">{item.text}</span>
+            {expanded && <span className="sidebar-text">{item.text}</span>}
           </NavLink>
         ))}
       </div>
@@ -42,7 +38,7 @@ const Sidebar = () => {
       <div className="sidebar-footer">
         <NavLink to="/login" className="sidebar-link">
           <FaSignOutAlt className="sidebar-icon" />
-          <span className="sidebar-text">Sair</span>
+          {expanded && <span className="sidebar-text">Sair</span>}
         </NavLink>
       </div>
     </div>

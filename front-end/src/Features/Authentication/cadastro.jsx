@@ -8,6 +8,7 @@ import axios from "../../api";
 const CatsPage = () => {
   const navigate = useNavigate();
   const [clinicas, setClinicas] = useState([]);
+  const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,98 +69,105 @@ const CatsPage = () => {
 
   return (
     <div className="cats-page">
-      <Sidebar />
-      <header className="cats-header">
-        <h1 className="cats-title">Clientes Cadastrados</h1>
-        <div className="cats-actions">
-          <button className="export-button">Exportar</button>
-          <button
-            className="add-button"
-            onClick={() => navigate("/criarcliente")}
-          >
-            + Adicionar
-          </button>
-        </div>
-      </header>
+      <Sidebar
+        expanded={expanded}
+        onMouseEnter={() => setExpanded(true)}
+        onMouseLeave={() => setExpanded(false)}
+      />
 
-      <div className="table-container">
-        <table className="cats-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome da Empresa</th>
-              <th>Endereço</th>
-              <th>E-mail</th>
-              <th>Telefone</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length > 0 ? (
-              currentItems.map((clinica) => (
-                <tr key={clinica.id}>
-                  <td className="inicio">#{clinica.id}</td>
-                  <td className="meio">{clinica.Nome}</td>
-                  <td className="meio">{clinica.Endereco}</td>
-                  <td className="meio">{clinica.Email}</td>
-                  <td className="meio">{clinica.Telefone}</td>
-                  <td className="fim">
-                    <div className="actions-menu-container">
-                      <button
-                        className="actions-button"
-                        onClick={() => handleMenuToggle(clinica.id)}
-                      >
-                        <FaEllipsisV />
-                      </button>
-                      {menuOpen === clinica.id && (
-                        <div className="actions-menu">
-                          <button
-                            className="edit"
-                            onClick={() =>
-                              navigate(`/alterarcliente/${clinica.id}`)
-                            }
-                          >
-                            Alterar
-                          </button>
-                          <button
-                            className="delete"
-                            onClick={() => handleDelete(clinica.id)}
-                          >
-                            Excluir
-                          </button>
-                        </div>
-                      )}
-                    </div>
+      <div className={`main-content ${expanded ? 'sidebar-expanded' : ''}`}>
+
+        <header className="cats-header">
+          <h1 className="cats-title">Clientes Cadastrados</h1>
+          <div className="cats-actions">
+            <button className="export-button">Exportar</button>
+            <button
+              className="add-button"
+              onClick={() => navigate("/criarcliente")}
+            >
+              + Adicionar
+            </button>
+          </div>
+        </header>
+
+        <div className="table-container">
+          <table className="cats-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome da Empresa</th>
+                <th>Endereço</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.length > 0 ? (
+                currentItems.map((clinica) => (
+                  <tr key={clinica.id}>
+                    <td className="inicio">#{clinica.id}</td>
+                    <td className="meio">{clinica.Nome}</td>
+                    <td className="meio">{clinica.Endereco}</td>
+                    <td className="meio">{clinica.Email}</td>
+                    <td className="meio">{clinica.Telefone}</td>
+                    <td className="fim">
+                      <div className="actions-menu-container">
+                        <button
+                          className="actions-button"
+                          onClick={() => handleMenuToggle(clinica.id)}
+                        >
+                          <FaEllipsisV />
+                        </button>
+                        {menuOpen === clinica.id && (
+                          <div className="actions-menu">
+                            <button
+                              className="edit"
+                              onClick={() =>
+                                navigate(`/alterarcliente/${clinica.id}`)
+                              }
+                            >
+                              Alterar
+                            </button>
+                            <button
+                              className="delete"
+                              onClick={() => handleDelete(clinica.id)}
+                            >
+                              Excluir
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="empty-row">
+                    Nenhum dado disponível.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="empty-row">
-                  Nenhum dado disponível.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tbody>
+          </table>
+        </div>
 
-      {/* Paginação */}
-      <div className="pagination">
-        {Array.from(
-          { length: Math.ceil(clinicas.length / itemsPerPage) },
-          (_, index) => (
-            <button
-              key={index}
-              className={`pagination-button ${
-                currentPage === index + 1 ? "active" : ""
-              }`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          )
-        )}
+        {/* Paginação */}
+        <div className="pagination">
+          {Array.from(
+            { length: Math.ceil(clinicas.length / itemsPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                className={`pagination-button ${currentPage === index + 1 ? "active" : ""
+                  }`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+        </div>
       </div>
     </div>
   );

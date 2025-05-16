@@ -16,10 +16,6 @@
 }
 
 
-.sidebar.expanded {
-  width: 250px;
-}
-
 /* Links da sidebar */
 .sidebar-link {
   color: #6F6F6F;
@@ -28,14 +24,18 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  justify-content: center; /* Centraliza o ícone inicialmente */
+  justify-content: center;
   transition: color 0.3s ease, background-color 1s ease; /* Efeitos suaves */
   margin: 10px 0; /* Espaçamento entre os links */
 }
 
+.sidebar.expanded .sidebar-link {
+  justify-content: center;
+}
+
 /* Link ativo */
 .sidebar-link.active {
-  color: #292929; /* Texto escuro */
+  color: #333; /* Texto escuro */
   background-color: #FFC100; /* Fundo amarelo destacado */
   font-weight: bold;
   width: 100%;
@@ -49,7 +49,6 @@
 
 /* Oculta o texto inicialmente */
 .sidebar-text {
-  display: none;
   opacity: 0;
   transition: opacity 2.0s ease, margin-left 0.5s ease;
 }
@@ -57,7 +56,6 @@
 /* Quando a sidebar expandir, exibe o texto */
 .sidebar.expanded .sidebar-text {
   opacity: 1;
-
 }
 
 /* Conteúdo da sidebar (estrutura geral) */
@@ -71,6 +69,10 @@
   margin-top: 150px;
 }
 
+.sidebar.expanded {
+  width: 200px; /* largura expandida */
+}
+
 .sidebar .img {
   margin-top: 50px;
   display: flex;
@@ -79,6 +81,16 @@
   margin-bottom: 20px; /* Ajuste o espaço abaixo da logo se necessário */
 }
 
+
+.main-content {
+  margin-left: 80px;
+  transition: margin-left 0.5s ease;
+  padding: 20px;
+}
+
+.main-content.sidebar-expanded {
+  margin-left: 200px;
+}
 
 @media (max-width: 768px) {
   .sidebar {
