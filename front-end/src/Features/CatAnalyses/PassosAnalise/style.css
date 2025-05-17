@@ -5,10 +5,8 @@
 }
 
 .cadastro-container {
-    max-width: 900px;
     margin: 50px auto;
-    padding: 0;
-    background-color: #f8f9fa;
+    padding: 50px;
 }
 
 .progress-bar {
@@ -18,18 +16,22 @@
 }
 
 .progress-step {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    background-color: #f5f5f5;
-    color: #333;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
+.passo-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
 .progress-bar.step-1 .progress-step:nth-child(1),
 .progress-bar.step-2 .progress-step:nth-child(2),
 .progress-bar.step-3 .progress-step:nth-child(3) {
-  background-color: #FFBF1B;
-  color: white;
+
+  color: #454343;
   border-radius: 0px 20px 20px 0px;
 }
 
@@ -37,7 +39,7 @@
 .progress-bar.step-2 .progress-step:nth-child(-n+1),
 .progress-bar.step-3 .progress-step:nth-child(-n+2) {
   background-color: #28a745;
-  color: white;
+  color: #454343;
 }
 
 
@@ -52,6 +54,7 @@
 
 .form-step {
     margin: 20px 0;
+    color: #6F6F6F;
 }
 
 .form-row {

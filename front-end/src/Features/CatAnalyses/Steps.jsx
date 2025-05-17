@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api"; // Certifique-se de que o caminho está correto
 import "../CatAnalyses/PassosAnalise/style.css";
+import Sidebar from "../../Templates/Sidebar/Sidebar";
+import passo1Img from "../../../src/Components/assets/el_ok-circle.svg";
+import passo2Img from "../../../src/Components/assets/el_ok-circle.svg";
+import passo3Img from "../../../src/Components/assets/el_ok-circle.svg";
+
 
 const Cadastro = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -22,6 +27,9 @@ const Cadastro = () => {
 
     const [veterinarios, setVeterinarios] = useState([]); // Estado para armazenar os veterinários
     const navigate = useNavigate();
+    const [expanded, setExpanded] = useState(false);
+    const passoImgs = [passo1Img, passo2Img, passo3Img];
+
 
     // Busca os veterinários do backend ao carregar o componente
     useEffect(() => {
@@ -63,6 +71,22 @@ const Cadastro = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const nextStep = () => {
+            if (currentStep === 1) {
+                if (!formData.nomeGato || !formData.racaGato || !formData.idadeGato || !formData.sexoGato) {
+                    alert("Preencha todos os campos do passo 1.");
+                    return;
+                }
+            }
+            if (currentStep === 2 && formData.clienteCadastrado === "Não") {
+                if (!formData.nomeClinica || !formData.telefoneClinica || !formData.emailClinica || !formData.enderecoClinica) {
+                    alert("Preencha todos os campos da clínica.");
+                    return;
+                }
+            }
+            setCurrentStep(currentStep + 1);
+        };
+
         const relatorioData = {
             Nome: formData.nomeGato,
             Sexo: formData.sexoGato,
@@ -85,194 +109,194 @@ const Cadastro = () => {
 
     return (
         <div className="cadastro-container">
-            {/* Barra de progresso */}
-            <div className={`progress-bar step-${currentStep}`}>    
-                {["Passo 1", "Passo 2", "Passo 3"].map((step, index) => (
-                    <div
-                        key={index} 
-                        className={`progress-step ${
-                            currentStep === index + 1
-                                ? "active"
-                                : currentStep > index + 1
-                                ? "completed"
-                                : ""
-                        }`}
-                    >
-                        {step}
-                    </div>
-                ))}
-            </div>
 
-            <form className="form-container" onSubmit={(e) => e.preventDefault()}>
-                {/* Passo 1: Informações básicas do gato */}
-                {currentStep === 1 && (
-                    <div className="form-step">
-                        <h2>Informações Básicas do Gato</h2>
-                        <div className="form-row">
-                            <label>
-                                Nome:
-                                <input
-                                    type="text"
-                                    name="nomeGato"
-                                    value={formData.nomeGato}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                Raça:
-                                <input
-                                    type="text"
-                                    name="racaGato"
-                                    value={formData.racaGato}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                        </div>
-                        <div className="form-row">
-                            <label>
-                                Idade:
-                                <input
-                                    type="number"
-                                    name="idadeGato"
-                                    value={formData.idadeGato}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                Sexo:
-                                <select
-                                    name="sexoGato"
-                                    value={formData.sexoGato}
-                                    onChange={handleChange}
-                                >
-                                    <option value="">Selecione</option>
-                                    <option value="Macho">Macho</option>
-                                    <option value="Fêmea">Fêmea</option>
-                                </select>
-                            </label>
-                        </div>
-                      
-                    </div>
-                )}
+            <Sidebar
+                expanded={expanded}
+                onMouseEnter={() => setExpanded(true)}
+                onMouseLeave={() => setExpanded(false)}
+            />
 
-                {/* Passo 2: Informações da clínica veterinária */}
-                {currentStep === 2 && (
-                    <div className="form-step">
-                        <h2>Informações da Clínica Veterinária</h2>
-                        <div className="form-row">
-                            <label>
-                                Nome da Empresa:
-                                <input
-                                    type="text"
-                                    name="nomeClinica"
-                                    value={formData.nomeClinica}
-                                    onChange={handleChange}
-                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
-                                />
-                            </label>
-                            <label>
-                                Telefone:
-                                <input
-                                    type="tel"
-                                    name="telefoneClinica"
-                                    value={formData.telefoneClinica}
-                                    onChange={handleChange}
-                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
-                                />
-                            </label>
-                        </div>
-                        <div className="form-row">
-                            <label>
-                                Email:
-                                <input
-                                    type="email"
-                                    name="emailClinica"
-                                    value={formData.emailClinica}
-                                    onChange={handleChange}
-                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
-                                />
-                            </label>
-                            <label>
-                                Endereço:
-                                <input
-                                    type="text"
-                                    name="enderecoClinica"
-                                    value={formData.enderecoClinica}
-                                    onChange={handleChange}
-                                    disabled={formData.clienteCadastrado !== "Não"} // Desabilitar se não for "Não"
-                                />
-                            </label>
-                        </div>
-                        <label>
-                            Já é cadastrado?
-                            <select
-                                name="clienteCadastrado"
-                                value={formData.clienteCadastrado}
-                                onChange={handleChange}
-                            >
-                                <option value="Não">Não</option>
-                                {veterinarios.map((vet) => (
-                                    <option key={vet.id} value={vet.Nome}>
-                                        {vet.Nome}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
-                )}
+            <div className={`main-content ${expanded ? 'sidebar-expanded' : ''}`}>
 
-                {/* Passo 3: Sobre a análise */}
-                {currentStep === 3 && (
-                    <div className="form-step">
-                        <h2>Sobre a Análise</h2>
-                        <label>
-                            Material Genético:
-                            <input
-                                type="text"
-                                name="materialGenetico"
-                                value={formData.materialGenetico}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Sequenciamento:
-                            <input
-                                type="text"
-                                name="sequenciamento"
-                                value={formData.sequenciamento}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label className="file-upload">
-                            <input
-                                type="file"
-                                onChange={handleFileChange}
-                            />
-                            <span>
-                                {formData.arquivo ? formData.arquivo.name : "Escolha um arquivo"}
-                            </span>
-                        </label>
-                    </div>
-                )}
-
-                {/* Botões de navegação */}
-                <div className="nav-buttons">
-                    {currentStep > 0 && (
-                        <button type="button" onClick={prevStep} className="nav-button">
-                            Anterior
-                        </button>
-                    )}
-                    {currentStep < 3 ? (
-                        <button type="button" onClick={nextStep} className="nav-button-next">
-                            Próximo
-                        </button>
-                    ) : (
-                        <button type="submit" onClick={handleSubmit} className="nav-button-finalizar">
-                            Finalizar
-                        </button>
-                    )}
+                <div className={`progress-bar step-${currentStep}`}>
+                    {[1, 2, 3].map((step, index) => (
+                        <div
+                            key={index}
+                            className={`progress-step ${currentStep === step
+                                    ? "active-step"
+                                    : currentStep > step
+                                        ? "completed"
+                                        : ""
+                                }`}
+                        >
+                            {currentStep !== step && (
+                                <img src={passoImgs[index]} alt={`Passo ${step}`} className="passo-img" />
+                            )}
+                            <span>Passo {step}</span>
+                        </div>
+                    ))}
                 </div>
-            </form>
+
+                <form className="form-container" onSubmit={handleSubmit}>
+                    {currentStep === 1 && (
+                        <div className="form-step">
+                            <div className="form-row">
+                                <label>
+                                    Nome do Gato
+                                    <input
+                                        type="text"
+                                        name="nomeGato"
+                                        value={formData.nomeGato}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                                <label>
+                                    Raça do Gato
+                                    <input
+                                        type="text"
+                                        name="racaGato"
+                                        value={formData.racaGato}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                            </div>
+                            <div className="form-row">
+                                <label>
+                                    Idade do Gato
+                                    <input
+                                        type="number"
+                                        name="idadeGato"
+                                        value={formData.idadeGato}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                                <label>
+                                    Sexo
+                                    <select
+                                        name="sexoGato"
+                                        value={formData.sexoGato}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="">Selecione</option>
+                                        <option value="Macho">Macho</option>
+                                        <option value="Fêmea">Fêmea</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    )}
+
+                    {currentStep === 2 && (
+                        <div className="form-step">
+                            <div className="form-row">
+                                <label>
+                                    Cliente já é cadastrado?
+                                    <select
+                                        name="clienteCadastrado"
+                                        value={formData.clienteCadastrado}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="Não">Não</option>
+                                        <option value="Sim">Sim</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            {formData.clienteCadastrado === "Não" && (
+                                <>
+                                    <div className="form-row">
+                                        <label>
+                                            Nome da Clínica
+                                            <input
+                                                type="text"
+                                                name="nomeClinica"
+                                                value={formData.nomeClinica}
+                                                onChange={handleChange}
+                                            />
+                                        </label>
+                                        <label>
+                                            Telefone
+                                            <input
+                                                type="text"
+                                                name="telefoneClinica"
+                                                value={formData.telefoneClinica}
+                                                onChange={handleChange}
+                                            />
+                                        </label>
+                                    </div>
+                                    <div className="form-row">
+                                        <label>
+                                            Email
+                                            <input
+                                                type="email"
+                                                name="emailClinica"
+                                                value={formData.emailClinica}
+                                                onChange={handleChange}
+                                            />
+                                        </label>
+                                        <label>
+                                            Endereço
+                                            <textarea
+                                                name="enderecoClinica"
+                                                value={formData.enderecoClinica}
+                                                onChange={handleChange}
+                                            />
+                                        </label>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    )}
+
+                    {currentStep === 3 && (
+                        <div className="form-step">
+                            <div className="form-row">
+                                <label>
+                                    Material Genético
+                                    <input
+                                        type="text"
+                                        name="materialGenetico"
+                                        value={formData.materialGenetico}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                                <label>
+                                    Tipo de Sequenciamento
+                                    <input
+                                        type="text"
+                                        name="sequenciamento"
+                                        value={formData.sequenciamento}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                            </div>
+
+                            <label className="file-upload">
+                                <input type="file" name="arquivo" onChange={handleFileChange} />
+                                <span>Selecione o arquivo</span>
+                            </label>
+                        </div>
+                    )}
+
+                    <div className="nav-buttons">
+                        {currentStep > 1 && (
+                            <button type="button" onClick={prevStep} className="nav-button">
+                                Voltar
+                            </button>
+                        )}
+                        {currentStep < 3 && (
+                            <button type="button" onClick={nextStep} className="nav-button-next">
+                                Próximo
+                            </button>
+                        )}
+                        {currentStep === 3 && (
+                            <button type="submit" className="nav-button-finalizar">
+                                Finalizar
+                            </button>
+                        )}
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
