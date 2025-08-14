@@ -56,6 +56,8 @@ npm install
 npm start
 ```
 
+É necessário que um servidor SQL esteja rodando na máquina(xampp por exemplo)
+
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -198,6 +200,189 @@ npm start
   "CRBM": "123456",
   "Admin": true,
   "Ativo": true
+}
+
+
+
+```
+## Rotas de Relatórios
+
+---
+
+## Cadastro de Novo Relatório
+
+**POST** `localhost:4000/relatorios/novo-relatorio`
+
+### Requisição:
+```json
+{
+  "Nome": "Dark",
+  "Sexo": "Homi",
+  "Cliente": "mari5",
+  "Idade": 9,
+  "Raca": "preto",
+  "Material": "Sangue",
+  "Metodo": "DNA"
+}
+```
+### Resposta:
+```json
+{
+  "message": "Relatório criado com sucesso"
+}
+
+```
+
+## Alteração de Relatório
+
+**PUT** `/relatorios/relatorio/1`
+
+### Requisição:
+```json
+{
+  "Nome": "Dark",
+  "Sexo": "Homi",
+  "Cliente": "Mariana",
+  "Idade": 10,
+  "Pelagem": "preto",
+  "Material": "Sangue",
+  "Metodo": "DNA"
+}
+
+```
+### Resposta:
+```json
+{
+  "message": "Relatório atualizado com sucesso.",
+  "relatorio": {
+    "id": 1,
+    "Nome": "Dark",
+    "Sexo": "Homi",
+    "Cliente": "Mariana",
+    "Idade": 10,
+    "Raca": "preto",
+    "Material": "Sangue",
+    "Metodo": "DNA",
+    "createdAt": "2025-08-13T01:22:25.000Z",
+    "updatedAt": "2025-08-14T22:16:57.317Z"
+  }
+}
+
+
+```
+## Deleção de Relatório
+
+**DEL** `/relatorios/relatorio/1`
+
+### Resposta:
+```json
+{
+  "message": "Relatório excluído com sucesso."
+}
+
+```
+
+## Buscar Relatório por ID
+
+**GET** `/relatorios/relatorio/1`
+
+### Resposta:
+```json
+{
+  "id": 2,
+  "Nome": "Dark",
+  "Sexo": "Homi",
+  "Cliente": "mari5",
+  "Idade": 9,
+  "Material": "Sangue",
+  "Metodo": "DNA"
+}
+
+
+```
+
+## Rotas de Clínicas Veterinárias
+
+---
+
+## Cadastro de Nova Clínica
+
+**POST** `localhost:4000/vet/cadastro`
+
+### Requisição:
+```json
+{
+  "Nome": "clinica bomJesus",
+  "Telefone": "13-981123141",
+  "Email": "bomjesos@gmail.com",
+  "Endereco": "Rua catsearch"
+}
+```
+### Resposta:
+```json
+{
+  "message": "Clínica cadastrada com sucesso"
+}
+
+```
+
+## Alteração de Clínica
+
+**PUT** `4000/vet/1`
+
+### Requisição:
+```json
+{
+  "Nome": "clinica bomGato",
+  "Telefone": "13-981123141",
+  "Email": "bomjesos@gmail.com",
+  "Endereco": "Rua catsearch"
+}
+
+```
+### Resposta:
+```json
+{
+  "message": "Clínica atualizada com sucesso.",
+  "clinica": {
+    "id": 1,
+    "Nome": "clinica bomGato",
+    "Telefone": "13-981123141",
+    "Email": "bomjesos@gmail.com",
+    "Endereco": "Rua catsearch",
+    "createdAt": "2025-08-13T02:00:00.000Z",
+    "updatedAt": "2025-08-14T22:30:00.000Z"
+  }
+}
+
+
+```
+
+## Deleção de Clínica
+
+**DEL** `4000/vet/1`
+
+### Resposta:
+```json
+{
+  "message": "Clínica excluída com sucesso."
+}
+
+
+```
+
+## Buscar Clínica por ID
+
+**GET** `4000/vet/1`
+
+### Resposta:
+```json
+{
+  "id": 5,
+  "Nome": "clinica bomJesus",
+  "Telefone": "13-981123141",
+  "Email": "bomjesos@gmail.com",
+  "Endereco": "Rua catsearch"
 }
 
 
