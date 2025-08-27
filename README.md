@@ -43,8 +43,23 @@ Contudo, ao utilizar Docker, essas dependências já estarão inclusas nos conta
 
 ## 🚀 Instruções de Instalação e Execução
 
-> 🔧 Esta seção será preenchida posteriormente.
+>Siga os passos abaixo para executar o projeto CatBioSearch utilizando **Docker Compose**:
 
+---
+
+### 🔁 1. Clone o Repositório
+
+```bash
+git clone https://github.com/LauroLn/CatBioSearch.git
+```
+### 📂 2. Acesse a pasta do projeto
+```bash
+cd CatBioSearch
+```
+### 🐳 3. Execute o Docker Compose
+```bash
+docker-compose up --build
+```
 ---
 
 ## 🛠️ Tecnologias Utilizadas
