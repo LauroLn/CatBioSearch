@@ -28,6 +28,9 @@ O projeto foi desenvolvido utilizando **quatro partes principais**:
 
 ---
 
+## 🗂️ Fluxograma do Projeto
+
+---
 ## ⚙️ Requisitos do Sistema
 
 O projeto roda totalmente em **containers Docker**, garantindo portabilidade e facilidade de execução.  
