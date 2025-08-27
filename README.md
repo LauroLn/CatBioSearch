@@ -70,3 +70,78 @@ Contudo, ao utilizar Docker, essas dependências já estarão inclusas nos conta
   - Docker & Docker Compose  
 
 ---
+
+## 📂 Estrutura Geral do Projeto
+
+O projeto CatBioSearch é dividido em **quatro grandes módulos principais**: `back-end`, `back-end-fasta`, `ia` e `front-end`.  
+Cada módulo possui responsabilidades específicas dentro do sistema, garantindo modularidade e organização.
+
+---
+
+### 🖥️ Back-end
+
+Responsável por toda a **lógica principal da aplicação**, manipulação de banco de dados, autenticação de usuários, gerenciamento de relatórios e clínicas veterinárias.
+```
+back-end/
+│── db/ # Configurações de manipulação do banco de dados
+│ └── ... # Scripts de criação e inicialização automática do banco
+│
+│── models/ # Definições das tabelas do banco de dados (Sequelize)
+│ └── ... # Arquivos de modelos representando as entidades do sistema
+│
+│── routes/ # Definição de todas as rotas da API
+│ └── ... # Endpoints organizados por contexto (usuários, relatórios, clínicas)
+│
+│── index.js # Arquivo principal do back-end
+# - Configurações de rotas padrão
+# - Requisição das funções
+# - Inicialização do servidor
+
+```
+---
+
+### 🧬 Back-end FASTA
+
+Módulo responsável por processar **arquivos FASTA** enviados pelas clínicas veterinárias.  
+Realiza a leitura, extração de sequências e análise genética, identificando mutações relacionadas ao **gene PKD1**.
+
+
+```
+back-end-fasta/
+│── services.py # Processa arquivos FASTA
+│ # - Identifica o gene PKD1
+│ # - Realiza análises de alinhamento com BLAST local
+│
+│── utils.py # Manipulação de arquivos FASTA
+│ # - Leitura de arquivos enviados
+│ # - Salvamento em local temporário
+│ # - Extração de sequências genéticas para processamento
+
+```
+
+
+---
+
+### 🤖 Inteligência Artificial (IA)
+
+Módulo dedicado à **classificação de mutações genéticas** utilizando **modelos de Machine Learning**.  
+Baseia-se principalmente nas sequências do **exon 29**.
+
+```
+ia/
+│── app.py # API responsável por receber sequências do exon 29
+│ # - Classificação utilizando modelo de ML treinado
+│
+│── train-model/ # Treinamento e salvamento do modelo de ML
+│ └── ... # Scripts de preparação, treino e persistência do modelo
+
+```
+
+---
+
+### 🎨 Front-end
+
+Responsável pela **interface com o usuário**.  
+Aqui será desenvolvida a tela atrativa, de fácil acesso e com recursos de acessibilidade.
+
+
