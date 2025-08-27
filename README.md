@@ -59,7 +59,9 @@ cd CatBioSearch
 ### 🐳 3. Execute o Docker Compose
 ```bash
 docker-compose up --build
+
 ```
+>💡 Este comando irá criar e iniciar todos os containers necessários para o projeto, incluindo o back-end, back-end FASTA, IA e banco de dados.
 ---
 
 ## 🛠️ Tecnologias Utilizadas
