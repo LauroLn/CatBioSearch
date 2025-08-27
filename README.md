@@ -95,10 +95,35 @@ ia/
 
 ---
 
+
 ### 🎨 Front-end
 
-Responsável pela **interface com o usuário**.  
-Aqui será desenvolvida a tela atrativa, de fácil acesso e com recursos de acessibilidade.
+O módulo **Front-end** é responsável pela interface com o usuário, fornecendo telas atrativas e de fácil navegação.  
+Ele está organizado da seguinte forma:
+
+
+```
+front-end/
+│── public/ # Arquivos públicos para utilização pelo front-end
+│
+│── src/
+│ │── app/ # Arquivos de rotas do front-end
+│ │── components/ # Componentes reutilizáveis da interface
+│ │── features/ # Arquivos com funcionalidades específicas do front-end
+│ │── pages/ # Arquivos das páginas do sistema
+│ │── styles/ # Arquivos CSS para estilização
+│
+│── .gitignore
+│── eslint.config.js
+│── index.html
+│── package-lock.json
+│── package.json
+│── README.md
+│── vite.config.js
+
+```
+
+> 💡 Essa organização permite escalabilidade, separando claramente **componentes**, **funcionalidades** e **páginas**, mantendo o código limpo e fácil de manter.
 
 
 ---
