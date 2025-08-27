@@ -129,7 +129,7 @@ front-end/
 ---
 
 ## 🗂️ Fluxograma do Projeto
-
+<img width="860" height="695" alt="Image" src="https://github.com/user-attachments/assets/2598f057-a1c5-458a-a640-13d69759c016" />
 ---
 ## ⚙️ Requisitos do Sistema
 
