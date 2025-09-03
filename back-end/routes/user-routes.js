@@ -127,7 +127,7 @@ router.get('/admin-usuario/:id', autenticacao, isAdmin, async (req, res) => {
 
     try {
         const usuario = await User.findByPk(id, {
-            attributes: ['id', 'Nome', 'Login', 'CPF', 'Nascimento', 'CRBM', 'Admin', 'Ativo']
+            attributes: ['id', 'Nome', 'Login', 'CPF', 'Nascimento', 'CRBM', 'Admin', 'Ativo','Funcao']
         });
 
         if (!usuario) {

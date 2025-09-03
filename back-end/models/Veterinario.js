@@ -27,11 +27,12 @@ const initVetModel = async () => {
             allowNull: false, // Campo obrigatório
             unique: true
         },
-        Observacoes: {
-            type: Sequelize.STRING,
-            allowNull: true, 
-            unique: true
-        }
+    Observacoes: {
+    type: Sequelize.STRING,
+    allowNull: true, // agora pode ser null
+    unique: false    // remove unicidade se não precisar
+}
+
     });
 
     // Sincroniza o modelo com o banco de dados

@@ -78,7 +78,7 @@ router.get('/relatorio/:id', autenticacao, async (req, res) => {
 
     try {
         const relatorio = await Relatorio.findByPk(id, {
-            attributes: ['id', 'Nome', 'Sexo', 'Cliente', 'Idade', 'Pelagem', 'Material', 'Metodo']
+            attributes: ['id', 'Nome', 'Sexo', 'Cliente', 'Idade', 'Material', 'Metodo']
         });
 
         if (!relatorio) {

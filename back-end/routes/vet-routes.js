@@ -27,7 +27,7 @@ router.post('/cadastro', autenticacao, async (req, res) => {
             Telefone,
             Email,
             Endereco,
-            Observacoes,
+           
         });
 
         res.status(201).json({ message: 'Veterinário criado com sucesso.', veterinario: novoVet });
