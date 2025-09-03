@@ -51,9 +51,9 @@ router.get('/user-dashboard/relatorio', async (req, res) => {
     }
 });
 
-router.get('/relatorios', async (req, res) => {
+router.get('/relatorios',autenticacao, async (req, res) => {
     try {
-        // Buscar todos os relatórios na tabela 'Relatorio'
+        // Buscar todos os relatórios na tabela 'Relatorio' 
         const relatorios = await Relatorio.findAll();
 
         // Verificar se há relatórios
