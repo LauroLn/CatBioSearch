@@ -1,1 +1,193 @@
-Projeto Integrador iniciado no 4 semestre do curso Desenvolvimento de Software Multiplataforma.
+# 🧬 CatBioSearch - Documentação Geral
+
+CatBioSearch é um sistema voltado para clínicas veterinárias que realizam **sequenciamento genético em gatos da raça Persa**.  
+O objetivo principal do projeto é **auxiliar na geração de relatórios que identificam doenças genéticas**, como a **policistose renal (PKD)**, além de fornecer ferramentas para análise e comparação de resultados.
+
+O sistema foi projetado para ser **modular e escalável**, utilizando diferentes camadas que se integram de forma transparente para entregar valor tanto ao usuário final quanto às clínicas veterinárias.
+
+---
+
+## 📌 Visão Geral do Projeto
+
+O projeto foi desenvolvido utilizando **quatro partes principais**:
+
+- **Front-end**:  
+  - Exposição de uma **tela atrativa e facilitadora**, garantindo melhor experiência de uso.  
+  - Disponibilização de uma **tela de fácil acesso a recursos e acessibilidade**.  
+
+- **Back-end**:  
+  - Responsável pelo gerenciamento de usuários, clínicas e relatórios.  
+  - Sistema de autenticação seguro.  
+  - Exposição de métricas e estatísticas do uso do sistema.  
+
+- **Back-end Fasta**:  
+  - Responsável pela **análise de arquivos FASTA enviados pelas clínicas veterinárias**, identificando possíveis mutações genéticas nos animais.  
+
+- **Inteligência Artificial (IA)**:  
+  - **Comparação automática com genes de gatos saudáveis**, fornecendo insights clínicos e auxiliando na **geração de relatórios mais precisos**.  
+
+---
+## 📂 Estrutura Geral do Projeto
+
+O projeto CatBioSearch é dividido em **quatro grandes módulos principais**: `back-end`, `back-end-fasta`, `ia` e `front-end`.  
+Cada módulo possui responsabilidades específicas dentro do sistema, garantindo modularidade e organização.
+
+---
+
+### 🖥️ Back-end
+
+Responsável por toda a **lógica principal da aplicação**, manipulação de banco de dados, autenticação de usuários, gerenciamento de relatórios e clínicas veterinárias.
+```
+back-end/
+│── db/ # Configurações de manipulação do banco de dados
+│ └── ... # Scripts de criação e inicialização automática do banco
+│
+│── models/ # Definições das tabelas do banco de dados (Sequelize)
+│ └── ... # Arquivos de modelos representando as entidades do sistema
+│
+│── routes/ # Definição de todas as rotas da API
+│ └── ... # Endpoints organizados por contexto (usuários, relatórios, clínicas)
+│
+│── index.js # Arquivo principal do back-end
+# - Configurações de rotas padrão
+# - Requisição das funções
+# - Inicialização do servidor
+
+```
+---
+
+### 🧬 Back-end FASTA
+
+Módulo responsável por processar **arquivos FASTA** enviados pelas clínicas veterinárias.  
+Realiza a leitura, extração de sequências e análise genética, identificando mutações relacionadas ao **gene PKD1**.
+
+
+```
+back-end-fasta/
+│── services.py # Processa arquivos FASTA
+│ # - Identifica o gene PKD1
+│ # - Realiza análises de alinhamento com BLAST local
+│
+│── utils.py # Manipulação de arquivos FASTA
+│ # - Leitura de arquivos enviados
+│ # - Salvamento em local temporário
+│ # - Extração de sequências genéticas para processamento
+
+```
+
+
+---
+
+### 🤖 Inteligência Artificial (IA)
+
+Módulo dedicado à **classificação de mutações genéticas** utilizando **modelos de Machine Learning**.  
+Baseia-se principalmente nas sequências do **exon 29**.
+
+```
+ia/
+│── app.py # API responsável por receber sequências do exon 29
+│ # - Classificação utilizando modelo de ML treinado
+│
+│── train-model/ # Treinamento e salvamento do modelo de ML
+│ └── ... # Scripts de preparação, treino e persistência do modelo
+
+```
+
+---
+
+
+### 🎨 Front-end
+
+O módulo **Front-end** é responsável pela interface com o usuário, fornecendo telas atrativas e de fácil navegação.  
+Ele está organizado da seguinte forma:
+
+
+```
+front-end/
+│── public/ # Arquivos públicos para utilização pelo front-end
+│
+│── src/
+│ │── app/ # Arquivos de rotas do front-end
+│ │── components/ # Componentes reutilizáveis da interface
+│ │── features/ # Arquivos com funcionalidades específicas do front-end
+│ │── pages/ # Arquivos das páginas do sistema
+│ │── styles/ # Arquivos CSS para estilização
+│
+│── .gitignore
+│── eslint.config.js
+│── index.html
+│── package-lock.json
+│── package.json
+│── README.md
+│── vite.config.js
+
+```
+
+> 💡 Essa organização permite escalabilidade, separando claramente **componentes**, **funcionalidades** e **páginas**, mantendo o código limpo e fácil de manter.
+
+
+---
+
+## 🗂️ Fluxograma do Projeto
+<img width="860" height="695" alt="Image" src="https://github.com/user-attachments/assets/2598f057-a1c5-458a-a640-13d69759c016" />
+---
+## ⚙️ Requisitos do Sistema
+
+O projeto roda totalmente em **containers Docker**, garantindo portabilidade e facilidade de execução.  
+Portanto, é necessário apenas ter o **Docker** e o **Docker Compose** instalados.
+
+> 💡 Para ambientes de desenvolvimento mais avançados, podem ser necessários:
+> - **Node.js** (para o front-end e back-end principal)  
+> - **Python** (para o back-end FASTA e módulos de IA)  
+
+Contudo, ao utilizar Docker, essas dependências já estarão inclusas nos containers.
+
+---
+
+## 🚀 Instruções de Instalação e Execução
+
+>Siga os passos abaixo para executar o projeto CatBioSearch utilizando **Docker Compose**:
+
+---
+
+### 🔁 1. Clone o Repositório
+
+```bash
+git clone https://github.com/LauroLn/CatBioSearch.git
+```
+### 📂 2. Acesse a pasta do projeto
+```bash
+cd CatBioSearch
+```
+### 🐳 3. Execute o Docker Compose
+```bash
+docker-compose up --build
+
+```
+>💡 Este comando irá criar e iniciar todos os containers necessários para o projeto, incluindo o back-end, back-end FASTA, IA e banco de dados.
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Front-end**  
+  - React.js ou Next.js (UI moderna e responsiva)
+
+- **Back-end**  
+  - Node.js  
+  - Express.js  
+  - Sequelize (ORM)  
+  - Banco de dados SQL (PostgreSQL/MySQL/MariaDB)
+
+- **Back-end Fasta**  
+  - Python  
+  - Bibliotecas para análise genética e manipulação de arquivos FASTA  
+
+- **Inteligência Artificial (IA)**  
+  - Python  
+  - Modelos de Machine Learning para análise comparativa de genes  
+
+- **Infraestrutura**  
+  - Docker & Docker Compose  
+
+---
+
