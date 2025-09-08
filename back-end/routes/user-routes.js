@@ -64,22 +64,23 @@ router.get('/user-dashboard', autenticacao, (req, res) => {
     res.json({ message: `Bem-vindo ao painel de usuário, ${req.session.user.nome}` });
 });
 
-// Rota protegida para administradores
-router.get('/admin-dashboard', autenticacao, isAdmin, async (req, res) => {
-    try {
-        const usuarios = await User.findAll({
-            attributes: ['id', 'Nome', 'Login', 'Ativo', 'Nascimento'],
-        });
 
-        res.json({
-            message: `Bem-vindo ao painel de administrador, ${req.session.user.nome}`,
-            usuarios: usuarios,
-        });
-    } catch (err) {
-        console.error(`Erro ao listar os usuarios: ${err}`);
-        res.status(500).json({ message: 'Erro ao listar usuários' });
-    }
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Rota protegida para administradores
+
 
 // Rota de cadastro de usuário por administradores
 router.post('/admin-cadastro', autenticacao, isAdmin, async (req, res) => {
