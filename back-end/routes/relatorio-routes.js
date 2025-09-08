@@ -12,37 +12,18 @@ const autenticacao = (req, res, next) => {
     if (req.session.user) {
         return next();
     } else {
-        return res.status(401).json({ message: "Você precisa estar logado." });
+        return res.status(401).json({ message: "Você precisa estar logado para." });
     }
 };
 
-// Rota para criar novo relatório
-router.post('/novo-relatorio', autenticacao, async (req, res) => {
-    const { Nome, Sexo, Cliente, Idade, Raca, Material, Metodo } = req.body;
 
-    try {
-        await Relatorio.create({
-            Nome,
-            Sexo,
-            Cliente,
-            Idade,
-            Raca,
-            Material,
-            Metodo,
-        });
-        res.json({ message: 'Relatório criado com sucesso' });
-    } catch (err) {
-        console.error(`Ocorreu um erro: ${err}`);
-        res.status(500).send('Ocorreu um erro ao criar o relatório.');
-    }
-});
 
 // Rota para a outra "tela" de relatório
-router.get('/user-dashboard/relatorio', async (req, res) => {
+router.get('/user-dashboard/relatorio',autenticacao ,async (req, res) => {
     try {
         const totalRelatorios = await Relatorio.count(); // Conta todos os registros na tabela 'Relatorio'
         res.json({
-            message: 'Total de relatórios',
+            message: 'Total de relatórios ',
             total: totalRelatorios,
         });
     } catch (err) {
