@@ -16,7 +16,26 @@ const autenticacao = (req, res, next) => {
     }
 };
 
+// Rota para criar novo relatório
+router.post('/novo-relatorio', autenticacao, async (req, res) => {
+    const { Nome, Sexo, Cliente, Idade, Raca, Material, Metodo } = req.body;
 
+    try {
+        await Relatorio.create({
+            Nome,
+            Sexo,
+            Cliente,
+            Idade,
+            Raca,
+            Material,
+            Metodo,
+        });
+        res.json({ message: 'Relatório criado com sucesso' });
+    } catch (err) {
+        console.error(`Ocorreu um erro: ${err}`);
+        res.status(500).send('Ocorreu um erro ao criar o relatório.');
+    }
+});
 
 // Rota para a outra "tela" de relatório
 router.get('/user-dashboard/relatorio',autenticacao ,async (req, res) => {
